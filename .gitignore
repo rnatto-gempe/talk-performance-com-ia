@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Backups
+*.bak
+*.backup
+*.html.bak
+*.tmp
+
+# Build / output
+dist/
+build/
+node_modules/
+
+# Anthropic / Claude artifacts
+.claude/
+CLAUDE.md

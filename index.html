@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Você acha que está sendo produtivo com IA. Mas está? - StartSe Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Barlow+Condensed:wght@500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05060a;--bg-card:#0d0f17;--bg-code:#11131c;--green:#00d9ff;--amber:#ffc233;--red:#ff5577;--blue:#7aa2ff;--purple:#c084fc;--text:#eef0f7;--text-dim:#7c7e92;--text-muted:#3d3f52;--border:#1a1c28;--border-bright:#2a2d3d;--font-display:'Barlow Condensed',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-body:'Barlow',sans-serif;--slide-pad:clamp(40px,4vw,80px);}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(ellipse at 20% 10%,rgba(0,217,255,0.05) 0%,transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(0,217,255,0.025) 0%,transparent 50%),var(--bg);background-attachment:fixed;}
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;padding:var(--slide-pad);display:none;flex-direction:column;justify-content:center;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;overflow:hidden;}
+.slide.active{display:flex;opacity:1;transform:translateY(0)}
+.slide[data-block]:not([data-block=""])::before{content:attr(data-block);position:absolute;top:32px;left:var(--slide-pad);font-family:var(--font-mono);font-size:clamp(11px,0.85vw,14px);font-weight:600;color:var(--green);letter-spacing:2.5px;text-transform:uppercase;}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(64px,5vw,108px);line-height:0.92;letter-spacing:-0.02em;color:var(--text)}
+h2{font-family:var(--font-display);font-weight:700;font-size:clamp(40px,3.4vw,64px);line-height:1;letter-spacing:-0.01em;color:var(--text);margin-bottom:0.4em}
+h3{font-family:var(--font-display);font-weight:700;font-size:clamp(24px,1.8vw,34px);line-height:1.1;color:var(--text);margin-bottom:0.5em}
+p{font-size:clamp(16px,1.2vw,21px);line-height:1.5;color:var(--text);max-width:900px}
+.dim{color:var(--text-dim)}.muted{color:var(--text-muted)}.green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}.blue{color:var(--blue)}.purple{color:var(--purple)}.bold{font-weight:700}.mono{font-family:var(--font-mono)}.italic{font-style:italic}
+.divider{height:1px;background:linear-gradient(90deg,var(--green) 0%,var(--green) 60px,transparent 60px);margin:24px 0;width:100%;}
+.fade-in{animation:fade .6s ease both}.fade-in-d1{animation:fade .6s ease .15s both}.fade-in-d2{animation:fade .6s ease .3s both}.fade-in-d3{animation:fade .6s ease .45s both}.fade-in-d4{animation:fade .6s ease .6s both}.fade-in-d5{animation:fade .6s ease .75s both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.bignum{font-family:var(--font-display);font-weight:900;font-size:clamp(140px,16vw,280px);line-height:0.85;letter-spacing:-0.04em;color:var(--green);text-shadow:0 0 40px rgba(0,217,255,0.25)}
+.bignum.red{color:var(--red);text-shadow:0 0 40px rgba(255,85,119,0.22)}
+.bignum.amber{color:var(--amber);text-shadow:0 0 40px rgba(255,194,51,0.22)}
+.bignum.green{color:var(--green)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
+.card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:8px;padding:18px 20px}
+.card-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);margin-bottom:8px;letter-spacing:0.3px}
+.card p{font-size:14px;line-height:1.45;color:var(--text-dim)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:14px;align-items:start}
+.flow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:20px 0}
+.flow-node{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:10px 14px;font-family:var(--font-mono);font-size:13px;font-weight:500;text-align:center;line-height:1.3}
+.flow-node.active{border-color:var(--green);box-shadow:0 0 0 1px var(--green) inset,0 0 24px rgba(0,217,255,0.22);color:var(--green)}
+.flow-arrow{color:var(--text-dim);font-size:18px}
+.quote{border-left:3px solid var(--amber);padding:14px 20px;background:rgba(255,194,51,0.04);border-radius:0 6px 6px 0;font-style:italic;font-size:17px;line-height:1.5;color:var(--text);max-width:980px;margin-top:10px}
+.quote-source{display:block;margin-top:8px;font-style:normal;font-size:12px;font-family:var(--font-mono);color:var(--text-dim);letter-spacing:0.5px}
+.notes{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9;width:min(80vw,800px);max-height:35vh;overflow-y:auto;background:rgba(18,18,26,0.97);backdrop-filter:blur(14px);border:1px solid var(--border-bright);border-radius:8px;padding:18px 22px;font-size:14px;line-height:1.55;color:var(--text-dim);opacity:0;visibility:hidden;transition:.3s}
+.notes.visible{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.notes::before{content:'SPEAKER NOTES';display:block;font-family:var(--font-mono);font-size:10px;color:var(--green);letter-spacing:2px;margin-bottom:8px}
+.footer-logos{position:fixed;bottom:14px;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:0 var(--slide-pad);pointer-events:none;opacity:0.5;transition:opacity .4s ease;}
+.footer-logos:hover{opacity:0.85}
+.footer-logos .logo-wrap{height:28px;display:flex;align-items:center;gap:10px}
+.footer-logos img{height:30px;width:auto;display:block;filter:brightness(1.05)}
+body.cover-active .footer-logos{opacity:0.95;bottom:36px}
+body.cover-active .footer-logos img{height:40px}
+body.cover-active .footer-logos .footer-event-date{display:block}
+.footer-event-date{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;display:none;}
+body.outro-active .footer-logos{display:none}
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--green);z-index:11;transition:width .3s ease;box-shadow:0 0 8px rgba(0,217,255,0.6);opacity:0.4}
+.cover-photo-circle{width:clamp(180px,20vw,280px);height:clamp(180px,20vw,280px);border-radius:50%;background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-code) 100%);border:2px solid var(--green);box-shadow:0 0 60px rgba(0,217,255,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--text-dim);letter-spacing:2px;text-align:center;overflow:hidden;position:absolute;top:50%;right:var(--slide-pad);transform:translateY(-50%);}
+.cover-photo-circle img{width:100%;height:100%;object-fit:cover}
+.cover-photo-circle .placeholder{padding:20px;line-height:1.3}
+.numlist{counter-reset:n;list-style:none;margin-top:14px}
+.numlist li{counter-increment:n;padding:12px 0 12px 56px;border-bottom:1px solid var(--border);position:relative;font-size:16px;line-height:1.5;max-width:1100px}
+.numlist li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:12px;font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--green);letter-spacing:1px}
+table.cmp{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+table.cmp th,table.cmp td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border-bright);vertical-align:top}
+table.cmp th{font-family:var(--font-display);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);border-bottom:2px solid var(--border-bright)}
+table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
+.checklist{margin-top:12px}
+.checklist li{list-style:none;padding:7px 0 7px 22px;font-size:15px;position:relative;line-height:1.5}
+.checklist li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--green)}
+.checklist li.x::before{background:var(--red)}
+.tip{margin-top:14px;font-family:var(--font-mono);font-size:12px;color:var(--text-dim);letter-spacing:0.5px}
+.tip .green{color:var(--green)}
+.source{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:0.5px;margin-top:14px;line-height:1.4}
+.source a{color:var(--text-dim);text-decoration:none}
+.qr-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.qr-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:10px;padding:18px;text-align:center}
+.qr-pic{width:140px;height:140px;background:repeating-linear-gradient(45deg,var(--text) 0 4px,var(--bg-card) 4px 8px);border-radius:6px;margin:0 auto 12px;border:2px solid var(--green)}
+.qr-card .qr-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--green);margin-bottom:4px;letter-spacing:0.3px;line-height:1.2}
+.qr-card .qr-sub{font-size:13px;color:var(--text-dim);line-height:1.4}
+.u-curve{width:100%;max-width:680px;height:200px;display:block;margin:10px 0}
+.bar-row{display:grid;grid-template-columns:240px 1fr 90px;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px}
+.bar-row:last-child{border-bottom:none}
+.bar-label{color:var(--text-dim);font-size:13px}
+.bar-track{height:18px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:3px;overflow:hidden;position:relative}
+.bar-fill{height:100%;display:flex;align-items:center;padding:0 8px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--bg)}
+.bar-fill.up{background:linear-gradient(90deg,var(--green) 0%,#0099cc 100%)}
+.bar-fill.down{background:linear-gradient(90deg,var(--red) 0%,#cc3355 100%)}
+.bar-fill.warn{background:linear-gradient(90deg,var(--amber) 0%,#cc9020 100%)}
+.bar-value{font-family:var(--font-display);font-weight:800;font-size:18px;text-align:right}
+.bar-value.up{color:var(--green)}.bar-value.down{color:var(--red)}.bar-value.warn{color:var(--amber)}
+.fw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px}
+.fw-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:14px;text-align:center}
+.fw-card.featured{border-color:var(--green);background:rgba(0,217,255,0.05)}
+.fw-name{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);margin-bottom:4px}
+.fw-card.featured .fw-name{color:var(--green)}
+.fw-tag{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase}
+.step-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.step-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:8px;padding:18px;border-top:3px solid var(--green);display:flex;flex-direction:column;gap:8px}
+.step-card .step-num{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--green);letter-spacing:2px;margin-bottom:4px}
+.step-card .step-title{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.2;color:var(--text)}
+.step-card .step-desc{font-size:13px;line-height:1.5;color:var(--text-dim)}
+.metric-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:8px;padding:18px;border-left:3px solid var(--green)}
+.metric-card .metric-name{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--green);margin-bottom:4px}
+.metric-card .metric-desc{font-size:14px;color:var(--text-dim);line-height:1.45}
+.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.recap-row{display:grid;grid-template-columns:200px 1fr 60px;gap:18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
+.recap-row:last-child{border-bottom:none}
+.recap-q{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);line-height:1.25}
+.recap-a{font-family:var(--font-mono);font-size:14px;color:var(--text-dim)}
+.recap-check{font-family:var(--font-display);font-weight:800;font-size:28px;text-align:right}
+.recap-check.done{color:var(--green)}
+.recap-check.todo{color:var(--amber)}
+.step-card-reveal{opacity:0;transform:translateY(24px) scale(0.94);transition:opacity .55s cubic-bezier(0.2,0.8,0.2,1),transform .55s cubic-bezier(0.2,0.8,0.2,1);pointer-events:none}
+.step-card-reveal.revealed{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.step-card-reveal.revealed .card,.step-card-reveal.revealed > p{animation:cardPulse .8s cubic-bezier(0.2,0.8,0.2,1) both}
+@keyframes cardPulse{0%{box-shadow:0 0 0 0 rgba(0,217,255,0.3)}50%{box-shadow:0 0 40px 4px rgba(0,217,255,0.15)}100%{box-shadow:0 0 0 0 rgba(0,217,255,0)}}
+.step-indicator{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);z-index:8;display:none;gap:6px;padding:6px 12px;background:rgba(13,15,23,0.85);border:1px solid var(--border-bright);border-radius:20px;backdrop-filter:blur(8px)}
+.step-indicator.visible{display:flex}
+.step-indicator .dot{width:8px;height:8px;border-radius:50%;background:var(--text-muted);transition:all .3s ease}
+.step-indicator .dot.active{background:var(--green);box-shadow:0 0 12px var(--green);transform:scale(1.3)}
+/* ===== DEMO DE CHAT - JEITO TRADICIONAL ===== */
+.chat-demo{background:#0a0c14;border:1px solid var(--border-bright);border-radius:10px;padding:0;width:100%;max-width:1000px;height:520px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);position:relative}
+.chat-header{background:#11131c;border-bottom:1px solid var(--border-bright);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.chat-header .dots{display:flex;gap:6px}
+.chat-header .dots span{width:10px;height:10px;border-radius:50%;background:#3d3f52}
+.chat-header .dots span:nth-child(1){background:#ff5f56}
+.chat-header .dots span:nth-child(2){background:#ffbd2e}
+.chat-header .dots span:nth-child(3){background:#27c93f}
+.chat-header .chat-title{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-left:8px}
+.chat-header .chat-context{margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:6px}
+.chat-header .chat-context .ctx-bar{width:80px;height:6px;background:var(--bg-code);border-radius:3px;overflow:hidden;position:relative}
+.chat-header .chat-context .ctx-fill{height:100%;background:linear-gradient(90deg,var(--green) 0%,var(--amber) 60%,var(--red) 100%);width:0;animation:ctxFill 40s linear forwards;animation-play-state:paused}
+.chat-demo.playing .chat-header .ctx-fill{animation-play-state:running}
+@keyframes ctxFill{0%{width:0}100%{width:100%}}
+
+.chat-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 22px;display:flex;flex-direction:column;gap:14px;position:relative;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#2a2d3d transparent}
+.chat-body::-webkit-scrollbar{width:6px}
+.chat-body::-webkit-scrollbar-track{background:transparent}
+.chat-body::-webkit-scrollbar-thumb{background:#2a2d3d;border-radius:3px}
+
+.chat-msg{display:flex;gap:12px;align-items:flex-start;opacity:0;transform:translateY(12px);animation:msgIn .4s cubic-bezier(0.2,0.8,0.2,1) forwards;animation-play-state:paused}
+.chat-demo.playing .chat-msg{animation-play-state:running}
+.chat-msg .avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chat-msg.user .avatar{background:var(--amber);color:var(--bg)}
+.chat-msg.ai .avatar{background:var(--green);color:var(--bg)}
+.chat-msg .bubble{font-size:14px;line-height:1.5;color:var(--text);max-width:80%}
+.chat-msg.user .bubble{color:#dfe1ec}
+.chat-msg.ai .bubble{color:#aeb1c4}
+.chat-msg .bubble code{font-family:var(--font-mono);font-size:12px;background:rgba(0,217,255,0.08);color:var(--green);padding:1px 6px;border-radius:3px}
+.chat-msg .codeblock{margin-top:8px;background:#06070c;border:1px solid #1a1c28;border-left:2px solid var(--green);border-radius:4px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;line-height:1.5;color:#7c7e92;max-height:80px;overflow:hidden;position:relative}
+.chat-msg .codeblock::after{content:'';position:absolute;bottom:0;left:0;right:0;height:24px;background:linear-gradient(180deg,transparent 0%,#06070c 100%)}
+.chat-msg .codeblock .green{color:var(--green)}
+.chat-msg .codeblock .amber{color:var(--amber)}
+@keyframes msgIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* Sequência das mensagens - delays escalonados (15 mensagens, ~40s total) */
+.chat-msg.m1{animation-delay:0.3s}
+.chat-msg.m2{animation-delay:2s}
+.chat-msg.m3{animation-delay:4.5s}
+.chat-msg.m4{animation-delay:6.5s}
+.chat-msg.m5{animation-delay:9s}
+.chat-msg.m6{animation-delay:11s}
+.chat-msg.m7{animation-delay:13.5s}
+.chat-msg.m8{animation-delay:15.5s}
+.chat-msg.m9{animation-delay:18s}
+.chat-msg.m10{animation-delay:20s}
+.chat-msg.m11{animation-delay:22.5s}
+.chat-msg.m12{animation-delay:25s}
+.chat-msg.m13{animation-delay:28s}
+.chat-msg.m14{animation-delay:30.5s}
+.chat-msg.m15{animation-delay:34s}
+
+/* Indicador "digitando" */
+.typing{display:inline-flex;gap:3px;align-items:center;padding:6px 10px;background:var(--bg-code);border-radius:10px}
+.typing span{width:5px;height:5px;border-radius:50%;background:var(--text-dim);animation:typingBounce 1s ease-in-out infinite}
+.typing span:nth-child(2){animation-delay:0.15s}
+.typing span:nth-child(3){animation-delay:0.3s}
+@keyframes typingBounce{0%,80%,100%{opacity:0.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+
+/* Sumário final dos 3 problemas após a demo */
+.problem-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;max-width:1100px}
+.problem-summary .card{border-top:3px solid var(--red);padding:18px 20px}
+.problem-summary .card .mono{font-size:11px;letter-spacing:2px;margin-bottom:6px;color:var(--red)}
+.problem-summary .card .card-title{font-size:22px;color:var(--red);margin-bottom:4px}
+.problem-summary .card p{font-size:13px;line-height:1.45}
+
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+<!-- 01 CAPA -->
+<div class="slide active" data-block="" data-notes="Você acha que está sendo produtivo usando IA? Mas realmente está? PAUSA LONGA. Deixar a pergunta no ar.">
+  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:24px">RENATO BARBOSA - STARTSE TECH</p>
+  <h1 class="fade-in-d1" style="font-size:clamp(56px,5.8vw,124px);line-height:0.9;max-width:1100px">
+    Você acha que<br>está sendo produtivo<br>com <span class="green">IA</span>.<br><span class="amber">Mas está?</span>
+  </h1>
+  <div class="cover-photo-circle fade-in-d3">
+    <span class="placeholder">FOTO<br>RENATO</span>
+  </div>
+</div>
+
+<!-- 02 APRESENTACAO -->
+<div class="slide" data-block="ABERTURA" data-notes="Olá pessoal, muito bom dia. Hoje vamos falar sobre produtividade real com IA. Sou Renato Barbosa, Head de Engenharia e Sócio na StartSe. Sou de perfil generalista, passei por várias cadeiras de tecnologia. Entusiasta de open source, acompanho de perto novas soluções que surgem no mercado. Atuo na consultoria de IA da StartSe há mais de 2 anos, ajudando empresas a aplicarem IA do jeito certo. E dentro do meu time, ocupo o papel de inovação, sendo braço de inovação junto aos squads.">
+  <h2 class="fade-in">Renato Barbosa</h2>
+  <p class="fade-in-d1" style="font-size:19px;max-width:900px;margin-top:4px"><strong class="green">Head de Engenharia &amp; Sócio</strong> na StartSe</p>
+  <div class="cards fade-in-d2" style="margin-top:28px;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1100px">
+    <div class="card" style="border-left:3px solid var(--green)">
+      <div class="card-title green">Perfil generalista</div>
+      <p>Passei por <strong>várias cadeiras</strong> ao longo da carreira: cloud, performance, infra, frontend, backend, app.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--blue)">
+      <div class="card-title blue">Entusiasta de open source</div>
+      <p>Acompanho de perto as <strong>novas soluções que surgem no mercado</strong> e estudo como resolvem os problemas reais do dia a dia.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--amber)">
+      <div class="card-title amber">Consultoria de IA - 2+ anos</div>
+      <p>Atuo na consultoria da StartSe ajudando <strong>empresas a aplicarem IA do jeito certo</strong> em seus processos.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--purple)">
+      <div class="card-title purple">Papel de inovação</div>
+      <p>Dentro do meu time, sou o <strong>braço de inovação junto aos squads</strong>, trazendo novas formas de trabalhar com IA.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 03 ÍNDICE -->
+<div class="slide" data-block="ÍNDICE" data-notes="Aqui o índice da nossa conversa. As 3 perguntas que respondemos operacionalmente na StartSe: como definir um processo de trabalho com IA na engenharia, como mensurar performance de verdade, e como acompanhar alinhamento estratégico em escala.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">ÍNDICE</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(40px,3.6vw,68px)">As <span class="green">3 perguntas</span> que respondemos<br>operacionalmente na StartSe.</h2>
+  <div class="cards fade-in-d2" style="margin-top:30px;grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="border-top:3px solid var(--green);padding:24px 22px">
+      <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">PERGUNTA 1</div>
+      <div class="card-title" style="font-size:21px;line-height:1.25">Como definimos um <span class="green">processo de trabalho</span> com IA na engenharia de software?</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green);padding:24px 22px">
+      <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">PERGUNTA 2</div>
+      <div class="card-title" style="font-size:21px;line-height:1.25">Como mensuramos <span class="green">performance de verdade</span>?</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green);padding:24px 22px">
+      <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">PERGUNTA 3</div>
+      <div class="card-title" style="font-size:21px;line-height:1.25">Como acompanhamos <span class="green">alinhamento estratégico</span> em escala?</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04 METR -->
+<div class="slide" data-block="DIAGNÓSTICO - METR" data-steps="4" data-notes="STEP 0 (inicial): Vou contar o experimento. METR é uma organização sem fins lucrativos focada em medir capacidades de IA. Em 2025 fizeram um estudo controlado com 16 devs experientes em projetos open source maduros (5+ anos de contribuição). 246 tarefas reais. Cada tarefa foi randomicamente atribuída pra ser feita COM ou SEM IA. SETA DIREITA - STEP 1: Pergunta 1 - antes de começar, qual a expectativa? +24% mais rápidos com IA. SETA DIREITA - STEP 2: Pergunta 2 - depois de usar, qual a percepção? Ainda achavam que tinham acelerado, +20%. SETA DIREITA - STEP 3: Pergunta 3 - qual a realidade medida? -19% MAIS LENTOS. PAUSA LONGA. SETA DIREITA - STEP 4: Um gap de ~39 pontos percentuais entre o que você ACHA e o que está acontecendo.">
+  <h2 class="fade-in">O gap entre <span class="amber">percepção</span><br>e <span class="red">realidade</span>.</h2>
+  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">Estudo controlado da METR (16 devs experientes, 246 tarefas em projetos open source maduros).</p>
+
+  <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;max-width:1100px;min-height:240px;align-items:stretch">
+    <div class="step-card-reveal" data-step="1">
+      <div class="card" style="border-top:3px solid var(--text-dim);padding:22px;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:center">
+        <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">EXPECTATIVA</div>
+        <div class="bignum" style="font-size:clamp(56px,5vw,84px);color:var(--text-dim);text-shadow:none">+24%</div>
+        <p style="margin-top:6px;font-size:13px;line-height:1.4">Esperavam ser <strong>mais rápidos</strong> com IA.</p>
+      </div>
+    </div>
+    <div class="step-card-reveal" data-step="2">
+      <div class="card" style="border-top:3px solid var(--amber);padding:22px;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:center">
+        <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERCEPÇÃO APÓS USAR</div>
+        <div class="bignum amber" style="font-size:clamp(56px,5vw,84px)">+20%</div>
+        <p style="margin-top:6px;font-size:13px;line-height:1.4">Achavam que <strong>tinham acelerado</strong>.</p>
+      </div>
+    </div>
+    <div class="step-card-reveal" data-step="3">
+      <div class="card" style="border-top:3px solid var(--red);padding:22px;text-align:center;background:rgba(255,85,119,0.04);height:100%;display:flex;flex-direction:column;justify-content:center">
+        <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">REALIDADE MEDIDA</div>
+        <div class="bignum red" style="font-size:clamp(56px,5vw,84px)">-19%</div>
+        <p style="margin-top:6px;font-size:13px;line-height:1.4"><strong>Mais lentos.</strong> A IA atrasou.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card-reveal" data-step="4">
+    <p style="font-size:clamp(20px,1.8vw,28px);font-weight:600;margin-top:22px;line-height:1.4;max-width:1100px">
+      Um <span class="amber">gap de ~39pp</span> entre o que você <em>acha</em> e o que está <em>acontecendo</em>.
+    </p>
+  </div>
+
+  <p class="source fade-in-d1">METR (Becker, Rush, Barnes, Rein) - "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity" - arXiv:2507.09089 - Jul/2025</p>
+</div>
+
+<!-- 05 FAROS AI -->
+<div class="slide" data-block="DIAGNÓSTICO - FAROS AI" data-steps="4" data-notes="STEP 0 (inicial): Só a pergunta. Mas espera, entregamos mais com IA? PAUSA pra deixar a pergunta no ar. SETA DIREITA - STEP 1: Sim! Faros AI analisou telemetria real de 22 mil devs em 4 mil times. SETA DIREITA - STEP 2: Os números positivos. Épicos completados por dev +66%. Task throughput +34%. PRs por dev +67%. SETA DIREITA - STEP 3: PAUSA. Mas isso é produtividade? SETA DIREITA - STEP 4: DEPENDE... O estudo se chama Acceleration Whiplash. Tempo de review +441%. Incidentes por PR +242%. Bugs por dev +54%. PRs mergeados sem review +31%. Então a IA acelera o que está na frente e estrangula o que está atrás." style="overflow-y:auto;justify-content:flex-start;padding-top:8vh">
+  <h2 class="fade-in" style="line-height:1.05">
+    Entregamos mais com IA?
+  </h2>
+  <div class="step-card-reveal" data-step="1" style="margin-top:4px">
+    <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(48px,4.5vw,80px);line-height:1;color:var(--green);text-shadow:0 0 30px rgba(0,217,255,0.3)">Sim!</span>
+  </div>
+
+  <div class="step-card-reveal" data-step="2" style="margin-top:18px;max-width:1050px">
+    <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:8px">OS NÚMEROS POSITIVOS</p>
+    <div class="bar-row">
+      <span class="bar-label">Épicos completados por dev</span>
+      <div class="bar-track"><div class="bar-fill up" style="width:80%">+66%</div></div>
+      <span class="bar-value up">+66%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Task throughput</span>
+      <div class="bar-track"><div class="bar-fill up" style="width:55%">+34%</div></div>
+      <span class="bar-value up">+34%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">PRs por dev (daily contexts)</span>
+      <div class="bar-track"><div class="bar-fill up" style="width:78%">+67%</div></div>
+      <span class="bar-value up">+67%</span>
+    </div>
+  </div>
+
+  <div class="step-card-reveal" data-step="3" style="margin-top:22px">
+    <p style="font-size:clamp(24px,2.2vw,36px);font-weight:700;line-height:1.3">
+      Mas isso é <span class="amber">produtividade</span>?
+    </p>
+  </div>
+
+  <div class="step-card-reveal" data-step="4" style="margin-top:12px;max-width:1050px">
+    <p style="font-size:clamp(26px,2.4vw,40px);font-weight:800;line-height:1;margin-bottom:14px">
+      <span class="red">DEPENDE...</span>
+    </p>
+    <p class="mono red" style="font-size:12px;letter-spacing:2px;margin-bottom:8px">OS NÚMEROS NEGATIVOS - DOWNSTREAM</p>
+    <div class="bar-row">
+      <span class="bar-label">Tempo de review de PR</span>
+      <div class="bar-track"><div class="bar-fill down" style="width:98%">+441%</div></div>
+      <span class="bar-value down">+441%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Incidentes por PR</span>
+      <div class="bar-track"><div class="bar-fill down" style="width:88%">+242%</div></div>
+      <span class="bar-value down">+242%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Bugs por desenvolvedor</span>
+      <div class="bar-track"><div class="bar-fill warn" style="width:55%">+54%</div></div>
+      <span class="bar-value warn">+54%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">PRs mergeados sem review</span>
+      <div class="bar-track"><div class="bar-fill warn" style="width:42%">+31%</div></div>
+      <span class="bar-value warn">+31%</span>
+    </div>
+  </div>
+
+  <p class="source fade-in-d4">Faros AI - "AI Engineering Report 2026: The Acceleration Whiplash" - 22k devs, 4k times - faros.ai/research/ai-acceleration-whiplash</p>
+</div>
+
+<!-- 06 EHSANI -->
+<div class="slide" data-block="DIAGNÓSTICO - EHSANI ET AL" data-notes="Mas a IA não consegue entregar código bom? Sim, consegue. Estudo da Drexel University com 33 MIL PRs agênticos no GitHub: 71,48% são mergeados. OpenAI Codex tem a maior taxa, 82%. Copilot a menor, 43%. Mas a parte interessante é quando você olha os PRs REJEITADOS. Análise qualitativa de 600 PRs rejeitados. 38% foram abandonados pelo reviewer: ninguém revisou o que a IA submeteu. 31% são problemas no próprio PR: duplicação 23%, features indesejadas 4%. 22% são problemas de código: falhas de CI/testes, implementações incorretas. Só 2% são problemas específicos do agente. Olha o que isso está dizendo: o código não é o problema. O processo é o problema.">
+  <h2 class="fade-in">A IA <span class="green">entrega código bom</span>?</h2>
+  <p class="fade-in-d1" style="font-size:clamp(22px,2vw,32px);font-weight:600;line-height:1.3;max-width:1100px;margin-top:6px">
+    <span class="green">Sim — 71,48% dos PRs agênticos são mergeados.</span>
+  </p>
+  <p class="fade-in-d1 dim" style="font-size:14px;max-width:1050px;margin-top:8px">OpenAI Codex 82,59% - Devin moderado - Copilot 43,04% - estudo de 33k PRs em 5 agentes.</p>
+
+  <p class="fade-in-d2 mono amber" style="font-size:12px;letter-spacing:2px;margin-top:24px">MAS QUANDO ANALISAM OS 600 PRs REJEITADOS</p>
+
+  <div class="fade-in-d3" style="margin-top:14px;max-width:1100px">
+    <div class="bar-row">
+      <span class="bar-label">Abandono do Reviewer</span>
+      <div class="bar-track"><div class="bar-fill down" style="width:95%">38% - ninguém revisou</div></div>
+      <span class="bar-value down">38%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Problemas no PR (duplicação, features indesejadas)</span>
+      <div class="bar-track"><div class="bar-fill warn" style="width:78%">31% - PR duplicado ou não pedido</div></div>
+      <span class="bar-value warn">31%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Problemas no código (CI, testes, implementação)</span>
+      <div class="bar-track"><div class="bar-fill warn" style="width:55%">22%</div></div>
+      <span class="bar-value warn">22%</span>
+    </div>
+    <div class="bar-row">
+      <span class="bar-label">Problemas específicos do agente</span>
+      <div class="bar-track"><div class="bar-fill up" style="width:10%">2%</div></div>
+      <span class="bar-value up">2%</span>
+    </div>
+  </div>
+
+  <p class="fade-in-d4" style="font-size:clamp(20px,1.8vw,28px);font-weight:700;margin-top:22px;line-height:1.3;max-width:1100px">
+    <span class="amber">98% das falhas</span> são <span class="green">sócio-técnicas e de processo</span> — não do código.
+  </p>
+  <p class="source fade-in-d4">Ehsani, Pathak, Rawal et al. - "Where Do AI Coding Agents Fail? An Empirical Study of Failed Agentic Pull Requests in GitHub" - arXiv:2601.15195 - Jan/2026 - Drexel University</p>
+</div>
+
+<!-- 07 ENTREGAR /= PRODUTIVIDADE -->
+<div class="slide" data-block="DIAGNÓSTICO - SÍNTESE" data-notes="Pausa de 3 segundos antes de falar. Entregar MAIS não é o mesmo que ser PRODUTIVO. Entregar mais cria volume. Produtividade gera valor. O problema não é entregar código. O problema está no processo embaixo. PAUSA. E aí que entram nossas 3 perguntas operacionais.">
+  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:18px">A SÍNTESE</p>
+  <h1 class="fade-in-d1" style="font-size:clamp(60px,6vw,124px);line-height:0.92;max-width:1300px">
+    Entregar mais<br>
+    <span class="red">&ne;</span><br>
+    <span class="green">Produtividade</span>.
+  </h1>
+  <div class="divider fade-in-d2"></div>
+  <p class="fade-in-d3" style="font-size:clamp(22px,2vw,32px);font-weight:600;line-height:1.35;max-width:1100px">
+    O problema <span class="dim">não é entregar código</span>.<br>
+    O problema está <span class="amber">no processo</span>.
+  </p>
+</div>
+
+<!-- 08 P1 ABERTURA - DEMO DO JEITO TRADICIONAL + 3 PROBLEMAS -->
+<div class="slide" data-block="P1 - COMO DEFINIMOS UM PROCESSO" data-steps="2" data-notes="STEP 0: Primeira pergunta. Por que é importante ter um processo? O jeito tradicional de usar IA é abrir o Claude e pedir implementa a feature X. Pode funcionar - mas olha o que acontece na prática. Deixa a demo rodar uns 50 segundos enquanto narra: aqui você pede a feature, ele entrega errado, você corrige. Tenta de novo, quebra outra coisa. Você manda esquecer. Ele tenta com outro approach. Você ainda corrige refresh tokens. Você ainda corrige Redis. Você ainda corrige TypeScript. Finalmente fica bom. Olha o contexto lá em cima já no vermelho. Você tem o que pediu, mas pagou o preço. SETA DIREITA - STEP 1: Esses sintomas você já viu acontecer. SETA DIREITA - STEP 2: Três problemas estruturais. Não replicável, babysitting, context rot." style="justify-content:flex-start;padding-top:5vh">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">RESPOSTA PERGUNTA 1</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,48px)">Por que é importante <span class="green">ter um processo</span>?</h2>
+  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1050px;margin-top:4px;margin-bottom:14px">O jeito tradicional: abre o Claude, "implementa a feature X". Pode funcionar — mas olha o que costuma acontecer.</p>
+
+  <div class="chat-demo playing" id="chatDemo">
+    <div class="chat-header">
+      <div class="dots"><span></span><span></span><span></span></div>
+      <div class="chat-title">claude · auth-service · main</div>
+      <div class="chat-context">
+        contexto
+        <div class="ctx-bar"><div class="ctx-fill"></div></div>
+      </div>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg user m1">
+        <div class="avatar">EU</div>
+        <div class="bubble">implementa um sistema de auth com <code>JWT</code> pro nosso backend</div>
+      </div>
+      <div class="chat-msg ai m2">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          Claro! Vou criar o módulo de autenticação completo.
+          <div class="codeblock">
+            <span class="amber">+</span> <span class="green">auth/jwt.service.ts</span><br>
+            <span class="amber">+</span> <span class="green">auth/auth.middleware.ts</span><br>
+            <span class="amber">+</span> <span class="green">auth/auth.controller.ts</span><br>
+            <span style="color:var(--text-muted)">using bcrypt v4 + jsonwebtoken...</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-msg user m3">
+        <div class="avatar">EU</div>
+        <div class="bubble">espera, a gente usa <code>argon2</code> não bcrypt. refaz.</div>
+      </div>
+      <div class="chat-msg ai m4">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          Você tem razão, desculpe! Vou refazer com argon2.
+          <div class="codeblock">
+            <span class="amber">~</span> <span class="green">auth/auth.service.ts</span><br>
+            <span style="color:var(--text-muted)">switching bcrypt → argon2...</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-msg user m5">
+        <div class="avatar">EU</div>
+        <div class="bubble">agora tá quebrando o middleware de tenant existente</div>
+      </div>
+      <div class="chat-msg ai m6">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          Peço desculpas pela confusão! Vou ajustar para preservar o middleware atual.
+          <div class="codeblock">
+            <span style="color:var(--text-muted)">re-analyzing existing middleware chain...</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-msg user m7">
+        <div class="avatar">EU</div>
+        <div class="bubble">esquece tudo. recomeça do zero olhando os arquivos primeiro.</div>
+      </div>
+      <div class="chat-msg ai m8">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          Entendido. Vou ler os arquivos antes de propor mudanças.
+          <div class="codeblock">
+            <span style="color:var(--text-muted)">reading src/middleware/*.ts...</span><br>
+            <span style="color:var(--text-muted)">reading src/auth/*.ts...</span><br>
+            <span class="amber">~</span> <span class="green">auth/auth.service.ts</span> (preserva tenant)
+          </div>
+        </div>
+      </div>
+      <div class="chat-msg user m9">
+        <div class="avatar">EU</div>
+        <div class="bubble">cadê os refresh tokens? sem isso não vai pra produção</div>
+      </div>
+      <div class="chat-msg ai m10">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          Você está certo, faltou. Adicionando o fluxo de refresh.
+          <div class="codeblock">
+            <span class="amber">+</span> <span class="green">auth/refresh-token.service.ts</span><br>
+            <span class="amber">+</span> <span class="green">auth/refresh-token.entity.ts</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-msg user m11">
+        <div class="avatar">EU</div>
+        <div class="bubble">você tá salvando refresh em memória? tem que ser no <code>Redis</code> que já está no projeto</div>
+      </div>
+      <div class="chat-msg ai m12">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          Ah sim, claro. Ajustando para usar o Redis existente.
+          <div class="codeblock">
+            <span class="amber">~</span> <span class="green">auth/refresh-token.service.ts</span><br>
+            <span style="color:var(--text-muted)">injecting RedisClient from container...</span>
+          </div>
+        </div>
+      </div>
+      <div class="chat-msg user m13">
+        <div class="avatar">EU</div>
+        <div class="bubble">tá dando erro de type no controller. e os testes nem rodam</div>
+      </div>
+      <div class="chat-msg ai m14">
+        <div class="avatar">AI</div>
+        <div class="bubble">
+          Identifiquei o problema nos types e nos imports dos testes. Corrigindo.
+          <div class="codeblock">
+            <span class="amber">~</span> <span class="green">auth/auth.controller.ts</span> (tipo do payload)<br>
+            <span class="amber">~</span> <span class="green">auth/auth.spec.ts</span> (mocks)<br>
+            <span style="color:var(--text-muted)">running npm test...</span><br>
+            <span class="green">✓</span> 14 passed
+          </div>
+        </div>
+      </div>
+      <div class="chat-msg user m15">
+        <div class="avatar">EU</div>
+        <div class="bubble" style="color:var(--green)"><strong>agora sim. tá bom.</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-card-reveal" data-step="1" style="margin-top:0">
+    <p class="tip" style="margin-top:8px;font-size:14px"><span class="green">→</span> Você chegou onde queria — mas pagou o preço. <strong>Quanto tempo nessa thread?</strong></p>
+  </div>
+
+  <div class="step-card-reveal" data-step="2">
+    <div class="problem-summary">
+      <div class="card">
+        <div class="mono">PROBLEMA 1</div>
+        <div class="card-title">Não é replicável</div>
+        <p>Sua ótima capacidade de escrever prompts <strong>não escala</strong> pro time todo.</p>
+      </div>
+      <div class="card">
+        <div class="mono">PROBLEMA 2</div>
+        <div class="card-title">Babysitting</div>
+        <p>Você virou <strong>babá da IA</strong>: pede, espera, valida, solicita mudança, espera, valida...</p>
+      </div>
+      <div class="card">
+        <div class="mono">PROBLEMA 3</div>
+        <div class="card-title">Context Rot</div>
+        <p>A performance do LLM <strong>degrada</strong> conforme a memória cresce. O famoso <em>Lost in the Middle</em>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 09 INIMIGO 1 - NÃO REPLICAVEL -->
+<div class="slide" data-block="P1 - PROBLEMA 1 - NÃO REPLICAVEL" data-notes="Problema 1: não é replicável. Você pode ser muito bom em escrever prompts. Você conhece os truques, sabe dar contexto, sabe pedir formato de resposta. Mas como você ensina isso pra um time de 15 pessoas? Como você garante que o jeito que VOCÊ consegue resultado seja o mesmo jeito que TODO MUNDO consegue resultado? Sem processo, você vira gargalo do seu próprio time. Você precisa estar em toda interação pra dar dica de prompt. Isso não escala.">
+  <p class="fade-in mono red" style="font-size:12px;letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 1 - JEITO TRADICIONAL</p>
+  <h2 class="fade-in-d1">Não é <span class="red">replicável</span>.</h2>
+
+  <p class="fade-in-d2" style="font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.35;margin-top:14px;max-width:1100px">
+    Sua ótima capacidade de escrever prompts <span class="amber">não escala</span> pro time todo.
+  </p>
+
+  <div class="two-col fade-in-d3" style="margin-top:24px">
+    <div class="card" style="border-left:3px solid var(--red);padding:18px">
+      <div class="card-title red">O que acontece</div>
+      <p>Você conhece os truques, sabe dar contexto, formatar a resposta. Mas <strong>como ensinar isso pra 15 pessoas</strong>? Como garantir que o jeito que VOCÊ consegue resultado seja o mesmo do time todo?</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--red);padding:18px">
+      <div class="card-title red">A consequência</div>
+      <p>Sem processo, <strong>você vira gargalo</strong> do seu próprio time. Precisa estar em toda interação pra dar dica de prompt. Isso simplesmente <strong>não escala</strong>.</p>
+    </div>
+  </div>
+
+  <p class="fade-in-d4 tip" style="margin-top:16px"><span class="green">→</span> Processo padroniza o que está na sua cabeça em algo <strong>compartilhável</strong>.</p>
+</div>
+
+<!-- 10 INIMIGO 2 - BABYSITTING -->
+<div class="slide" data-block="P1 - PROBLEMA 2 - BABYSITTING" data-notes="Problema 2: Babysitting. Você manda a IA fazer, fica olhando as letrinhas se mexerem na tela. Ela pede permissão, você diz sim. Ela faz uma parte, você valida, solicita mudança, espera de novo. Reprovou, espera, valida... Você virou BABÁ. No tempo que ela trabalha, você devia estar produzindo valor em outra coisa. Alt+Tab. 3, 5 agentes em paralelo. Quem fica olhando IA trabalhar não é produtivo. Tem que mudar o modelo mental de USO da IA pra TRABALHAR COM agentes.">
+  <p class="fade-in mono red" style="font-size:12px;letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 2 - JEITO TRADICIONAL</p>
+  <h2 class="fade-in-d1"><span class="red">Babysitting</span> da IA.</h2>
+
+  <p class="fade-in-d2" style="font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.3;max-width:1100px;margin-top:14px">
+    Você pede. <span class="amber">Espera.</span><br>
+    Valida. Solicita mudança. <span class="amber">Espera.</span><br>
+    Valida. Reprova. <span class="amber">Espera.</span>
+  </p>
+
+  <div class="two-col fade-in-d3" style="margin-top:24px">
+    <div class="card" style="border-left:3px solid var(--red);padding:18px">
+      <div class="card-title red">O que está acontecendo</div>
+      <p>Você delegou a tarefa, mas continua <strong>preso à execução</strong>. As letrinhas se mexem. Ela pede permissão. Você dá. Ela continua. Você espera.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green);padding:18px">
+      <div class="card-title green">O que você devia estar fazendo</div>
+      <p>Outra tarefa em paralelo. <strong>Alt+Tab.</strong> 3 a 5 agentes rodando em <span class="mono">git worktrees</span> simultaneamente. Validar só o resultado final.</p>
+    </div>
+  </div>
+
+  <p class="fade-in-d4 tip" style="margin-top:16px"><span class="red">→</span> Mudar de <strong>USO da IA</strong> para <strong>TRABALHO COM agentes</strong>.</p>
+</div>
+
+<!-- 11 INIMIGO 3 - CONTEXT ROT -->
+<div class="slide" data-block="P1 - PROBLEMA 3 - CONTEXT ROT" data-notes="Problema 3: Context Rot. Conforme você usa a mesma janela do Claude, o contexto vai inchando. E a performance DEGRADA. Pesquisa da Chroma de julho de 2025: testaram 18 modelos SOTA. De 10 mil pra 100 mil tokens, queda de 20 a 50% de acurácia. O padrão tem nome: Lost in the Middle, curva em U. Atenção alta no começo da conversa, alta no final, PERDIDA NO MEIO. Vale até para os modelos mais novos. Conversa longa com IA igual a lixo.">
+  <p class="fade-in mono red" style="font-size:12px;letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 3 - JEITO TRADICIONAL</p>
+  <h2 class="fade-in-d1"><span class="red">Context Rot</span>.<br><span style="font-size:0.5em;color:var(--text-dim);font-weight:500;font-style:italic">Lost in the Middle.</span></h2>
+
+  <p class="fade-in-d2 dim" style="font-size:17px;max-width:1050px;margin-top:8px">Janela enche. Performance degrada. <strong>O contexto apodrece.</strong></p>
+
+  <div class="two-col fade-in-d3" style="margin-top:18px">
+    <div>
+      <svg class="u-curve" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ugrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00d9ff" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#00d9ff" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <path d="M 30 30 C 200 30, 200 170, 350 170 C 500 170, 500 30, 670 30 L 670 190 L 30 190 Z" fill="url(#ugrad)"/>
+        <path d="M 30 30 C 200 30, 200 170, 350 170 C 500 170, 500 30, 670 30" stroke="#00d9ff" stroke-width="2.5" fill="none"/>
+        <circle cx="30" cy="30" r="6" fill="#00d9ff"/>
+        <circle cx="350" cy="170" r="6" fill="#ff5577"/>
+        <circle cx="670" cy="30" r="6" fill="#00d9ff"/>
+        <text x="30" y="20" font-family="JetBrains Mono" font-size="11" fill="#7c7e92" text-anchor="start">início - alta atenção</text>
+        <text x="350" y="190" font-family="JetBrains Mono" font-size="11" fill="#ff5577" text-anchor="middle">meio - perdido</text>
+        <text x="670" y="20" font-family="JetBrains Mono" font-size="11" fill="#7c7e92" text-anchor="end">fim - alta atenção</text>
+      </svg>
+      <p class="source">Curva em U da atenção LLM - Liu et al., TACL 2024 - arXiv:2307.03172</p>
+    </div>
+    <div>
+      <p class="mono red" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">O QUE A PESQUISA MOSTRA</p>
+      <ul class="checklist">
+        <li class="x">Chroma Research - 18 modelos SOTA testados</li>
+        <li class="x"><strong>Queda 20-50%</strong> de acurácia de 10k para 100k tokens</li>
+        <li class="x">11 de 12 modelos abaixo de 50% em 32k (benchmark NoLiMa)</li>
+        <li class="x">Conversa longa com IA igual a <strong>lixo</strong>, mesmo nos modelos mais novos</li>
+      </ul>
+      <p class="source" style="margin-top:6px">Chroma Research - "Context Rot" - jul/2025 - research.trychroma.com/context-rot</p>
+    </div>
+  </div>
+</div>
+
+<!-- 12 RALPH LOOP -->
+<div class="slide" data-block="P1 - COMO RESOLVEMOS - RALPH LOOP" data-notes="Como definimos um processo na StartSe? Começamos por um padrão da comunidade. Ralph Loop. Não se prendam ao Ralph Loop especificamente, testem em casa. Mas existem outros: GSD, SDD, BMAD, Compozy. Pega um e roda. O importante não é qual framework você escolhe, é ter um processo padronizado pra plugar com seu time. Ralph Loop é um processo derivado de desenvolvimento orientado a especificação. Eu defino o que quero, e a IA itera em cima da especificação, não em cima de prompts soltos no chat.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">COMO RESOLVEMOS</p>
+  <h2 class="fade-in-d1">Ralph Loop.</h2>
+  <p class="fade-in-d2 dim" style="font-size:17px;max-width:1050px;margin-top:6px">Começamos por um padrão da comunidade. <strong>Ralph Loop é o que adotamos como default</strong> porque é simples e fácil de plugar.</p>
+
+  <div class="quote fade-in-d3" style="margin-top:18px;border-color:var(--green);background:rgba(0,217,255,0.04)">
+    Ralph Loop é um processo derivado de <strong>desenvolvimento orientado a especificação</strong> (spec-driven - SDD). Eu defino o que quero, e a IA <strong>itera em cima da especificação</strong> — não em cima de prompts soltos no chat.
+  </div>
+
+  <div class="two-col fade-in-d4" style="margin-top:20px">
+    <div>
+      <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">REPOSITÓRIO PÚBLICO DE REFERÊNCIA</p>
+      <p class="mono" style="font-size:13px;color:var(--text);background:var(--bg-code);padding:10px 14px;border-radius:6px;border-left:3px solid var(--green)">github.com/<span class="green">snarktank/ralph</span></p>
+    </div>
+    <div>
+      <p class="mono amber" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">OUTROS FRAMEWORKS DO MERCADO</p>
+      <div class="fw-grid" style="margin-top:0;grid-template-columns:repeat(2,1fr);gap:8px">
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">GSD</div><div class="fw-tag">get shit done</div></div>
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">SDD</div><div class="fw-tag">spec-driven</div></div>
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">BMAD</div><div class="fw-tag">comunidade</div></div>
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">Compozy</div><div class="fw-tag">workflows</div></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="fade-in-d5 tip" style="margin-top:16px"><span class="green">→</span> O importante <strong>não é qual framework</strong> — e <strong>ter um</strong> e padronizar com o time.</p>
+</div>
+
+<!-- 13 RALPH LOOP - COMO FUNCIONA - 4 CARDS -->
+<div class="slide" data-block="P1 - COMO FUNCIONA O RALPH LOOP" data-notes="Como funciona na prática. Ao invés de eu abrir a janela e pedir 'implementa X', eu vou seguir um processo de 4 etapas. Etapa 1: Planejar. Eu descrevo a feature, a IA me faz perguntas pra fechar gaps, gera planejamento inicial. Etapa 2: Validar o planejamento. Abro outra janela em paralelo: 'analise esse planejamento de forma crítica', re-revisão por perspectiva. Etapa 3: Solicitar implementação. Com plano validado, agente faz em background. Etapa 4: Validar a implementação. Eu não acompanho letrinhas se mexendo. Eu valido o resultado final.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">COMO FUNCIONA O RALPH LOOP</p>
+  <h2 class="fade-in-d1">4 etapas que o time todo segue.</h2>
+  <p class="fade-in-d2 dim" style="font-size:16px;max-width:1050px;margin-top:6px">Ao invés de "abre o Claude e implementa X", a interação com a IA passa por um pipeline padronizado.</p>
+
+  <div class="step-cards fade-in-d3">
+    <div class="step-card">
+      <div class="step-num">ETAPA 01</div>
+      <div class="step-title green">Planejar</div>
+      <p class="step-desc">Eu descrevo a feature. A IA <strong>analisa meu código</strong> e me faz perguntas pra fechar gaps. Gera um <strong>planejamento inicial</strong> com escopo, perguntas em aberto e checklist.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ETAPA 02</div>
+      <div class="step-title green">Validar o planejamento</div>
+      <p class="step-desc">Abro <strong>2a janela em paralelo</strong>: "analise esse plano de forma crítica". Re-revisão por perspectiva: seguranca, UX, escalabilidade, infra. Sem context rot.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ETAPA 03</div>
+      <div class="step-title green">Solicitar implementação</div>
+      <p class="step-desc">Com o plano validado, <strong>agente trabalha em background</strong>. Eu vou pra outra task. Alt+Tab. Paralelismo real - 3 a 5 agentes em <span class="mono">git worktrees</span>.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">ETAPA 04</div>
+      <div class="step-title green">Validar a implementação</div>
+      <p class="step-desc">Eu <strong>não olho letrinhas se mexendo</strong>. Quando o agente termina, eu valido o resultado final contra o planejamento. CI, staging, code review ficam onde estavam.</p>
+    </div>
+  </div>
+
+  <p class="fade-in-d4 tip" style="margin-top:18px"><span class="green">→</span> Agora a maior parte do tempo gasto está em <strong>planejamento e validação</strong>.</p>
+</div>
+
+<!-- 14 RALPH LOOP NA PRATICA - SKILLS + EXECUCAO -->
+<div class="slide" data-block="P1 - RALPH LOOP NA PRÁTICA" data-notes="Na prática, o Ralph Loop roda com 3 comandos. Primeiro: skill /prd. Eu descrevo a feature em linguagem natural e essa skill gera um Product Requirements Document estruturado. Segundo: skill /ralph. Ela pega o PRD e gera o plano de execução: tasks, ordem, dependências, critérios de aceite. Tudo num arquivo .md versionado no repo. Terceiro: rodo o ralph.sh, passando a ferramenta - aqui Claude - e quantas iterações ele pode fazer, 15 por exemplo. Ponto importante: ele abre o Claude com a flag dangerously skip permissions. Isso é o que permite o agente rodar autonomamente em background sem precisar eu aprovar cada read, cada write, cada bash. Sem essa flag, você volta pro babysitting. Com ela, o agente trabalha sozinho dentro do worktree isolado. PAUSA pra falar do aviso: dangerously não está no nome por acaso. O agente vai executar comandos sem confirmação, incluindo rm, git push, instalar dependências, chamar APIs. Plano ruim, estrago real. Por isso a etapa 2 com a skill ralph e a segunda janela de validação crítica não são opcionais. Validar o plano antes de soltar o agente é o que separa autonomia produtiva de prejuízo no fim do mês." style="justify-content:flex-start;padding-top:6vh">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">P1 - NA PRÁTICA</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,52px)">Como rodamos <span class="green">no dia a dia</span>.</h2>
+  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1050px;margin-top:4px;margin-bottom:18px">Duas skills versionadas no repo + um shell script. O time todo executa do mesmo jeito.</p>
+
+  <div class="fade-in-d3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;max-width:1100px;margin-bottom:16px">
+    <div class="card" style="border-top:3px solid var(--green);padding:16px 18px">
+      <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">ETAPA 01 — SKILL</div>
+      <div style="font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--green);margin-bottom:8px">/prd</div>
+      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Descrevo a feature em linguagem natural. A skill gera um <strong>Product Requirements Document</strong> estruturado, com escopo, critérios de aceite e perguntas em aberto.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--green);padding:16px 18px">
+      <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">ETAPA 02 — SKILL</div>
+      <div style="font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--green);margin-bottom:8px">/ralph</div>
+      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Pega o PRD e gera o <strong>plano de execução do loop</strong>: tasks ordenadas, dependências, critérios de validação. Tudo num <span class="mono" style="font-size:12px">.md</span> versionado.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--amber);padding:16px 18px">
+      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">ETAPA 03 — EXECUÇÃO</div>
+      <div style="font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--amber);margin-bottom:8px">./ralph.sh</div>
+      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Roda o loop autonomamente. Recebe a <strong>ferramenta</strong> e o <strong>número de iterações</strong> permitidas como argumento.</p>
+    </div>
+  </div>
+
+  <div class="fade-in-d4" style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;max-width:1100px;align-items:stretch">
+    <div style="background:#06070c;border:1px solid var(--border-bright);border-left:3px solid var(--amber);border-radius:6px;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--text)">
+      <div style="color:var(--text-muted);font-size:11px;margin-bottom:8px;letter-spacing:1px">~/auth-service · main</div>
+      <div><span style="color:var(--green)">$</span> ./ralph.sh <span class="amber">--tool</span> claude <span class="amber">15</span></div>
+      <div style="color:var(--text-muted);margin-top:6px">→ spawn claude <span class="amber">--dangerously-skip-permissions</span></div>
+      <div style="color:var(--text-muted)">→ working dir: <span class="green">worktrees/ralph-iter-01</span></div>
+      <div style="color:var(--text-muted)">→ executing loop (max 15 iterations)</div>
+      <div style="color:var(--text-muted);margin-top:6px">  <span class="amber">[01/15]</span> reading plan.md...</div>
+      <div style="color:var(--text-muted)">  <span class="amber">[01/15]</span> creating auth.service.ts...</div>
+      <div style="color:var(--text-muted)">  <span class="amber">[02/15]</span> running tests... <span class="green">14 passed</span></div>
+      <div style="color:var(--text-muted)">  <span class="amber">[03/15]</span> updating refresh-token...</div>
+      <div style="color:var(--text-muted)">  ...</div>
+    </div>
+
+    <div class="card" style="border-left:3px solid var(--amber);padding:14px 16px">
+      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">A FLAG QUE MUDA TUDO</div>
+      <div style="font-family:var(--font-mono);font-size:13px;color:var(--amber);margin-bottom:8px;line-height:1.3">--dangerously<br>-skip-permissions</div>
+      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Sem ela, o agente <strong>pede aprovação</strong> a cada read, write, bash. Você volta pro <strong class="red">babysitting</strong>.</p>
+      <p style="font-size:13px;line-height:1.5;color:var(--text-dim);margin-top:6px">Com ela + <span class="mono" style="font-size:12px">git worktree</span> isolado, o agente <strong class="green">trabalha sozinho em background</strong>.</p>
+    </div>
+  </div>
+
+  <div class="fade-in-d5" style="margin-top:12px;max-width:1100px;background:rgba(255,85,119,0.06);border:1px solid var(--red);border-radius:6px;padding:12px 16px;display:flex;gap:14px;align-items:flex-start">
+    <div style="font-size:22px;line-height:1;flex-shrink:0;margin-top:1px">⚠️</div>
+    <div>
+      <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-bottom:4px">O OUTRO LADO DA FLAG</div>
+      <p style="font-size:13px;line-height:1.5;color:var(--text)">
+        <span class="mono" style="font-size:12px;color:var(--red)">dangerously</span> não está no nome por acaso. O agente vai <strong>executar comandos sem confirmação</strong> — incluindo <span class="mono" style="font-size:12px">rm</span>, <span class="mono" style="font-size:12px">git push</span>, instalar dependências, chamar APIs externas. <strong class="red">Plano ruim = estrago real.</strong>
+      </p>
+      <p style="font-size:13px;line-height:1.5;color:var(--text-dim);margin-top:6px">
+        Por isso a <strong>etapa 02 (skill <span class="mono" style="font-size:12px;color:var(--green)">/ralph</span>)</strong> e a <strong>2ª janela de validação crítica</strong> não são opcionais. <span class="green">Validar o plano antes de soltar o agente</span> é o que separa autonomia produtiva de prejuízo.
+      </p>
+    </div>
+  </div>
+
+  <p class="fade-in-d5 tip" style="margin-top:12px;font-size:14px"><span class="green">→</span> Mesmo comando, mesmo fluxo, <strong>qualquer dev do time consegue rodar</strong>.</p>
+</div>
+
+<!-- 15 TRANSICAO P1 -> P2 -->
+<div class="slide" data-block="" data-notes="Transição. Pausa de 2 segundos. Respondemos a primeira pergunta - como definimos um processo. Ralph Loop, skills, validação. Mas agora vem a segunda pergunta, e ela é igualmente crítica: como mensuramos performance de verdade? Sem isso, você não consegue justificar o investimento, não consegue evoluir, não consegue mostrar pro board que está funcionando.">
+  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:24px">FECHAMOS A PERGUNTA 1</p>
+  <h1 class="fade-in-d1" style="font-size:clamp(56px,5.5vw,108px);line-height:0.92;max-width:1200px">
+    Agora,<br>
+    <span class="green">como medimos</span><br>
+    <span class="amber">se está funcionando?</span>
+  </h1>
+  <p class="fade-in-d2 dim" style="font-size:clamp(18px,1.5vw,24px);font-weight:500;margin-top:28px;max-width:1000px;line-height:1.5">
+    Bora pra <strong>pergunta 2</strong>: como mensuramos performance de verdade — sem cair em métricas de vaidade?
+  </p>
+  <div class="fade-in-d3" style="margin-top:28px;display:flex;gap:14px;align-items:center">
+    <span class="mono green" style="font-size:11px;letter-spacing:2px">PERGUNTA 1</span>
+    <span class="green" style="font-size:22px;font-weight:800">✓</span>
+    <span class="muted" style="margin:0 12px">·</span>
+    <span class="mono amber" style="font-size:11px;letter-spacing:2px">PERGUNTA 2</span>
+    <span class="amber" style="font-size:22px;font-weight:800">⟶</span>
+    <span class="muted" style="margin:0 12px">·</span>
+    <span class="mono muted" style="font-size:11px;letter-spacing:2px">PERGUNTA 3</span>
+  </div>
+</div>
+
+<!-- 16 P2 ABERTURA - PAINEL DO VENDOR + CONSUMO REAL -->
+<div class="slide" data-block="P2 - COMO MENSURAMOS PERFORMANCE" data-notes="Segunda pergunta. Como mensuramos performance? O painel do vendor te mostra o que? Tokens consumidos. Linhas de código geradas. PRs abertos. Janela de contexto. Olha bonito. Inclusive, olha aqui esse gráfico. Esse verdão gigante sou eu, nos últimos 30 dias. 2.5 BILHÕES de tokens consumidos em UM mês. Aqueles risquinhos rasteiros embaixo são meu time todo - várias pessoas. Eu sozinho queimei mais que o time inteiro junto. E aí eu te pergunto: faz sentido eu chegar no board e dizer fomos super produtivos porque consumi 2.5 bilhões de tokens? Claro que não. Token não paga conta. Linhas não geram ROI. PR aberto é PR aberto. Precisamos de outras métricas." style="justify-content:flex-start;padding-top:5vh">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">RESPOSTA PERGUNTA 2</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,52px)">O painel do vendor te mostra <span class="amber">vaidade</span>.</h2>
+  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1050px;margin-top:4px;margin-bottom:14px">O painel do <strong>Claude</strong>, do <strong>Cursor</strong>, da maioria das ferramentas — só te mostra <strong>PRs abertos</strong>, <strong>linhas de código geradas</strong> e <strong>quantidade de tokens consumidos</strong>. Olha o meu próprio dashboard dos últimos 30 dias:</p>
+
+  <div class="fade-in-d3" style="background:#06070c;border:1px solid var(--border-bright);border-radius:8px;padding:16px 18px;max-width:1100px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+      <div>
+        <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:2px">CONSUMO DE TOKENS · ÚLTIMOS 30 DIAS</div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text)">Eu vs. meu time inteiro</div>
+      </div>
+      <div style="text-align:right">
+        <div class="bignum green" style="font-size:clamp(36px,3.6vw,56px);line-height:1;text-shadow:0 0 24px rgba(0,217,255,0.3)">2,5B</div>
+        <div class="mono dim" style="font-size:10px;letter-spacing:1.5px;margin-top:2px">SÓ EU</div>
+      </div>
+    </div>
+
+    <svg viewBox="0 0 1000 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+      <!-- Grid horizontal -->
+      <line x1="0" y1="20" x2="1000" y2="20" stroke="#1a1c28" stroke-width="1"/>
+      <line x1="0" y1="80" x2="1000" y2="80" stroke="#1a1c28" stroke-width="1"/>
+      <line x1="0" y1="140" x2="1000" y2="140" stroke="#1a1c28" stroke-width="1"/>
+      <line x1="0" y1="200" x2="1000" y2="200" stroke="#2a2d3d" stroke-width="1"/>
+
+      <!-- Labels Y -->
+      <text x="8" y="24" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">2,5B</text>
+      <text x="8" y="84" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">1,5B</text>
+      <text x="8" y="144" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">500M</text>
+      <text x="8" y="214" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">0</text>
+
+      <!-- Linhas do time (rasteiras) - 5 devs em valores próximos: 412M, 320M, 290M, 240M, 150M -->
+      <!-- Dev A - 1B - azul -->
+      <path d="M 60 200 L 150 198 L 250 192 L 380 178 L 500 162 L 640 148 L 780 138 L 900 128 L 990 120" stroke="#7aa2ff" stroke-width="2.2" fill="none"/>
+      <!-- Dev B - 320M - roxo -->
+      <path d="M 60 200 L 180 199 L 320 198 L 460 194 L 600 189 L 740 184 L 870 179 L 990 174" stroke="#c084fc" stroke-width="2.2" fill="none"/>
+      <!-- Dev C - 290M - amber -->
+      <path d="M 60 200 L 200 199 L 360 197 L 520 194 L 680 190 L 830 184 L 990 177" stroke="#ffc233" stroke-width="2.2" fill="none"/>
+      <!-- Dev D - 240M - rosa -->
+      <path d="M 60 200 L 220 199 L 400 198 L 580 195 L 750 190 L 900 185 L 990 181" stroke="#ff77aa" stroke-width="2.2" fill="none"/>
+      <!-- Dev E - 150M - vermelho -->
+      <path d="M 60 200 L 260 199 L 460 198 L 660 196 L 830 192 L 990 188" stroke="#ff5577" stroke-width="2.2" fill="none"/>
+
+      <!-- Linha do Renato (verde, sobe muito) -->
+      <path d="M 60 200 L 100 199 L 130 198 L 160 198 L 200 197 L 230 196 L 260 184 L 290 175 L 320 168 L 360 160 L 400 155 L 440 150 L 480 144 L 520 138 L 560 130 L 600 122 L 640 110 L 680 95 L 720 78 L 750 62 L 780 48 L 820 34 L 860 22 L 900 14 L 940 10 L 990 6"
+            stroke="#00d9ff" stroke-width="3.5" fill="none" filter="url(#glow)"/>
+
+      <!-- Glow filter -->
+      <defs>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="3" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- Anotação destacando o Renato -->
+      <circle cx="990" cy="6" r="6" fill="#00d9ff"/>
+      <line x1="990" y1="6" x2="930" y2="-2" stroke="#00d9ff" stroke-width="1" stroke-dasharray="3,2"/>
+
+      <!-- Labels X -->
+      <text x="60" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 1</text>
+      <text x="280" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 7</text>
+      <text x="500" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 15</text>
+      <text x="720" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 22</text>
+      <text x="930" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">hoje</text>
+    </svg>
+
+    <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:3px;background:#00d9ff"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text)"><strong>Renato</strong> · 2,5B</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#7aa2ff"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev A · 1B</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#c084fc"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev B · 320M</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ffc233"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev C · 290M</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ff77aa"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev D · 240M</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ff5577"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev E · 150M</span></div>
+    </div>
+  </div>
+
+  <p class="fade-in-d4" style="font-size:clamp(20px,1.8vw,28px);font-weight:700;margin-top:18px;line-height:1.35;max-width:1100px">
+    <span class="amber">"Renato foi super produtivo —<br>queimou 2,5 bilhões de tokens em 30 dias."</span>
+  </p>
+  <p class="fade-in-d5" style="font-size:clamp(28px,2.6vw,44px);font-weight:800;margin-top:8px;line-height:1.2"><span class="green">Faz sentido?</span></p>
+</div>
+
+<!-- 17 P2 - CASO META - TOKENMAXXING / CLAUDEONOMICS -->
+<div class="slide" data-block="P2 - QUANDO A MÉTRICA VIRA META" data-notes="E se você acha que isso é só comigo, é só uma piada do Renato em palestra, deixa eu te contar o que aconteceu na Meta. Abril de 2026. Um funcionário criou um leaderboard interno chamado Claudeonomics. Olha o nome - já é uma piada. Painel que rankeia os 85 mil funcionários da Meta pelo consumo de tokens. Quem consome mais ganha títulos tipo Token Legend, Cache Wizard, Model Connoisseur. Importante: esses números são ESTIMATIVAS apuradas por jornalistas - The Information e Pragmatic Engineer - a partir de relatos internos. A Meta nunca confirmou oficialmente. Mas mesmo com a margem de erro, a ordem de grandeza é absurda. Em 30 dias o time inteiro queimou estimados 60 TRILHÕES de tokens. O top user, sozinho, queimou estimados 281 bilhões num mês. Custo estimado em preço de API da Anthropic: cerca de 900 milhões de dólares em UM MÊS - a Meta provavelmente paga bem menos por contratos enterprise, mas mesmo descontando isso, é absurdo. Aí vem o problema. Engenheiros começaram a deixar agentes rodando sozinhos só pra inflar número. Outros começaram a perguntar pra IA coisas que estavam na documentação interna - só pra subir no ranking. Outros prototipavam features que nunca iam shipar. Vários SEVs - incidentes em produção - foram causados por código IA gerado sem cuidado, porque o cara estava mais preocupado em queimar token que em entregar qualidade. Esse padrão tem nome: tokenmaxxing. Quando você mede a coisa errada, as pessoas otimizam pra coisa errada. A Meta tirou o leaderboard do ar 2 dias depois da história vazar. Lição: token consumido é métrica de input, não de output. É proxy de proxy. Não te diz se algo de valor foi entregue." style="justify-content:flex-start;padding-top:5vh">
+  <p class="fade-in mono amber" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">QUANDO A MÉTRICA VIRA META</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,52px)">O caso <span class="amber">"Claudeonomics"</span> da Meta.</h2>
+  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1100px;margin-top:4px;margin-bottom:8px">Em abril/2026, um funcionário criou um <strong>leaderboard interno</strong> rankeando os 85 mil engenheiros da Meta por consumo de tokens. Quem consumia mais ganhava títulos: <span class="mono" style="font-size:12px">Token Legend</span>, <span class="mono" style="font-size:12px">Cache Wizard</span>, <span class="mono" style="font-size:12px">Model Connoisseur</span>.</p>
+  <p class="fade-in-d2 mono amber" style="font-size:10px;letter-spacing:1.5px;margin-bottom:10px;opacity:0.85">⚠ NÚMEROS ESTIMADOS — APURADOS POR THE INFORMATION + PRAGMATIC ENGINEER</p>
+
+  <div class="fade-in-d3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px;margin-bottom:16px">
+    <div class="card" style="border-top:3px solid var(--amber);padding:16px 18px;text-align:center">
+      <div class="bignum amber" style="font-size:clamp(40px,4vw,64px);line-height:1">~60T</div>
+      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-top:4px">TOKENS EM 30 DIAS · EST.</div>
+      <p style="font-size:12px;line-height:1.4;color:var(--text-dim);margin-top:6px">Total estimado, queimado por 85 mil funcionários no leaderboard interno.</p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--amber);padding:16px 18px;text-align:center">
+      <div class="bignum amber" style="font-size:clamp(40px,4vw,64px);line-height:1">~281B</div>
+      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-top:4px">SÓ DO TOP USER · EST.</div>
+      <p style="font-size:12px;line-height:1.4;color:var(--text-dim);margin-top:6px">Uma única pessoa, num só mês. <strong>~112× o meu consumo.</strong></p>
+    </div>
+    <div class="card" style="border-top:3px solid var(--red);padding:16px 18px;text-align:center">
+      <div class="bignum red" style="font-size:clamp(40px,4vw,64px);line-height:1">~US$ 900M</div>
+      <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-top:4px">CUSTO ESTIMADO</div>
+      <p style="font-size:12px;line-height:1.4;color:var(--text-dim);margin-top:6px">A preço de API da Anthropic, em <strong>um único mês</strong>. Meta provavelmente paga menos.</p>
+    </div>
+  </div>
+
+  <div class="fade-in-d4" style="display:grid;grid-template-columns:1.3fr 1fr;gap:14px;max-width:1100px;align-items:stretch">
+    <div class="card" style="border-left:3px solid var(--red);padding:16px 18px">
+      <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">O QUE COMEÇOU A ACONTECER</div>
+      <ul class="checklist" style="margin-top:0">
+        <li class="x">Devs <strong>deixavam agentes rodando ociosos</strong> só pra inflar número</li>
+        <li class="x">Perguntavam à IA o que estava na <strong>documentação interna</strong> — pra subir no ranking</li>
+        <li class="x">Prototipavam features <strong>que nunca iam shipar</strong></li>
+        <li class="x"><strong class="red">SEVs em produção</strong> causados por código IA descuidado</li>
+      </ul>
+    </div>
+    <div style="background:rgba(255,194,51,0.06);border:1px solid var(--amber);border-radius:6px;padding:14px 18px;display:flex;flex-direction:column;justify-content:center">
+      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">O FENÔMENO TEM NOME</div>
+      <div style="font-family:var(--font-display);font-weight:800;font-size:clamp(28px,2.8vw,44px);line-height:1;color:var(--amber);text-shadow:0 0 24px rgba(255,194,51,0.25);margin-bottom:8px">Tokenmaxxing</div>
+      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Quando consumo de token vira <strong>proxy de produtividade</strong> — engenheiros otimizam o número, não o resultado.</p>
+    </div>
+  </div>
+
+  <p class="fade-in-d5" style="font-size:clamp(18px,1.6vw,24px);font-weight:700;margin-top:14px;line-height:1.35;max-width:1100px">
+    A Meta tirou o leaderboard do ar <span class="amber">2 dias depois</span> da história vazar. <span class="green">Lição cara.</span>
+  </p>
+  <p class="source fade-in-d5">Fontes: The Information · Pragmatic Engineer (Gergely Orosz) · Fortune · The Decoder — abr/2026. Citação: "Token consumption is an input metric, not an output metric. (...) A proxy for a proxy."</p>
+</div>
+
+<!-- 18 DORA METRICS -->
+<div class="slide" data-block="P2 - DORA METRICS" data-notes="Pra medir performance de engenharia de verdade, começamos pelo DORA. DevOps Research and Assessment, do Google Cloud. Validado em centenas de organizações ao longo de mais de 10 anos. 4 métricas core. Lead Time: tempo da alteração até chegar em produção. Deployment Frequency: com que frequência você entrega. Change Failure Rate: percentual de deploys que falham. Recovery Time: tempo pra restaurar quando algo quebra. Essas métricas dizem se você está entregando rápido E com qualidade. Token não diz isso, lead time diz.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P2 - O PRIMEIRO PILAR</p>
+  <h2 class="fade-in-d1">DORA Metrics.</h2>
+  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">Como o Google mede performance de times de tecnologia há mais de 10 anos. 4 métricas core, validadas em centenas de orgs.</p>
+
+  <div class="metric-grid fade-in-d2">
+    <div class="metric-card">
+      <div class="metric-name">Lead Time</div>
+      <div class="metric-desc">Tempo desde a <strong>alteração no código até chegar em produção</strong>. Mede a velocidade real de entrega, ponta a ponta.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Deployment Frequency</div>
+      <div class="metric-desc">Com que <strong>frequência você entrega valor</strong>. Times de alta performance entregam múltiplas vezes por dia.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Change Failure Rate</div>
+      <div class="metric-desc"><strong>Percentual de deploys que falham</strong> em produção. Mede a qualidade do que você está entregando — não só a velocidade.</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-name">Recovery Time</div>
+      <div class="metric-desc"><strong>Tempo para restaurar</strong> quando algo quebra. Mede a resiliência operacional do time.</div>
+    </div>
+  </div>
+
+  <p class="fade-in-d3 tip" style="margin-top:16px"><span class="green">→</span> DORA responde: <strong>"você está entregando rápido E com qualidade?"</strong> — token não responde isso.</p>
+  <p class="source fade-in-d3">DORA - DevOps Research and Assessment - Google Cloud - livro Accelerate (Forsgren, Humble, Kim) - dora.dev</p>
+</div>
+
+<!-- 16 DEV FLUENCY -->
+<div class="slide" data-block="P2 - DEV FLUENCY" data-notes="DORA é do mundo pré-IA. Pra times trabalhando com agentes, precisamos de um pilar a mais: Dev Fluency. Esse termo veio das nossas conversas internas e captura algo que o DORA não captura: a fluência do time em CRIAR, OPERAR e EVOLUIR agentes de IA dentro do processo. Como o time está criando skills? Como está evoluindo as específicações? Quanto do trabalho já roda em background sem babysitting? Quanto da operação já está automatizada? Esses são indicadores que dizem se o time está amadurecendo na IA — ou apenas usando ela.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P2 - O SEGUNDO PILAR</p>
+  <h2 class="fade-in-d1">Dev Fluency.</h2>
+  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">DORA é do mundo pré-IA. Pra times com agentes, precisamos de <strong>um pilar a mais</strong>: a fluência do time em criar, operar e evoluir agentes dentro do processo.</p>
+
+  <div class="quote fade-in-d2" style="margin-top:18px;border-color:var(--green);background:rgba(0,217,255,0.04)">
+    Dev Fluency mede <strong>maturidade na prática com IA</strong>, não apenas adoção. A diferença entre um time que <em>usa</em> IA é um time que <em>opera</em> com agentes está nessas métricas.
+  </div>
+
+  <div class="metric-grid fade-in-d3" style="margin-top:14px">
+    <div class="metric-card" style="border-left-color:var(--amber)">
+      <div class="metric-name amber">Criação de skills</div>
+      <div class="metric-desc">Quantas skills novas o time está criando, evoluindo e <strong>compartilhando</strong> entre squads.</div>
+    </div>
+    <div class="metric-card" style="border-left-color:var(--amber)">
+      <div class="metric-name amber">Qualidade da especificação</div>
+      <div class="metric-desc">Quantas iterações o agente precisa <strong>antes de acertar</strong>. Especificação boa = poucas iterações.</div>
+    </div>
+    <div class="metric-card" style="border-left-color:var(--amber)">
+      <div class="metric-name amber">% de trabalho em background</div>
+      <div class="metric-desc">Quanto do trabalho já roda <strong>sem babysitting</strong> ativo do dev. Indicador de maturidade real.</div>
+    </div>
+    <div class="metric-card" style="border-left-color:var(--amber)">
+      <div class="metric-name amber">Paralelismo do time</div>
+      <div class="metric-desc">Quantos agentes em paralelo o time consegue <strong>orquestrar com qualidade</strong> ao mesmo tempo.</div>
+    </div>
+  </div>
+
+  <p class="fade-in-d4 tip" style="margin-top:16px"><span class="green">→</span> Sem Dev Fluency, você sabe se entregou — <strong>mas não se evoluiu</strong>.</p>
+</div>
+
+<!-- 17 RALPH CONSOLE -->
+<div class="slide" data-block="P2 - RALPH CONSOLE" data-notes="Quando você junta DORA com Dev Fluency, você tem o Ralph Console. E a ferramenta que construímos pra olhar essas duas dimensões ao mesmo tempo: o quanto você está entregando rápido E com qualidade, e o quanto seu time está amadurecendo na prática com IA. O painel do vendor te dá vaidade. O Ralph Console te dá DECISÃO. Onde alocar esforço, onde ta o gargalo, qual time precisa de mais investimento em método, qual já consegue rodar 5 agentes em paralelo. Ainda está no início, vocês podem entrar na waitlist no QR do final.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P2 - A FERRAMENTA</p>
+  <h2 class="fade-in-d1">Ralph <span class="green">Console</span>.</h2>
+  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">DORA + Dev Fluency num só painel. <strong>Vaidade vira decisão.</strong></p>
+
+  <table class="cmp fade-in-d2" style="margin-top:18px">
+    <thead><tr><th>Dimensão</th><th class="col-bad">PAINEL DO VENDOR (vaidade)</th><th class="col-good">RALPH CONSOLE (decisão)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Velocidade</strong></td><td class="dim">Tokens consumidos, linhas geradas</td><td class="dim"><strong>Lead Time</strong> - alteração até produção</td></tr>
+      <tr><td><strong>Cadência</strong></td><td class="dim">PRs abertos</td><td class="dim"><strong>Deployment Frequency</strong> - entrega real</td></tr>
+      <tr><td><strong>Qualidade</strong></td><td class="dim">não medido</td><td class="dim"><strong>Change Failure Rate</strong> - % deploys que falham</td></tr>
+      <tr><td><strong>Resiliência</strong></td><td class="dim">não medido</td><td class="dim"><strong>Recovery Time</strong> - tempo de restauração</td></tr>
+      <tr><td><strong>Maturidade IA</strong></td><td class="dim">não medido</td><td class="dim"><strong>Dev Fluency</strong> - skills, especificação, paralelismo</td></tr>
+    </tbody>
+  </table>
+
+  <p class="fade-in-d3 tip" style="margin-top:14px"><span class="green">→</span> Pergunta certa: <strong>"onde realocar esforço?"</strong> — token responde "gaste mais", Ralph Console responde "invista em X squad com Y método".</p>
+  <p class="source fade-in-d3">Ralph Console - waitlist via QR code no final da apresentação</p>
+</div>
+
+<!-- 18 RECAPITULANDO -->
+<div class="slide" data-block="RECAPITULANDO" data-notes="Antes de seguir, deixa eu fazer uma pausa pra recapitular. O que vimos até aqui? Como definimos um processo com IA? Adotamos o Ralph Loop, junto com outros frameworks possíveis do mercado. Como mensuramos produtividade? Criamos o Ralph Console juntando DORA com Dev Fluency. E agora a terceira pergunta, que é a mais crítica em escala: como eu acompanho a evolução do time todo sem virar microgerente? E aí que entra a última parte da nossa conversa.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:18px">O QUE VIMOS ATÉ AGORA</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(36px,3.2vw,52px)">Recapitulando.</h2>
+
+  <div class="fade-in-d2" style="margin-top:24px;max-width:1100px">
+    <div class="recap-row">
+      <div>
+        <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERGUNTA 1</div>
+        <div class="recap-q">Como definimos um processo com IA?</div>
+      </div>
+      <div class="recap-a"><strong class="green">Ralph Loop</strong> - spec-driven, 4 etapas, padronizado pelo time</div>
+      <div class="recap-check done">OK</div>
+    </div>
+    <div class="recap-row">
+      <div>
+        <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERGUNTA 2</div>
+        <div class="recap-q">Como mensuramos produtividade?</div>
+      </div>
+      <div class="recap-a"><strong class="green">Ralph Console</strong> - DORA + Dev Fluency, vaidade vira decisão</div>
+      <div class="recap-check done">OK</div>
+    </div>
+    <div class="recap-row">
+      <div>
+        <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERGUNTA 3</div>
+        <div class="recap-q">Como acompanho alinhamento estratégico em escala?</div>
+      </div>
+      <div class="recap-a amber">A pergunta mais crítica - <strong>ainda em aberto</strong></div>
+      <div class="recap-check todo">???</div>
+    </div>
+  </div>
+
+  <p class="fade-in-d3 tip" style="margin-top:20px"><span class="amber">→</span> Como eu acompanho a evolução do time todo <strong>sem virar microgerente</strong>?</p>
+</div>
+
+<!-- 19 P3 ABERTURA - SKILL TECH MANAGER -->
+<div class="slide" data-block="P3 - COMO ALINHAMOS COM A ESTRATEGIA" data-notes="Terceira pergunta. Como acompanhamos alinhamento estratégico em escala? Como Head de Engenharia, eu gastava grande parte do dia entrando em dailies ao vivo de todos os squads pra entender o que estava sendo priorizado. A pergunta que me fiz: eu precisava ESTAR nas dailies de forma síncrona? Não. Eu precisava da TRANSCRIÇÃO delas. A daily não precisava ser uma reunião, ela precisava ser um INPUT. E aí criei uma skill personalizada que processa esse input automaticamente todo dia: a tech-manager. Vou mostrar como funciona em 2 partes: a anatomia, e o operacional.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">RESPOSTA PERGUNTA 3</p>
+  <h2 class="fade-in-d1">Skill personalizada<br><span class="mono green" style="font-size:0.85em">/tech-manager</span></h2>
+
+  <p class="fade-in-d2" style="font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.35;margin-top:14px;max-width:1100px">
+    Eu não precisava <span class="amber">estar nas dailies</span>.<br>
+    Eu precisava da <span class="green">transcrição</span> delas.
+  </p>
+
+  <p class="fade-in-d3 dim" style="font-size:16px;max-width:1050px;margin-top:18px">
+    Daily não precisa ser <em>reunião</em>. Daily precisa ser <strong>input estruturado</strong>. A skill <span class="mono">/tech-manager</span> processa esse input automaticamente todo dia.
+  </p>
+
+  <div class="cards fade-in-d4" style="margin-top:22px;grid-template-columns:repeat(2,1fr);gap:14px;max-width:1100px">
+    <div class="card" style="border-left:3px solid var(--amber);padding:18px">
+      <div class="card-title amber">Antes</div>
+      <p>4-5 dailies ao vivo por dia. Dia inteiro em reunião. <strong>Microgerência obrigatória</strong> pra não perder contexto.</p>
+    </div>
+    <div class="card" style="border-left:3px solid var(--green);padding:18px">
+      <div class="card-title green">Agora</div>
+      <p>Dailies assíncronas no Slack, IA transcreve, skill <span class="mono">/tech-manager</span> analisa, board atualiza, Tech Lead é cobrado se faltar prazo. <strong>Eu vejo só o relatório.</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- 20 ANATOMIA DA SKILL -->
+<div class="slide" data-block="P3 - ANATOMIA DA SKILL" data-notes="Vamos olhar como a skill funciona por dentro. O corpo da skill define o que ela faz: le todas as transcrições das dailies do Slack, cruza com o board, identifica drift entre o que está sendo discutido é o que está priorizado. Os passos são um pipeline diário: 1 le transcrições, 2 cruza com o board, 3 detecta lacunas, 4 cria card automaticamente ou cobra prazo via Slack, 5 gera resumo do estado da semana. Tudo isso roda de manhã sem eu pedir nada.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P3 - ANATOMIA</p>
+  <h2 class="fade-in-d1">Como a skill funciona <span class="green">por dentro</span>.</h2>
+
+  <div class="two-col fade-in-d2" style="margin-top:20px">
+    <div>
+      <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">CORPO DA SKILL</p>
+      <div style="background:var(--bg-code);border:1px solid var(--border-bright);border-left:3px solid var(--green);border-radius:6px;padding:14px 18px;font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--text-dim)">
+        <span class="green">name:</span> tech-manager<br>
+        <span class="green">trigger:</span> cron diário 09:00<br>
+        <span class="green">inputs:</span><br>
+        &nbsp;&nbsp;- transcrições Slack (#daily-*)<br>
+        &nbsp;&nbsp;- estado do board (GitHub Projects V2)<br>
+        &nbsp;&nbsp;- prioridades da semana (OKR)<br>
+        <span class="green">outputs:</span><br>
+        &nbsp;&nbsp;- cards atualizados<br>
+        &nbsp;&nbsp;- cobrancas no Slack do Tech Lead<br>
+        &nbsp;&nbsp;- resumo semanal pro CTO
+      </div>
+    </div>
+    <div>
+      <p class="mono amber" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">PASSOS DIARIOS DA SKILL</p>
+      <ul class="checklist" style="margin-top:8px">
+        <li><strong>01.</strong> Le todas as transcrições das dailies do dia anterior</li>
+        <li><strong>02.</strong> Cruza com o board (GitHub Projects V2)</li>
+        <li><strong>03.</strong> Detecta drift entre o que foi falado é o que está priorizado</li>
+        <li><strong>04.</strong> Cria card novo se a demanda não existe</li>
+        <li><strong>05.</strong> Cobra prazo via Slack se o card tiver gap</li>
+        <li><strong>06.</strong> Gera resumo do estado da semana pro CTO</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="fade-in-d3 tip" style="margin-top:16px"><span class="green">→</span> Tudo isso roda <strong>de manhã, sem eu pedir nada</strong>.</p>
+</div>
+
+<!-- 21 OPERACIONAL - BOARD + RELATORIOS -->
+<div class="slide" data-block="P3 - OPERACIONAL" data-notes="Como isso aparece operacionalmente? Estrutura do board: cada iniciativa tem dono, squad, status, prazo e link pra discussão. O agente atualiza tudo isso sozinho cruzando com as dailies. E o output mais importante pra mim como Head: o relatório semanal. Toda sexta de manhã eu recebo um documento estruturado: o que foi entregue, o que ficou em risco, onde precisa de decisão minha. Eu não preciso entrar em reunião pra saber. Eu só abro o relatório e sei pra onde redirecionar foco.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P3 - OPERACIONAL</p>
+  <h2 class="fade-in-d1">Board atualizado <span class="dim">sozinho.</span><br>Relatório chega <span class="dim">sozinho.</span></h2>
+
+  <div class="two-col fade-in-d2" style="margin-top:22px">
+    <div>
+      <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">ESTRUTURA DO BOARD</p>
+      <div style="background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:14px;font-family:var(--font-mono);font-size:12px;color:var(--text-dim);line-height:1.7">
+        <strong class="green">Iniciativa</strong> - título + descrição curta<br>
+        <strong class="green">Dono</strong> - Tech Lead responsável<br>
+        <strong class="green">Squad</strong> - qual time está executando<br>
+        <strong class="green">Status</strong> - todo, doing, review, done, blocked<br>
+        <strong class="green">Prazo</strong> - data alvo, atualizada automaticamente<br>
+        <strong class="green">OKR</strong> - alinhamento com objetivo do quarter<br>
+        <strong class="green">Discussão</strong> - link pra thread no Slack<br>
+        <strong class="green">Última menção</strong> - data + transcrição referenciada
+      </div>
+      <p class="dim" style="font-size:13px;margin-top:10px">Cada campo pode ser atualizado pelo agente cruzando dailies + Git + Slack.</p>
+    </div>
+    <div>
+      <p class="mono amber" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">RELATORIO SEMANAL (sexta 09:00)</p>
+      <div style="background:var(--bg-card);border:1px solid var(--border-bright);border-left:3px solid var(--amber);border-radius:6px;padding:14px;font-size:13px;line-height:1.6">
+        <p style="font-weight:600;color:var(--text)">Estado da semana - Squad X</p>
+        <p style="margin-top:8px;color:var(--text-dim)"><strong class="green">Entregue:</strong> 4 iniciativas (lista)</p>
+        <p style="margin-top:4px;color:var(--text-dim)"><strong class="amber">Em risco:</strong> 2 iniciativas (motivos + sugestão)</p>
+        <p style="margin-top:4px;color:var(--text-dim)"><strong class="red">Bloqueado:</strong> 1 iniciativa (precisa decisão do Head)</p>
+        <p style="margin-top:4px;color:var(--text-dim)"><strong class="blue">Proxima semana:</strong> prioridades sugeridas</p>
+        <p style="margin-top:4px;color:var(--text-dim)"><strong class="purple">Decisão requerida:</strong> 1 ponto crítico</p>
+      </div>
+      <p class="dim" style="font-size:13px;margin-top:10px">Eu só abro o relatório. <strong>Sei pra onde redirecionar foco</strong>.</p>
+    </div>
+  </div>
+
+  <p class="fade-in-d3 tip" style="margin-top:16px"><span class="green">→</span> Microgerência <strong>terceirizada pro agente</strong>. Eu fico com decisão estratégica.</p>
+</div>
+
+<!-- 22 PRA LEVAR PRA CASA -->
+<div class="slide" data-block="PRA LEVAR PRA CASA" data-notes="Pra levar pra casa, 3 direcionamentos práticos. Um: defina um processo. Ralph Loop, GSD, BMAD, Compozy, SDD, qualquer um. Mas padronize suas iterações com a IA. Assim você sabe evoluir. Dois: fuja de mensurar tokens, PRs, linhas de código. Você não quer um time viciado em tokens. Você quer uma empresa que entrega resultado. Três: acompanhe o processo. Não é porque funciona hoje que vai continuar funcionando amanhã. As ferramentas evoluem, ainda mais agora. Tendo métricas, você sabe POR QUE trocar da A pra B, e não fica refém de benchmark enviesado.">
+  <h2 class="fade-in">Pra levar pra casa.</h2>
+
+  <ol class="numlist" style="margin-top:14px">
+    <li class="fade-in-d1">
+      <strong class="green">Defina um processo.</strong>
+      <span class="dim">Ralph Loop, GSD, BMAD, Compozy, SDD — qualquer um.<br>
+      Padronize suas iterações com a IA. <strong>Assim você sabe evoluir.</strong></span>
+    </li>
+    <li class="fade-in-d2">
+      <strong class="green">Fuja de mensurar tokens, PRs, linhas de código.</strong>
+      <span class="dim">Você não quer um time <strong>viciado em tokens</strong>.<br>
+      Você quer uma empresa que <strong>entrega resultado</strong>.</span>
+    </li>
+    <li class="fade-in-d3">
+      <strong class="green">Acompanhe a evolução do processo.</strong>
+      <span class="dim">Não é porque funciona hoje que vai funcionar amanhã. As ferramentas evoluem rápido.<br>
+      Com métricas, você sabe <strong>por que</strong> trocar da A para a B — e não fica <strong>refém de benchmark enviesado</strong>.</span>
+    </li>
+  </ol>
+</div>
+
+<!-- 23 FECHAMENTO DO CICLO -->
+<div class="slide" data-block="FECHAMENTO" data-notes="E o fechamento. Comecei perguntando se você está sendo produtivo com IA. Agora dá pra responder. Se você tem processo, mede outcomes e mantém alinhamento estratégico em escala, você ESTÁ. Se está olhando token, linha, PR aberto, fazendo babysitting da IA ou usando ela como um chat infinito até ela quebrar, provavelmente ainda não está.">
+  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:24px">FECHANDO O CICLO</p>
+  <h1 class="fade-in-d1" style="font-size:clamp(40px,4vw,72px);line-height:1.05;max-width:1200px">
+    Comecei perguntando se você<br>
+    <span class="dim">está sendo produtivo com IA.</span>
+  </h1>
+  <p class="fade-in-d2" style="font-size:clamp(22px,2vw,32px);font-weight:600;line-height:1.4;margin-top:32px;max-width:1200px">
+    Agora dá pra responder.<br>
+    <span class="green">Se você tem processo, mede outcomes e mantém alinhamento — está.</span><br>
+    <span class="amber">Se está olhando token, linha, PR ou de babá da IA — provavelmente ainda não.</span>
+  </p>
+</div>
+
+<!-- 24 CONECTE-SE -->
+<div class="slide" data-block="CONECTE-SE" data-notes="Antes de fechar, três QRs. Quem quiser receber esta apresentação, me chama no LinkedIn no primeiro QR. Quem quiser entrar na waitlist do Ralph Console, segundo QR. E pra quem ainda não fez, o terceiro QR é o da Bússola Executiva de IA, um diagnóstico gratuito de 5 minutos onde um time de agentes analisa seu perfil. Deixa 30 segundos pra galera escanear sem pressa.">
+  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">CONECTE-SE</p>
+  <h2 class="fade-in-d1">Pra continuar a conversa.</h2>
+
+  <div class="qr-row fade-in-d2" style="margin-top:24px">
+    <div class="qr-card">
+      <div class="qr-pic"></div>
+      <div class="qr-title">LinkedIn - Renato</div>
+      <div class="qr-sub">Me chame —<br>te envio <strong>os slides desta talk</strong>.</div>
+    </div>
+    <div class="qr-card">
+      <div class="qr-pic"></div>
+      <div class="qr-title">Ralph Console</div>
+      <div class="qr-sub">Entre na <strong>waitlist</strong>.<br>Você recebe o convite quando liberarmos.</div>
+    </div>
+    <div class="qr-card" style="border-color:var(--amber)">
+      <div class="qr-pic" style="border-color:var(--amber)"></div>
+      <div class="qr-title amber">Bússola Executiva de IA</div>
+      <div class="qr-sub">Diagnóstico gratuito - 5 min.<br>Time de agentes analisa seu perfil.</div>
+    </div>
+  </div>
+
+  <p class="fade-in-d3 dim" style="font-size:14px;margin-top:18px;text-align:center;width:100%">
+    Deixar 30 segundos aberto pra galera escanear sem pressa.
+  </p>
+</div>
+
+<!-- 25 OBRIGADO -->
+<div class="slide" data-block="" data-notes="Muito obrigado pelo tempo e atenção. Foi um prazer compartilhar. Excelente evento a todos.">
+  <h1 class="fade-in" style="font-size:clamp(80px,9vw,180px);line-height:0.88;text-align:center;width:100%">
+    Obrigado.
+  </h1>
+  <p class="fade-in-d2" style="font-size:clamp(20px,1.8vw,28px);font-weight:500;margin-top:24px;color:var(--text-dim);text-align:center;width:100%">
+    Excelente evento a todos.
+  </p>
+</div>
+
+</div><!-- /deck -->
+
+<div class="footer-logos" id="footerLogos">
+  <div class="logo-wrap" title="StartSe Tech Academy">
+    <span style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:1.5px;color:#bfc1d4">STARTSE TECH</span>
+  </div>
+  <div class="footer-event-date">13-14 maio - Pro Magno - SP</div>
+  <div class="logo-wrap" title="AI Festival 2026">
+    <img src="https://pages.startse.com/hs-fs/hubfs/AIFESTIVAL26.png?width=200&name=AIFESTIVAL26.png" alt="AI Festival 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+    <span style="display:none;font-family:var(--font-display);font-weight:800;font-size:14px;letter-spacing:2px;color:var(--green)">AI FESTIVAL 26</span>
+  </div>
+</div>
+
+<div class="notes" id="notes"></div>
+
+<div class="step-indicator" id="stepIndicator"></div>
+
+<script>
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total = slides.length;
+let current = 0;
+let currentStep = 0;
+let notesVisible = false;
+
+function getMaxStep(slide){
+  const ds = slide.dataset.steps;
+  return ds ? parseInt(ds, 10) : 0;
+}
+
+function renderStepIndicator(){
+  const slide = slides[current];
+  const maxStep = getMaxStep(slide);
+  const ind = document.getElementById('stepIndicator');
+  if(maxStep === 0){
+    ind.classList.remove('visible');
+    ind.innerHTML = '';
+    return;
+  }
+  ind.classList.add('visible');
+  let html = '';
+  for(let i = 0; i <= maxStep; i++){
+    html += '<span class="dot' + (i <= currentStep ? ' active' : '') + '"></span>';
+  }
+  ind.innerHTML = html;
+}
+
+function applySteps(){
+  const slide = slides[current];
+  const reveals = slide.querySelectorAll('.step-card-reveal');
+  let lastRevealed = null;
+  reveals.forEach(el => {
+    const step = parseInt(el.dataset.step, 10);
+    const wasRevealed = el.classList.contains('revealed');
+    const shouldReveal = step <= currentStep;
+    if(shouldReveal && !wasRevealed){
+      el.classList.add('revealed');
+      lastRevealed = el;
+    } else if(!shouldReveal && wasRevealed){
+      el.classList.remove('revealed');
+    }
+  });
+  renderStepIndicator();
+  // Auto-scroll suave pro último elemento revelado (caso o slide tenha overflow)
+  if(lastRevealed && slide.scrollHeight > slide.clientHeight){
+    setTimeout(()=>{
+      lastRevealed.scrollIntoView({behavior:'smooth', block:'nearest', inline:'nearest'});
+    }, 100);
+  }
+}
+
+function show(idx){
+  current = Math.max(0,Math.min(total-1,idx));
+  currentStep = 0;
+  slides.forEach((s,i)=>s.classList.toggle('active',i===current));
+  document.getElementById('progress').style.width = ((current+1)/total*100)+'%';
+  const n = slides[current].dataset.notes||'';
+  document.getElementById('notes').textContent = n;
+  document.body.classList.toggle('cover-active', current === 0);
+  document.body.classList.toggle('outro-active', current === total - 1);
+  slides[current].querySelectorAll('.fade-in,.fade-in-d1,.fade-in-d2,.fade-in-d3,.fade-in-d4,.fade-in-d5').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
+  // Reset todos os reveals do slide ativo
+  slides[current].querySelectorAll('.step-card-reveal').forEach(el => el.classList.remove('revealed'));
+  // Reset scroll do slide (caso seja scrollável)
+  slides[current].scrollTop = 0;
+  // Reset/restart demos de chat (re-trigger animações CSS + auto-scroll do body)
+  document.querySelectorAll('.chat-demo').forEach(demo => demo.classList.remove('playing'));
+  const slideDemo = slides[current].querySelector('.chat-demo');
+  if(slideDemo){
+    // Force reflow para reiniciar todas as animações CSS
+    slideDemo.querySelectorAll('.chat-msg, .ctx-fill').forEach(el => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+    // Reset scroll do body do chat
+    const body = slideDemo.querySelector('.chat-body');
+    if(body) body.scrollTop = 0;
+    // Pequeno delay pra começar a tocar após o slide aparecer
+    setTimeout(()=> {
+      slideDemo.classList.add('playing');
+      setupChatAutoScroll(slideDemo);
+    }, 300);
+  }
+  applySteps();
+}
+
+function setupChatAutoScroll(demo){
+  const body = demo.querySelector('.chat-body');
+  if(!body) return;
+  // Cada msg dispara 'animationstart' quando começa a aparecer.
+  // Nesse momento fazemos scroll suave até ela.
+  body.querySelectorAll('.chat-msg').forEach(msg => {
+    msg.addEventListener('animationstart', (e) => {
+      if(e.animationName !== 'msgIn') return;
+      // Pequeno timeout pra garantir que a mensagem renderizou completamente
+      setTimeout(() => {
+        // Scroll suave dentro do chat-body (não scrollIntoView pra não mexer no slide)
+        const msgBottom = msg.offsetTop + msg.offsetHeight;
+        const visibleBottom = body.scrollTop + body.clientHeight;
+        if(msgBottom > visibleBottom - 20){
+          body.scrollTo({
+            top: msgBottom - body.clientHeight + 20,
+            behavior: 'smooth'
+          });
+        }
+      }, 80);
+    }, {once: true});
+  });
+}
+
+function nextSlide(){
+  const slide = slides[current];
+  const maxStep = getMaxStep(slide);
+  if(maxStep > 0 && currentStep < maxStep){
+    currentStep++;
+    applySteps();
+    return;
+  }
+  show(current+1);
+}
+
+function prevSlide(){
+  const slide = slides[current];
+  const maxStep = getMaxStep(slide);
+  if(maxStep > 0 && currentStep > 0){
+    currentStep--;
+    applySteps();
+    return;
+  }
+  show(current-1);
+}
+
+function toggleNotes(){notesVisible=!notesVisible;document.getElementById('notes').classList.toggle('visible',notesVisible);}
+function toggleFs(){if(!document.fullscreenElement) document.documentElement.requestFullscreen();else document.exitFullscreen();}
+
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();nextSlide()}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevSlide()}
+  if(e.key==='n'||e.key==='N')toggleNotes();
+  if(e.key==='f'||e.key==='F')toggleFs();
+  if(e.key==='Home')show(0);
+  if(e.key==='End')show(total-1);
+});
+
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX});
+document.addEventListener('touchend',e=>{
+  const d=tx-e.changedTouches[0].clientX;
+  if(Math.abs(d)>50) d>0?nextSlide():prevSlide();
+});
+
+show(0);
+</script>
+</body>
+</html>
