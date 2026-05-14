@@ -13,7 +13,10 @@
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;-webkit-font-smoothing:antialiased}
 body{background:radial-gradient(ellipse at 20% 10%,rgba(0,217,255,0.05) 0%,transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(0,217,255,0.025) 0%,transparent 50%),var(--bg);background-attachment:fixed;}
 .deck{position:relative;width:100vw;height:100vh}
-.slide{position:absolute;inset:0;padding:var(--slide-pad);display:none;flex-direction:column;justify-content:center;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;overflow:hidden;}
+.slide{position:absolute;inset:0;padding:var(--slide-pad);display:none;flex-direction:column;justify-content:safe center;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--border-bright) transparent;}
+.slide::-webkit-scrollbar{width:8px}
+.slide::-webkit-scrollbar-track{background:transparent}
+.slide::-webkit-scrollbar-thumb{background:var(--border-bright);border-radius:4px}
 .slide.active{display:flex;opacity:1;transform:translateY(0)}
 .slide[data-block]:not([data-block=""])::before{content:attr(data-block);position:absolute;top:32px;left:var(--slide-pad);font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);font-weight:600;color:var(--green);letter-spacing:2.5px;text-transform:uppercase;}
 h1{font-family:var(--font-display);font-weight:800;font-size:clamp(72px,6.5vw,160px);line-height:0.92;letter-spacing:-0.02em;color:var(--text)}
@@ -119,7 +122,7 @@ img.qr-pic{background:#fff;padding:6px}
 .step-indicator .dot{width:5px;height:5px;border-radius:50%;background:var(--text-muted);opacity:0.6;transition:all .3s ease}
 .step-indicator .dot.active{background:var(--green);box-shadow:0 0 6px var(--green);transform:scale(1.25);opacity:1}
 /* ===== DEMO DE CHAT - JEITO TRADICIONAL ===== */
-.chat-demo{background:#0a0c14;border:1px solid var(--border-bright);border-radius:10px;padding:0;width:100%;max-width:clamp(900px,65vw,1500px);height:clamp(480px,52vh,780px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);position:relative}
+.chat-demo{background:#0a0c14;border:1px solid var(--border-bright);border-radius:10px;padding:0;width:100%;max-width:clamp(900px,65vw,1500px);height:clamp(420px,58vh,900px);flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);position:relative}
 .chat-header{background:#11131c;border-bottom:1px solid var(--border-bright);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
 .chat-header .dots{display:flex;gap:6px}
 .chat-header .dots span{width:10px;height:10px;border-radius:50%;background:#3d3f52}
@@ -183,6 +186,34 @@ img.qr-pic{background:#fff;padding:6px}
 .rc-legend-dot{width:clamp(12px,1vw,18px);height:clamp(12px,1vw,18px);border-radius:50%;display:block}
 .rc-legend-name{font-family:var(--font-display);font-weight:700;font-size:clamp(15px,1.2vw,22px);color:var(--text);line-height:1.15}
 .rc-legend-desc{font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim);margin-top:2px;display:block}
+
+/* ===== Dev Fluency Score - tela do Ralph Console ===== */
+.dfs-frame{width:100%;max-width:1500px;height:clamp(440px,62vh,800px);background:var(--bg-card);border:1px solid var(--border-bright);border-radius:10px;overflow:hidden;position:relative;margin-top:10px}
+.dfs-scroll{padding:clamp(20px,2vw,40px);animation:dfsScroll 18s cubic-bezier(0.4,0,0.2,1) 1.6s forwards;will-change:transform}
+@keyframes dfsScroll{0%,38%{transform:translateY(0)}82%,100%{transform:translateY(-46vh)}}
+.dfs-section-title{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,1.8vw,36px);color:var(--text);margin-bottom:clamp(12px,1vw,20px)}
+.dfs-gauge-section{display:flex;flex-direction:column;min-height:clamp(360px,55vh,640px)}
+.dfs-gauge-wrap{display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(4px,0.4vw,8px);width:100%;margin-top:auto;margin-bottom:auto}
+.dfs-gauge{width:clamp(280px,28vw,460px);height:auto;display:block}
+.dfs-needle{transform:rotate(9deg);transform-origin:100px 100px}
+.dfs-value{font-family:var(--font-display);font-weight:900;font-size:clamp(56px,5vw,96px);line-height:1;color:var(--text);letter-spacing:-0.02em;margin-top:4px}
+.dfs-level{font-family:var(--font-body);font-weight:400;font-size:clamp(18px,1.4vw,28px);color:var(--text-dim)}
+.dfs-desc{margin-top:clamp(14px,1.2vw,22px);font-size:clamp(14px,1.15vw,22px);color:var(--text-dim);max-width:720px;line-height:1.45}
+.dfs-dims-section{margin-top:clamp(20px,2vw,40px)}
+.dfs-dims-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.1vw,18px)}
+.dfs-dim-card{background:#0a0c14;border:1px solid var(--border-bright);border-radius:10px;padding:clamp(14px,1.2vw,22px);border-left:3px solid var(--amber);display:flex;flex-direction:column;gap:clamp(6px,0.6vw,10px)}
+.dfs-dim-card.dfs-green{border-left-color:#2dd4bf}
+.dfs-dim-card.dfs-amber{border-left-color:var(--amber)}
+.dfs-dim-name{font-family:var(--font-body);font-weight:600;font-size:clamp(14px,1.15vw,22px);color:var(--text-dim)}
+.dfs-dim-score{display:flex;align-items:baseline;gap:6px}
+.dfs-dim-value{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,2.4vw,44px);color:var(--text);line-height:1}
+.dfs-dim-max{font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);color:var(--text-dim)}
+.dfs-dim-bar{height:clamp(4px,0.4vw,7px);background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;margin:6px 0 10px}
+.dfs-dim-fill{height:100%;background:var(--amber);border-radius:3px}
+.dfs-dim-card.dfs-green .dfs-dim-fill{background:#2dd4bf}
+.dfs-dim-subs{display:flex;flex-direction:column;gap:clamp(5px,0.45vw,8px);margin-top:auto;padding-top:6px}
+.dfs-dim-subs div{display:flex;justify-content:space-between;font-size:clamp(12px,1vw,18px);color:var(--text-dim)}
+.dfs-dim-subs strong{color:var(--text);font-weight:600;font-family:var(--font-mono);font-size:clamp(12px,1vw,18px)}
 
 </style>
 </head>
@@ -1171,6 +1202,78 @@ img.qr-pic{background:#fff;padding:6px}
   <p class="fade-in-d3 tip" style="margin-top:14px;font-size:clamp(13px,1.05vw,20px)"><span class="green">→</span> Tag <strong style="color:var(--rc-qa)">DIRECT</strong> = merge direto em produção, sem QA. Bandeira de contexto, não de erro.</p>
 </div>
 
+<!-- 17d DEV FLUENCY SCORE - TELA DO CONSOLE -->
+<div class="slide" data-block="P2 - DEV FLUENCY SCORE" data-notes="Outra tela do Ralph Console: o DevFluency Score. Resume num número, de 0 a 100, a maturidade prática do time com IA. Aqui o squad está em 55 - Definido: processos estão documentados, time acompanha métricas, tem visibilidade sobre gargalos. A tela rola sozinha pra revelar as 4 dimensões que compõem o score: AI Effectiveness, eficácia do agente; Process Consistency, disciplina do processo; Delivery Speed, da família DORA; e Quality and Reliability, também DORA. Cada dimensão tem suas sub-métricas. O squad aqui está fraco em AI Effectiveness, 44, e mediano em Delivery Speed, 50 - sinal de que ainda dependem muito de retrabalho. Process Consistency em 71 é o ponto forte: processo está rodando. É essa visão que te diz ONDE investir esforço." style="justify-content:flex-start;padding-top:clamp(80px,8vh,130px)">
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:10px">P2 - DEV FLUENCY</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,48px)">Um <span class="green">número</span> pra maturidade do time.</h2>
+  <p class="fade-in-d2 dim" style="font-size:clamp(15px,1.2vw,23px);max-width:1100px;margin-top:4px;margin-bottom:8px">DevFluency Score: 0–100, calculado a partir de 4 dimensões. A tela rola sozinha pra mostrar o detalhe.</p>
+
+  <div class="dfs-frame fade-in-d3">
+    <div class="dfs-scroll">
+      <div class="dfs-gauge-section">
+        <div class="dfs-section-title">DevFluency Score</div>
+        <div class="dfs-gauge-wrap">
+          <svg viewBox="0 0 200 115" class="dfs-gauge" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 20 100 A 80 80 0 0 1 35.3 53.0" stroke="#ef4444" stroke-width="18" fill="none" stroke-linecap="butt"/>
+            <path d="M 35.3 53.0 A 80 80 0 0 1 100 20" stroke="#f59e0b" stroke-width="18" fill="none"/>
+            <path d="M 100 20 A 80 80 0 0 1 180 100" stroke="#10b981" stroke-width="18" fill="none"/>
+            <line class="dfs-needle" x1="100" y1="100" x2="100" y2="32" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="100" cy="100" r="5" fill="#fff"/>
+          </svg>
+          <div class="dfs-value">55</div>
+          <div class="dfs-level">Definido</div>
+          <p class="dfs-desc">Processos de desenvolvimento com IA estão definidos e documentados. O time acompanha métricas e tem visibilidade sobre eficiência e gargalos.</p>
+        </div>
+      </div>
+
+      <div class="dfs-dims-section">
+        <div class="dfs-section-title">Dimensões</div>
+        <div class="dfs-dims-grid">
+          <div class="dfs-dim-card dfs-amber">
+            <div class="dfs-dim-name">AI Effectiveness</div>
+            <div class="dfs-dim-score"><span class="dfs-dim-value">44</span><span class="dfs-dim-max">/ 100</span></div>
+            <div class="dfs-dim-bar"><div class="dfs-dim-fill" style="width:44%"></div></div>
+            <div class="dfs-dim-subs">
+              <div><span>1ª tentativa</span><strong>14 %</strong></div>
+              <div><span>Conclusão</span><strong>76 %</strong></div>
+              <div><span>Iters/story</span><strong>9.8</strong></div>
+            </div>
+          </div>
+          <div class="dfs-dim-card dfs-green">
+            <div class="dfs-dim-name">Process Consistency</div>
+            <div class="dfs-dim-score"><span class="dfs-dim-value">71</span><span class="dfs-dim-max">/ 100</span></div>
+            <div class="dfs-dim-bar"><div class="dfs-dim-fill" style="width:71%"></div></div>
+            <div class="dfs-dim-subs">
+              <div><span>Conclusão</span><strong>76 %</strong></div>
+              <div><span>PRDs bloqueados</span><strong>17 %</strong></div>
+            </div>
+          </div>
+          <div class="dfs-dim-card dfs-amber">
+            <div class="dfs-dim-name">Delivery Speed</div>
+            <div class="dfs-dim-score"><span class="dfs-dim-value">50</span><span class="dfs-dim-max">/ 100</span></div>
+            <div class="dfs-dim-bar"><div class="dfs-dim-fill" style="width:50%"></div></div>
+            <div class="dfs-dim-subs">
+              <div><span>Lead time</span><strong>15341 min</strong></div>
+              <div><span>Deploy/semana</span><strong>9.3</strong></div>
+            </div>
+          </div>
+          <div class="dfs-dim-card dfs-amber">
+            <div class="dfs-dim-name">Quality &amp; Reliability</div>
+            <div class="dfs-dim-score"><span class="dfs-dim-value">60</span><span class="dfs-dim-max">/ 100</span></div>
+            <div class="dfs-dim-bar"><div class="dfs-dim-fill" style="width:60%"></div></div>
+            <div class="dfs-dim-subs">
+              <div><span>Falhas pós-deploy</span><strong>27 %</strong></div>
+              <div><span>Bug fix ratio</span><strong>14 %</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="fade-in-d4 tip" style="margin-top:14px;font-size:clamp(13px,1.05vw,20px)"><span class="green">→</span> Score sozinho não decide. As <strong>4 dimensões</strong> mostram onde investir.</p>
+</div>
+
 <!-- 18 RECAPITULANDO -->
 <div class="slide" data-block="RECAPITULANDO" data-notes="Antes de seguir, deixa eu fazer uma pausa pra recapitular. O que vimos até aqui? Como definimos um processo com IA? Adotamos o Ralph Loop, junto com outros frameworks possíveis do mercado. Como mensuramos produtividade? Criamos o Ralph Console juntando DORA com Dev Fluency. E agora a terceira pergunta, que é a mais crítica em escala: como eu acompanho a evolução do time todo sem virar microgerente? E aí que entra a última parte da nossa conversa.">
   <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:18px">O QUE VIMOS ATÉ AGORA</p>
@@ -1361,8 +1464,8 @@ img.qr-pic{background:#fff;padding:6px}
       <div class="qr-sub">Entre na <strong>waitlist</strong>.<br>Você recebe o convite quando liberarmos.</div>
       <div class="qr-sub mono" style="margin-top:6px;font-size:clamp(11px,0.9vw,16px);word-break:break-all">ralph.ai-solutions.startse.com</div>
     </div>
-    <div class="qr-card" style="border-color:var(--amber)">
-      <img class="qr-pic" alt="QR Bússola Executiva de IA" src="assets/qr-bussola.png" style="border-color:var(--amber)">
+    <div class="qr-card">
+      <img class="qr-pic" alt="QR Bússola Executiva de IA" src="assets/qr-bussola.png">
       <div class="qr-title amber">Bússola Executiva de IA</div>
       <div class="qr-sub">Diagnóstico gratuito - 5 min.<br>Time de agentes analisa seu perfil.</div>
       <div class="qr-sub mono" style="margin-top:6px;font-size:clamp(11px,0.9vw,16px);word-break:break-all;color:var(--amber)">ai-festival.startse.com</div>
@@ -1490,7 +1593,7 @@ function show(idx){
   document.getElementById('notes').textContent = n;
   document.body.classList.toggle('cover-active', current === 0);
   document.body.classList.toggle('outro-active', current === total - 1);
-  slides[current].querySelectorAll('.fade-in,.fade-in-d1,.fade-in-d2,.fade-in-d3,.fade-in-d4,.fade-in-d5').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
+  slides[current].querySelectorAll('.fade-in,.fade-in-d1,.fade-in-d2,.fade-in-d3,.fade-in-d4,.fade-in-d5,.dfs-scroll').forEach(el=>{el.style.animation='none';void el.offsetWidth;el.style.animation=''});
   // Reset todos os reveals do slide ativo
   slides[current].querySelectorAll('.step-card-reveal').forEach(el => el.classList.remove('revealed'));
   // Reset scroll do slide (caso seja scrollável)
