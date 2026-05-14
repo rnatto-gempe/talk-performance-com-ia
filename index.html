@@ -8,40 +8,40 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Barlow+Condensed:wght@500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05060a;--bg-card:#0d0f17;--bg-code:#11131c;--green:#00d9ff;--amber:#ffc233;--red:#ff5577;--blue:#7aa2ff;--purple:#c084fc;--text:#eef0f7;--text-dim:#7c7e92;--text-muted:#3d3f52;--border:#1a1c28;--border-bright:#2a2d3d;--font-display:'Barlow Condensed',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-body:'Barlow',sans-serif;--slide-pad:clamp(40px,4vw,80px);}
+:root{--bg:#05060a;--bg-card:#0d0f17;--bg-code:#11131c;--green:#00d9ff;--amber:#ffc233;--red:#ff5577;--blue:#7aa2ff;--purple:#c084fc;--text:#eef0f7;--text-dim:#eef0f7;--text-muted:#eef0f7;--border:#1a1c28;--border-bright:#2a2d3d;--font-display:'Barlow Condensed',sans-serif;--font-mono:'JetBrains Mono',monospace;--font-body:'Barlow',sans-serif;--slide-pad:clamp(36px,3.2vw,72px);}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;-webkit-font-smoothing:antialiased}
 body{background:radial-gradient(ellipse at 20% 10%,rgba(0,217,255,0.05) 0%,transparent 50%),radial-gradient(ellipse at 80% 90%,rgba(0,217,255,0.025) 0%,transparent 50%),var(--bg);background-attachment:fixed;}
 .deck{position:relative;width:100vw;height:100vh}
 .slide{position:absolute;inset:0;padding:var(--slide-pad);display:none;flex-direction:column;justify-content:center;opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease;overflow:hidden;}
 .slide.active{display:flex;opacity:1;transform:translateY(0)}
-.slide[data-block]:not([data-block=""])::before{content:attr(data-block);position:absolute;top:32px;left:var(--slide-pad);font-family:var(--font-mono);font-size:clamp(11px,0.85vw,14px);font-weight:600;color:var(--green);letter-spacing:2.5px;text-transform:uppercase;}
-h1{font-family:var(--font-display);font-weight:800;font-size:clamp(64px,5vw,108px);line-height:0.92;letter-spacing:-0.02em;color:var(--text)}
-h2{font-family:var(--font-display);font-weight:700;font-size:clamp(40px,3.4vw,64px);line-height:1;letter-spacing:-0.01em;color:var(--text);margin-bottom:0.4em}
-h3{font-family:var(--font-display);font-weight:700;font-size:clamp(24px,1.8vw,34px);line-height:1.1;color:var(--text);margin-bottom:0.5em}
-p{font-size:clamp(16px,1.2vw,21px);line-height:1.5;color:var(--text);max-width:900px}
+.slide[data-block]:not([data-block=""])::before{content:attr(data-block);position:absolute;top:32px;left:var(--slide-pad);font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);font-weight:600;color:var(--green);letter-spacing:2.5px;text-transform:uppercase;}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(72px,6.5vw,160px);line-height:0.92;letter-spacing:-0.02em;color:var(--text)}
+h2{font-family:var(--font-display);font-weight:700;font-size:clamp(48px,4.5vw,96px);line-height:1;letter-spacing:-0.01em;color:var(--text);margin-bottom:0.4em}
+h3{font-family:var(--font-display);font-weight:700;font-size:clamp(28px,2.3vw,48px);line-height:1.1;color:var(--text);margin-bottom:0.5em}
+p{font-size:clamp(20px,1.55vw,32px);line-height:1.5;color:var(--text);max-width:1200px}
 .dim{color:var(--text-dim)}.muted{color:var(--text-muted)}.green{color:var(--green)}.amber{color:var(--amber)}.red{color:var(--red)}.blue{color:var(--blue)}.purple{color:var(--purple)}.bold{font-weight:700}.mono{font-family:var(--font-mono)}.italic{font-style:italic}
 .divider{height:1px;background:linear-gradient(90deg,var(--green) 0%,var(--green) 60px,transparent 60px);margin:24px 0;width:100%;}
 .fade-in{animation:fade .6s ease both}.fade-in-d1{animation:fade .6s ease .15s both}.fade-in-d2{animation:fade .6s ease .3s both}.fade-in-d3{animation:fade .6s ease .45s both}.fade-in-d4{animation:fade .6s ease .6s both}.fade-in-d5{animation:fade .6s ease .75s both}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.bignum{font-family:var(--font-display);font-weight:900;font-size:clamp(140px,16vw,280px);line-height:0.85;letter-spacing:-0.04em;color:var(--green);text-shadow:0 0 40px rgba(0,217,255,0.25)}
+.bignum{font-family:var(--font-display);font-weight:900;font-size:clamp(160px,18vw,360px);line-height:0.85;letter-spacing:-0.04em;color:var(--green);text-shadow:0 0 40px rgba(0,217,255,0.25)}
 .bignum.red{color:var(--red);text-shadow:0 0 40px rgba(255,85,119,0.22)}
 .bignum.amber{color:var(--amber);text-shadow:0 0 40px rgba(255,194,51,0.22)}
 .bignum.green{color:var(--green)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
 .card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:8px;padding:18px 20px}
-.card-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);margin-bottom:8px;letter-spacing:0.3px}
-.card p{font-size:14px;line-height:1.45;color:var(--text-dim)}
+.card-title{font-family:var(--font-display);font-weight:700;font-size:clamp(18px,1.45vw,28px);color:var(--text);margin-bottom:8px;letter-spacing:0.3px}
+.card p{font-size:clamp(14px,1.15vw,22px);line-height:1.45;color:var(--text-dim)}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:14px;align-items:start}
 .flow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:20px 0}
-.flow-node{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:10px 14px;font-family:var(--font-mono);font-size:13px;font-weight:500;text-align:center;line-height:1.3}
+.flow-node{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:10px 14px;font-family:var(--font-mono);font-size:clamp(13px,1.05vw,20px);font-weight:500;text-align:center;line-height:1.3}
 .flow-node.active{border-color:var(--green);box-shadow:0 0 0 1px var(--green) inset,0 0 24px rgba(0,217,255,0.22);color:var(--green)}
-.flow-arrow{color:var(--text-dim);font-size:18px}
-.quote{border-left:3px solid var(--amber);padding:14px 20px;background:rgba(255,194,51,0.04);border-radius:0 6px 6px 0;font-style:italic;font-size:17px;line-height:1.5;color:var(--text);max-width:980px;margin-top:10px}
-.quote-source{display:block;margin-top:8px;font-style:normal;font-size:12px;font-family:var(--font-mono);color:var(--text-dim);letter-spacing:0.5px}
-.notes{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9;width:min(80vw,800px);max-height:35vh;overflow-y:auto;background:rgba(18,18,26,0.97);backdrop-filter:blur(14px);border:1px solid var(--border-bright);border-radius:8px;padding:18px 22px;font-size:14px;line-height:1.55;color:var(--text-dim);opacity:0;visibility:hidden;transition:.3s}
+.flow-arrow{color:var(--text-dim);font-size:clamp(16px,1.4vw,26px)}
+.quote{border-left:3px solid var(--amber);padding:14px 20px;background:rgba(255,194,51,0.04);border-radius:0 6px 6px 0;font-style:italic;font-size:clamp(18px,1.5vw,28px);line-height:1.5;color:var(--text);max-width:1200px;margin-top:10px}
+.quote-source{display:block;margin-top:8px;font-style:normal;font-size:clamp(12px,1vw,18px);font-family:var(--font-mono);color:var(--text-dim);letter-spacing:0.5px}
+.notes{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9;width:min(80vw,1100px);max-height:35vh;overflow-y:auto;background:rgba(18,18,26,0.97);backdrop-filter:blur(14px);border:1px solid var(--border-bright);border-radius:8px;padding:18px 22px;font-size:clamp(14px,1.15vw,22px);line-height:1.55;color:var(--text-dim);opacity:0;visibility:hidden;transition:.3s}
 .notes.visible{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-.notes::before{content:'SPEAKER NOTES';display:block;font-family:var(--font-mono);font-size:10px;color:var(--green);letter-spacing:2px;margin-bottom:8px}
+.notes::before{content:'SPEAKER NOTES';display:block;font-family:var(--font-mono);font-size:clamp(10px,0.85vw,15px);color:var(--green);letter-spacing:2px;margin-bottom:8px}
 .footer-logos{position:fixed;bottom:14px;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:0 var(--slide-pad);pointer-events:none;opacity:0.5;transition:opacity .4s ease;}
 .footer-logos:hover{opacity:0.85}
 .footer-logos .logo-wrap{height:28px;display:flex;align-items:center;gap:10px}
@@ -49,125 +49,106 @@ p{font-size:clamp(16px,1.2vw,21px);line-height:1.5;color:var(--text);max-width:9
 body.cover-active .footer-logos{opacity:0.95;bottom:36px}
 body.cover-active .footer-logos img{height:40px}
 body.cover-active .footer-logos .footer-event-date{display:block}
-.footer-event-date{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;display:none;}
+.footer-event-date{font-family:var(--font-mono);font-size:clamp(10px,0.85vw,15px);color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;display:none;}
 body.outro-active .footer-logos{display:none}
 .progress{position:fixed;top:0;left:0;height:2px;background:var(--green);z-index:11;transition:width .3s ease;box-shadow:0 0 8px rgba(0,217,255,0.6);opacity:0.4}
-.cover-photo-circle{width:clamp(180px,20vw,280px);height:clamp(180px,20vw,280px);border-radius:50%;background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-code) 100%);border:2px solid var(--green);box-shadow:0 0 60px rgba(0,217,255,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--text-dim);letter-spacing:2px;text-align:center;overflow:hidden;position:absolute;top:50%;right:var(--slide-pad);transform:translateY(-50%);}
+.cover-photo-circle{width:clamp(200px,22vw,420px);height:clamp(200px,22vw,420px);border-radius:50%;background:linear-gradient(135deg,var(--bg-card) 0%,var(--bg-code) 100%);border:2px solid var(--green);box-shadow:0 0 60px rgba(0,217,255,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:clamp(14px,1.1vw,20px);color:var(--text-dim);letter-spacing:2px;text-align:center;overflow:hidden;position:absolute;top:50%;right:var(--slide-pad);transform:translateY(-50%);}
 .cover-photo-circle img{width:100%;height:100%;object-fit:cover}
 .cover-photo-circle .placeholder{padding:20px;line-height:1.3}
 .numlist{counter-reset:n;list-style:none;margin-top:14px}
-.numlist li{counter-increment:n;padding:12px 0 12px 56px;border-bottom:1px solid var(--border);position:relative;font-size:16px;line-height:1.5;max-width:1100px}
-.numlist li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:12px;font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--green);letter-spacing:1px}
-table.cmp{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}
+.numlist li{counter-increment:n;padding:12px 0 12px 56px;border-bottom:1px solid var(--border);position:relative;font-size:clamp(16px,1.3vw,24px);line-height:1.5;max-width:1400px}
+.numlist li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;top:12px;font-family:var(--font-mono);font-size:clamp(14px,1.1vw,20px);font-weight:700;color:var(--green);letter-spacing:1px}
+table.cmp{width:100%;border-collapse:collapse;margin-top:12px;font-size:clamp(14px,1.15vw,22px)}
 table.cmp th,table.cmp td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--border-bright);vertical-align:top}
-table.cmp th{font-family:var(--font-display);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);border-bottom:2px solid var(--border-bright)}
+table.cmp th{font-family:var(--font-display);font-weight:700;font-size:clamp(13px,1.05vw,18px);text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);border-bottom:2px solid var(--border-bright)}
 table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 .checklist{margin-top:12px}
-.checklist li{list-style:none;padding:7px 0 7px 22px;font-size:15px;position:relative;line-height:1.5}
+.checklist li{list-style:none;padding:7px 0 7px 22px;font-size:clamp(15px,1.2vw,22px);position:relative;line-height:1.5}
 .checklist li::before{content:'';position:absolute;left:0;top:14px;width:6px;height:6px;border-radius:50%;background:var(--green)}
 .checklist li.x::before{background:var(--red)}
-.tip{margin-top:14px;font-family:var(--font-mono);font-size:12px;color:var(--text-dim);letter-spacing:0.5px}
+.tip{margin-top:14px;font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);color:var(--text-dim);letter-spacing:0.5px}
 .tip .green{color:var(--green)}
-.source{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:0.5px;margin-top:14px;line-height:1.4}
+.source{font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-muted);letter-spacing:0.5px;margin-top:14px;line-height:1.4}
 .source a{color:var(--text-dim);text-decoration:none}
 .qr-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
 .qr-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:10px;padding:18px;text-align:center}
-.qr-pic{width:140px;height:140px;background:repeating-linear-gradient(45deg,var(--text) 0 4px,var(--bg-card) 4px 8px);border-radius:6px;margin:0 auto 12px;border:2px solid var(--green)}
-.qr-card .qr-title{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--green);margin-bottom:4px;letter-spacing:0.3px;line-height:1.2}
-.qr-card .qr-sub{font-size:13px;color:var(--text-dim);line-height:1.4}
+.qr-pic{width:clamp(160px,15vw,280px);height:clamp(160px,15vw,280px);background:repeating-linear-gradient(45deg,var(--text) 0 4px,var(--bg-card) 4px 8px);border-radius:6px;margin:0 auto 12px;border:2px solid var(--green);display:block;object-fit:contain}
+img.qr-pic{background:#fff;padding:6px}
+.qr-card .qr-title{font-family:var(--font-display);font-weight:700;font-size:clamp(18px,1.45vw,28px);color:var(--green);margin-bottom:4px;letter-spacing:0.3px;line-height:1.2}
+.qr-card .qr-sub{font-size:clamp(13px,1.1vw,20px);color:var(--text-dim);line-height:1.4}
 .u-curve{width:100%;max-width:680px;height:200px;display:block;margin:10px 0}
-.bar-row{display:grid;grid-template-columns:240px 1fr 90px;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px}
+.bar-row{display:grid;grid-template-columns:clamp(240px,18vw,340px) 1fr clamp(90px,7vw,140px);gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:clamp(14px,1.15vw,22px)}
 .bar-row:last-child{border-bottom:none}
-.bar-label{color:var(--text-dim);font-size:13px}
-.bar-track{height:18px;background:var(--bg-card);border:1px solid var(--border-bright);border-radius:3px;overflow:hidden;position:relative}
-.bar-fill{height:100%;display:flex;align-items:center;padding:0 8px;font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--bg)}
+.bar-label{color:var(--text-dim);font-size:clamp(13px,1.05vw,20px)}
+.bar-track{height:clamp(18px,1.5vw,28px);background:var(--bg-card);border:1px solid var(--border-bright);border-radius:3px;overflow:hidden;position:relative}
+.bar-fill{height:100%;display:flex;align-items:center;padding:0 8px;font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);font-weight:700;color:var(--bg)}
 .bar-fill.up{background:linear-gradient(90deg,var(--green) 0%,#0099cc 100%)}
 .bar-fill.down{background:linear-gradient(90deg,var(--red) 0%,#cc3355 100%)}
 .bar-fill.warn{background:linear-gradient(90deg,var(--amber) 0%,#cc9020 100%)}
-.bar-value{font-family:var(--font-display);font-weight:800;font-size:18px;text-align:right}
+.bar-value{font-family:var(--font-display);font-weight:800;font-size:clamp(18px,1.5vw,28px);text-align:right}
 .bar-value.up{color:var(--green)}.bar-value.down{color:var(--red)}.bar-value.warn{color:var(--amber)}
 .fw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px}
 .fw-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:14px;text-align:center}
 .fw-card.featured{border-color:var(--green);background:rgba(0,217,255,0.05)}
-.fw-name{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);margin-bottom:4px}
+.fw-name{font-family:var(--font-display);font-weight:700;font-size:clamp(18px,1.5vw,28px);color:var(--text);margin-bottom:4px}
 .fw-card.featured .fw-name{color:var(--green)}
-.fw-tag{font-family:var(--font-mono);font-size:10px;color:var(--text-dim);letter-spacing:1px;text-transform:uppercase}
+.fw-tag{font-family:var(--font-mono);font-size:clamp(10px,0.85vw,15px);color:var(--text-dim);letter-spacing:1px;text-transform:uppercase}
 .step-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
 .step-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:8px;padding:18px;border-top:3px solid var(--green);display:flex;flex-direction:column;gap:8px}
-.step-card .step-num{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--green);letter-spacing:2px;margin-bottom:4px}
-.step-card .step-title{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.2;color:var(--text)}
-.step-card .step-desc{font-size:13px;line-height:1.5;color:var(--text-dim)}
+.step-card .step-num{font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);font-weight:700;color:var(--green);letter-spacing:2px;margin-bottom:4px}
+.step-card .step-title{font-family:var(--font-display);font-weight:700;font-size:clamp(19px,1.55vw,30px);line-height:1.2;color:var(--text)}
+.step-card .step-desc{font-size:clamp(13px,1.1vw,20px);line-height:1.5;color:var(--text-dim)}
 .metric-card{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:8px;padding:18px;border-left:3px solid var(--green)}
-.metric-card .metric-name{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--green);margin-bottom:4px}
-.metric-card .metric-desc{font-size:14px;color:var(--text-dim);line-height:1.45}
+.metric-card .metric-name{font-family:var(--font-display);font-weight:700;font-size:clamp(18px,1.5vw,28px);color:var(--green);margin-bottom:4px}
+.metric-card .metric-desc{font-size:clamp(14px,1.15vw,22px);color:var(--text-dim);line-height:1.45}
 .metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
 .recap-row{display:grid;grid-template-columns:200px 1fr 60px;gap:18px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border)}
 .recap-row:last-child{border-bottom:none}
-.recap-q{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text);line-height:1.25}
-.recap-a{font-family:var(--font-mono);font-size:14px;color:var(--text-dim)}
-.recap-check{font-family:var(--font-display);font-weight:800;font-size:28px;text-align:right}
+.recap-q{font-family:var(--font-display);font-weight:700;font-size:clamp(18px,1.5vw,28px);color:var(--text);line-height:1.25}
+.recap-a{font-family:var(--font-mono);font-size:clamp(14px,1.15vw,22px);color:var(--text-dim)}
+.recap-check{font-family:var(--font-display);font-weight:800;font-size:clamp(28px,2.3vw,44px);text-align:right}
 .recap-check.done{color:var(--green)}
 .recap-check.todo{color:var(--amber)}
 .step-card-reveal{opacity:0;transform:translateY(24px) scale(0.94);transition:opacity .55s cubic-bezier(0.2,0.8,0.2,1),transform .55s cubic-bezier(0.2,0.8,0.2,1);pointer-events:none}
 .step-card-reveal.revealed{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
 .step-card-reveal.revealed .card,.step-card-reveal.revealed > p{animation:cardPulse .8s cubic-bezier(0.2,0.8,0.2,1) both}
 @keyframes cardPulse{0%{box-shadow:0 0 0 0 rgba(0,217,255,0.3)}50%{box-shadow:0 0 40px 4px rgba(0,217,255,0.15)}100%{box-shadow:0 0 0 0 rgba(0,217,255,0)}}
-.step-indicator{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);z-index:8;display:none;gap:6px;padding:6px 12px;background:rgba(13,15,23,0.85);border:1px solid var(--border-bright);border-radius:20px;backdrop-filter:blur(8px)}
+.step-indicator{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:8;display:none;gap:4px;padding:3px 8px;background:rgba(13,15,23,0.35);border:1px solid rgba(42,45,61,0.35);border-radius:14px;backdrop-filter:blur(6px);opacity:0.45;transition:opacity .3s ease}
+.step-indicator:hover{opacity:0.9}
 .step-indicator.visible{display:flex}
-.step-indicator .dot{width:8px;height:8px;border-radius:50%;background:var(--text-muted);transition:all .3s ease}
-.step-indicator .dot.active{background:var(--green);box-shadow:0 0 12px var(--green);transform:scale(1.3)}
+.step-indicator .dot{width:5px;height:5px;border-radius:50%;background:var(--text-muted);opacity:0.6;transition:all .3s ease}
+.step-indicator .dot.active{background:var(--green);box-shadow:0 0 6px var(--green);transform:scale(1.25);opacity:1}
 /* ===== DEMO DE CHAT - JEITO TRADICIONAL ===== */
-.chat-demo{background:#0a0c14;border:1px solid var(--border-bright);border-radius:10px;padding:0;width:100%;max-width:1000px;height:520px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);position:relative}
+.chat-demo{background:#0a0c14;border:1px solid var(--border-bright);border-radius:10px;padding:0;width:100%;max-width:clamp(900px,65vw,1500px);height:clamp(480px,52vh,780px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);position:relative}
 .chat-header{background:#11131c;border-bottom:1px solid var(--border-bright);padding:10px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0}
 .chat-header .dots{display:flex;gap:6px}
 .chat-header .dots span{width:10px;height:10px;border-radius:50%;background:#3d3f52}
 .chat-header .dots span:nth-child(1){background:#ff5f56}
 .chat-header .dots span:nth-child(2){background:#ffbd2e}
 .chat-header .dots span:nth-child(3){background:#27c93f}
-.chat-header .chat-title{font-family:var(--font-mono);font-size:11px;color:var(--text-dim);letter-spacing:1px;margin-left:8px}
-.chat-header .chat-context{margin-left:auto;font-family:var(--font-mono);font-size:10px;color:var(--text-dim);display:flex;align-items:center;gap:6px}
+.chat-header .chat-title{font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim);letter-spacing:1px;margin-left:8px}
+.chat-header .chat-context{margin-left:auto;font-family:var(--font-mono);font-size:clamp(10px,0.85vw,15px);color:var(--text-dim);display:flex;align-items:center;gap:6px}
 .chat-header .chat-context .ctx-bar{width:80px;height:6px;background:var(--bg-code);border-radius:3px;overflow:hidden;position:relative}
-.chat-header .chat-context .ctx-fill{height:100%;background:linear-gradient(90deg,var(--green) 0%,var(--amber) 60%,var(--red) 100%);width:0;animation:ctxFill 40s linear forwards;animation-play-state:paused}
-.chat-demo.playing .chat-header .ctx-fill{animation-play-state:running}
-@keyframes ctxFill{0%{width:0}100%{width:100%}}
+.chat-header .chat-context .ctx-fill{height:100%;background:linear-gradient(90deg,var(--green) 0%,var(--amber) 60%,var(--red) 100%);width:0;transition:width .35s ease}
 
 .chat-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:18px 22px;display:flex;flex-direction:column;gap:14px;position:relative;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#2a2d3d transparent}
 .chat-body::-webkit-scrollbar{width:6px}
 .chat-body::-webkit-scrollbar-track{background:transparent}
 .chat-body::-webkit-scrollbar-thumb{background:#2a2d3d;border-radius:3px}
 
-.chat-msg{display:flex;gap:12px;align-items:flex-start;opacity:0;transform:translateY(12px);animation:msgIn .4s cubic-bezier(0.2,0.8,0.2,1) forwards;animation-play-state:paused}
-.chat-demo.playing .chat-msg{animation-play-state:running}
-.chat-msg .avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;font-family:var(--font-mono);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.chat-msg{display:flex;gap:12px;align-items:flex-start;opacity:0;transform:translateY(12px);transition:opacity .35s cubic-bezier(0.2,0.8,0.2,1),transform .35s cubic-bezier(0.2,0.8,0.2,1)}
+.chat-msg.shown{opacity:1;transform:translateY(0)}
+.chat-msg .avatar{width:clamp(28px,2.2vw,44px);height:clamp(28px,2.2vw,44px);border-radius:50%;flex-shrink:0;font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);font-weight:700;display:flex;align-items:center;justify-content:center}
 .chat-msg.user .avatar{background:var(--amber);color:var(--bg)}
 .chat-msg.ai .avatar{background:var(--green);color:var(--bg)}
-.chat-msg .bubble{font-size:14px;line-height:1.5;color:var(--text);max-width:80%}
-.chat-msg.user .bubble{color:#dfe1ec}
-.chat-msg.ai .bubble{color:#aeb1c4}
-.chat-msg .bubble code{font-family:var(--font-mono);font-size:12px;background:rgba(0,217,255,0.08);color:var(--green);padding:1px 6px;border-radius:3px}
-.chat-msg .codeblock{margin-top:8px;background:#06070c;border:1px solid #1a1c28;border-left:2px solid var(--green);border-radius:4px;padding:8px 12px;font-family:var(--font-mono);font-size:11px;line-height:1.5;color:#7c7e92;max-height:80px;overflow:hidden;position:relative}
+.chat-msg .bubble{font-size:clamp(14px,1.15vw,22px);line-height:1.5;color:var(--text);max-width:80%}
+.chat-msg.user .bubble{color:#eef0f7}
+.chat-msg.ai .bubble{color:#eef0f7}
+.chat-msg .bubble code{font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);background:rgba(0,217,255,0.08);color:var(--green);padding:1px 6px;border-radius:3px}
+.chat-msg .codeblock{margin-top:8px;background:#06070c;border:1px solid #1a1c28;border-left:2px solid var(--green);border-radius:4px;padding:8px 12px;font-family:var(--font-mono);font-size:clamp(11px,0.9vw,17px);line-height:1.5;color:#eef0f7;max-height:clamp(80px,7vh,120px);overflow:hidden;position:relative}
 .chat-msg .codeblock::after{content:'';position:absolute;bottom:0;left:0;right:0;height:24px;background:linear-gradient(180deg,transparent 0%,#06070c 100%)}
 .chat-msg .codeblock .green{color:var(--green)}
 .chat-msg .codeblock .amber{color:var(--amber)}
-@keyframes msgIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-
-/* Sequência das mensagens - delays escalonados (15 mensagens, ~40s total) */
-.chat-msg.m1{animation-delay:0.3s}
-.chat-msg.m2{animation-delay:2s}
-.chat-msg.m3{animation-delay:4.5s}
-.chat-msg.m4{animation-delay:6.5s}
-.chat-msg.m5{animation-delay:9s}
-.chat-msg.m6{animation-delay:11s}
-.chat-msg.m7{animation-delay:13.5s}
-.chat-msg.m8{animation-delay:15.5s}
-.chat-msg.m9{animation-delay:18s}
-.chat-msg.m10{animation-delay:20s}
-.chat-msg.m11{animation-delay:22.5s}
-.chat-msg.m12{animation-delay:25s}
-.chat-msg.m13{animation-delay:28s}
-.chat-msg.m14{animation-delay:30.5s}
-.chat-msg.m15{animation-delay:34s}
-
 /* Indicador "digitando" */
 .typing{display:inline-flex;gap:3px;align-items:center;padding:6px 10px;background:var(--bg-code);border-radius:10px}
 .typing span{width:5px;height:5px;border-radius:50%;background:var(--text-dim);animation:typingBounce 1s ease-in-out infinite}
@@ -178,9 +159,30 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 /* Sumário final dos 3 problemas após a demo */
 .problem-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;max-width:1100px}
 .problem-summary .card{border-top:3px solid var(--red);padding:18px 20px}
-.problem-summary .card .mono{font-size:11px;letter-spacing:2px;margin-bottom:6px;color:var(--red)}
-.problem-summary .card .card-title{font-size:22px;color:var(--red);margin-bottom:4px}
-.problem-summary .card p{font-size:13px;line-height:1.45}
+.problem-summary .card .mono{font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px;color:var(--red)}
+.problem-summary .card .card-title{font-size:clamp(22px,1.75vw,34px);color:var(--red);margin-bottom:4px}
+.problem-summary .card p{font-size:clamp(13px,1.1vw,20px);line-height:1.45}
+
+/* ===== Ralph Console - timeline de PRDs ===== */
+:root{--rc-planning:#a855f7;--rc-planning-wait:#c084fc;--rc-dev:#2dd4bf;--rc-gap:#6b7280;--rc-review:#3b82f6;--rc-qa:#f59e0b;--rc-prod:#f97316;--rc-stab:#f43f5e}
+.rc-grid{display:grid;grid-template-columns:1.8fr 1fr;gap:clamp(24px,2.5vw,48px);margin-top:18px;align-items:start}
+.rc-list{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:10px;padding:clamp(16px,1.4vw,24px)}
+.rc-list-header{display:flex;align-items:baseline;gap:10px;margin-bottom:clamp(12px,1vw,18px);padding-bottom:clamp(10px,0.8vw,14px);border-bottom:1px solid var(--border)}
+.rc-list-title{font-family:var(--font-display);font-weight:700;font-size:clamp(18px,1.45vw,28px);color:var(--text)}
+.rc-list-count{font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);color:var(--text-dim);letter-spacing:0.5px}
+.rc-row{display:grid;grid-template-columns:clamp(180px,15vw,260px) clamp(60px,4.6vw,82px) 1fr;gap:clamp(10px,1vw,18px);align-items:center;padding:clamp(8px,0.7vw,12px) 0}
+.rc-name{font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-tag{font-family:var(--font-mono);font-size:clamp(10px,0.85vw,15px);font-weight:700;background:rgba(245,158,11,0.18);color:var(--rc-qa);padding:3px 8px;border-radius:4px;letter-spacing:1px;text-align:center;justify-self:start}
+.rc-tag.invisible{visibility:hidden}
+.rc-bar{display:flex;height:clamp(14px,1.2vw,22px);background:var(--bg-code);border-radius:3px;overflow:hidden;border:1px solid var(--border)}
+.rc-bar span{display:block;height:100%}
+.rc-legend{background:var(--bg-card);border:1px solid var(--border-bright);border-radius:10px;padding:clamp(16px,1.4vw,24px)}
+.rc-legend-title{font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:clamp(10px,0.9vw,16px)}
+.rc-legend-item{display:grid;grid-template-columns:clamp(12px,1vw,18px) 1fr;gap:clamp(10px,0.9vw,16px);align-items:baseline;padding:clamp(7px,0.6vw,11px) 0;border-bottom:1px dashed var(--border)}
+.rc-legend-item:last-child{border-bottom:none}
+.rc-legend-dot{width:clamp(12px,1vw,18px);height:clamp(12px,1vw,18px);border-radius:50%;display:block}
+.rc-legend-name{font-family:var(--font-display);font-weight:700;font-size:clamp(15px,1.2vw,22px);color:var(--text);line-height:1.15}
+.rc-legend-desc{font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim);margin-top:2px;display:block}
 
 </style>
 </head>
@@ -190,19 +192,19 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 01 CAPA -->
 <div class="slide active" data-block="" data-notes="Você acha que está sendo produtivo usando IA? Mas realmente está? PAUSA LONGA. Deixar a pergunta no ar.">
-  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:24px">RENATO BARBOSA - STARTSE TECH</p>
+  <p class="fade-in mono dim" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:24px">RENATO BARBOSA - STARTSE TECH</p>
   <h1 class="fade-in-d1" style="font-size:clamp(56px,5.8vw,124px);line-height:0.9;max-width:1100px">
     Você acha que<br>está sendo produtivo<br>com <span class="green">IA</span>.<br><span class="amber">Mas está?</span>
   </h1>
   <div class="cover-photo-circle fade-in-d3">
-    <span class="placeholder">FOTO<br>RENATO</span>
+    <img src="assets/profile.jpeg" alt="Renato Barbosa">
   </div>
 </div>
 
 <!-- 02 APRESENTACAO -->
 <div class="slide" data-block="ABERTURA" data-notes="Olá pessoal, muito bom dia. Hoje vamos falar sobre produtividade real com IA. Sou Renato Barbosa, Head de Engenharia e Sócio na StartSe. Sou de perfil generalista, passei por várias cadeiras de tecnologia. Entusiasta de open source, acompanho de perto novas soluções que surgem no mercado. Atuo na consultoria de IA da StartSe há mais de 2 anos, ajudando empresas a aplicarem IA do jeito certo. E dentro do meu time, ocupo o papel de inovação, sendo braço de inovação junto aos squads.">
   <h2 class="fade-in">Renato Barbosa</h2>
-  <p class="fade-in-d1" style="font-size:19px;max-width:900px;margin-top:4px"><strong class="green">Head de Engenharia &amp; Sócio</strong> na StartSe</p>
+  <p class="fade-in-d1" style="font-size:clamp(19px,1.5vw,30px);max-width:900px;margin-top:4px"><strong class="green">Head de Engenharia &amp; Sócio</strong> na StartSe</p>
   <div class="cards fade-in-d2" style="margin-top:28px;grid-template-columns:repeat(2,1fr);gap:16px;max-width:1100px">
     <div class="card" style="border-left:3px solid var(--green)">
       <div class="card-title green">Perfil generalista</div>
@@ -225,20 +227,20 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 03 ÍNDICE -->
 <div class="slide" data-block="ÍNDICE" data-notes="Aqui o índice da nossa conversa. As 3 perguntas que respondemos operacionalmente na StartSe: como definir um processo de trabalho com IA na engenharia, como mensurar performance de verdade, e como acompanhar alinhamento estratégico em escala.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">ÍNDICE</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">ÍNDICE</p>
   <h2 class="fade-in-d1" style="font-size:clamp(40px,3.6vw,68px)">As <span class="green">3 perguntas</span> que respondemos<br>operacionalmente na StartSe.</h2>
   <div class="cards fade-in-d2" style="margin-top:30px;grid-template-columns:repeat(3,1fr)">
     <div class="card" style="border-top:3px solid var(--green);padding:24px 22px">
-      <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">PERGUNTA 1</div>
-      <div class="card-title" style="font-size:21px;line-height:1.25">Como definimos um <span class="green">processo de trabalho</span> com IA na engenharia de software?</div>
+      <div class="mono dim" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:8px">PERGUNTA 1</div>
+      <div class="card-title" style="font-size:clamp(21px,1.65vw,32px);line-height:1.25">Como definimos um <span class="green">processo de trabalho</span> com IA na engenharia de software?</div>
     </div>
     <div class="card" style="border-top:3px solid var(--green);padding:24px 22px">
-      <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">PERGUNTA 2</div>
-      <div class="card-title" style="font-size:21px;line-height:1.25">Como mensuramos <span class="green">performance de verdade</span>?</div>
+      <div class="mono dim" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:8px">PERGUNTA 2</div>
+      <div class="card-title" style="font-size:clamp(21px,1.65vw,32px);line-height:1.25">Como mensuramos <span class="green">performance de verdade</span>?</div>
     </div>
     <div class="card" style="border-top:3px solid var(--green);padding:24px 22px">
-      <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">PERGUNTA 3</div>
-      <div class="card-title" style="font-size:21px;line-height:1.25">Como acompanhamos <span class="green">alinhamento estratégico</span> em escala?</div>
+      <div class="mono dim" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:8px">PERGUNTA 3</div>
+      <div class="card-title" style="font-size:clamp(21px,1.65vw,32px);line-height:1.25">Como acompanhamos <span class="green">alinhamento estratégico</span> em escala?</div>
     </div>
   </div>
 </div>
@@ -246,28 +248,28 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 <!-- 04 METR -->
 <div class="slide" data-block="DIAGNÓSTICO - METR" data-steps="4" data-notes="STEP 0 (inicial): Vou contar o experimento. METR é uma organização sem fins lucrativos focada em medir capacidades de IA. Em 2025 fizeram um estudo controlado com 16 devs experientes em projetos open source maduros (5+ anos de contribuição). 246 tarefas reais. Cada tarefa foi randomicamente atribuída pra ser feita COM ou SEM IA. SETA DIREITA - STEP 1: Pergunta 1 - antes de começar, qual a expectativa? +24% mais rápidos com IA. SETA DIREITA - STEP 2: Pergunta 2 - depois de usar, qual a percepção? Ainda achavam que tinham acelerado, +20%. SETA DIREITA - STEP 3: Pergunta 3 - qual a realidade medida? -19% MAIS LENTOS. PAUSA LONGA. SETA DIREITA - STEP 4: Um gap de ~39 pontos percentuais entre o que você ACHA e o que está acontecendo.">
   <h2 class="fade-in">O gap entre <span class="amber">percepção</span><br>e <span class="red">realidade</span>.</h2>
-  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">Estudo controlado da METR (16 devs experientes, 246 tarefas em projetos open source maduros).</p>
+  <p class="fade-in-d1 dim" style="font-size:clamp(17px,1.4vw,26px);max-width:1050px;margin-top:6px">Estudo controlado da METR (16 devs experientes, 246 tarefas em projetos open source maduros).</p>
 
   <div style="margin-top:24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;max-width:1100px;min-height:240px;align-items:stretch">
     <div class="step-card-reveal" data-step="1">
       <div class="card" style="border-top:3px solid var(--text-dim);padding:22px;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:center">
-        <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">EXPECTATIVA</div>
+        <div class="mono dim" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">EXPECTATIVA</div>
         <div class="bignum" style="font-size:clamp(56px,5vw,84px);color:var(--text-dim);text-shadow:none">+24%</div>
-        <p style="margin-top:6px;font-size:13px;line-height:1.4">Esperavam ser <strong>mais rápidos</strong> com IA.</p>
+        <p style="margin-top:6px;font-size:clamp(13px,1.05vw,20px);line-height:1.4">Esperavam ser <strong>mais rápidos</strong> com IA.</p>
       </div>
     </div>
     <div class="step-card-reveal" data-step="2">
       <div class="card" style="border-top:3px solid var(--amber);padding:22px;text-align:center;height:100%;display:flex;flex-direction:column;justify-content:center">
-        <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERCEPÇÃO APÓS USAR</div>
+        <div class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">PERCEPÇÃO APÓS USAR</div>
         <div class="bignum amber" style="font-size:clamp(56px,5vw,84px)">+20%</div>
-        <p style="margin-top:6px;font-size:13px;line-height:1.4">Achavam que <strong>tinham acelerado</strong>.</p>
+        <p style="margin-top:6px;font-size:clamp(13px,1.05vw,20px);line-height:1.4">Achavam que <strong>tinham acelerado</strong>.</p>
       </div>
     </div>
     <div class="step-card-reveal" data-step="3">
       <div class="card" style="border-top:3px solid var(--red);padding:22px;text-align:center;background:rgba(255,85,119,0.04);height:100%;display:flex;flex-direction:column;justify-content:center">
-        <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">REALIDADE MEDIDA</div>
+        <div class="mono red" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">REALIDADE MEDIDA</div>
         <div class="bignum red" style="font-size:clamp(56px,5vw,84px)">-19%</div>
-        <p style="margin-top:6px;font-size:13px;line-height:1.4"><strong>Mais lentos.</strong> A IA atrasou.</p>
+        <p style="margin-top:6px;font-size:clamp(13px,1.05vw,20px);line-height:1.4"><strong>Mais lentos.</strong> A IA atrasou.</p>
       </div>
     </div>
   </div>
@@ -282,7 +284,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 </div>
 
 <!-- 05 FAROS AI -->
-<div class="slide" data-block="DIAGNÓSTICO - FAROS AI" data-steps="4" data-notes="STEP 0 (inicial): Só a pergunta. Mas espera, entregamos mais com IA? PAUSA pra deixar a pergunta no ar. SETA DIREITA - STEP 1: Sim! Faros AI analisou telemetria real de 22 mil devs em 4 mil times. SETA DIREITA - STEP 2: Os números positivos. Épicos completados por dev +66%. Task throughput +34%. PRs por dev +67%. SETA DIREITA - STEP 3: PAUSA. Mas isso é produtividade? SETA DIREITA - STEP 4: DEPENDE... O estudo se chama Acceleration Whiplash. Tempo de review +441%. Incidentes por PR +242%. Bugs por dev +54%. PRs mergeados sem review +31%. Então a IA acelera o que está na frente e estrangula o que está atrás." style="overflow-y:auto;justify-content:flex-start;padding-top:8vh">
+<div class="slide" data-block="DIAGNÓSTICO - FAROS AI" data-steps="4" data-notes="STEP 0 (inicial): Só a pergunta. Mas espera, entregamos mais com IA? PAUSA pra deixar a pergunta no ar. SETA DIREITA - STEP 1: Sim! Faros AI analisou telemetria real de 22 mil devs em 4 mil times. SETA DIREITA - STEP 2: Os números positivos. Épicos completados por dev +66%. Task throughput +34%. PRs por dev +67%. SETA DIREITA - STEP 3: PAUSA. Mas isso é produtividade? SETA DIREITA - STEP 4: DEPENDE... O estudo se chama Acceleration Whiplash. Tempo de review +441%. Incidentes por PR +242%. Bugs por dev +54%. PRs mergeados sem review +31%. Então a IA acelera o que está na frente e estrangula o que está atrás." style="overflow-y:auto;justify-content:flex-start;padding-top:clamp(80px,8vh,130px)">
   <h2 class="fade-in" style="line-height:1.05">
     Entregamos mais com IA?
   </h2>
@@ -291,7 +293,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
   </div>
 
   <div class="step-card-reveal" data-step="2" style="margin-top:18px;max-width:1050px">
-    <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:8px">OS NÚMEROS POSITIVOS</p>
+    <p class="mono green" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:8px">OS NÚMEROS POSITIVOS</p>
     <div class="bar-row">
       <span class="bar-label">Épicos completados por dev</span>
       <div class="bar-track"><div class="bar-fill up" style="width:80%">+66%</div></div>
@@ -319,7 +321,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
     <p style="font-size:clamp(26px,2.4vw,40px);font-weight:800;line-height:1;margin-bottom:14px">
       <span class="red">DEPENDE...</span>
     </p>
-    <p class="mono red" style="font-size:12px;letter-spacing:2px;margin-bottom:8px">OS NÚMEROS NEGATIVOS - DOWNSTREAM</p>
+    <p class="mono red" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:8px">OS NÚMEROS NEGATIVOS - DOWNSTREAM</p>
     <div class="bar-row">
       <span class="bar-label">Tempo de review de PR</span>
       <div class="bar-track"><div class="bar-fill down" style="width:98%">+441%</div></div>
@@ -351,9 +353,9 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
   <p class="fade-in-d1" style="font-size:clamp(22px,2vw,32px);font-weight:600;line-height:1.3;max-width:1100px;margin-top:6px">
     <span class="green">Sim — 71,48% dos PRs agênticos são mergeados.</span>
   </p>
-  <p class="fade-in-d1 dim" style="font-size:14px;max-width:1050px;margin-top:8px">OpenAI Codex 82,59% - Devin moderado - Copilot 43,04% - estudo de 33k PRs em 5 agentes.</p>
+  <p class="fade-in-d1 dim" style="font-size:clamp(14px,1.15vw,22px);max-width:1050px;margin-top:8px">OpenAI Codex 82,59% - Devin moderado - Copilot 43,04% - estudo de 33k PRs em 5 agentes.</p>
 
-  <p class="fade-in-d2 mono amber" style="font-size:12px;letter-spacing:2px;margin-top:24px">MAS QUANDO ANALISAM OS 600 PRs REJEITADOS</p>
+  <p class="fade-in-d2 mono amber" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-top:24px">MAS QUANDO ANALISAM OS 600 PRs REJEITADOS</p>
 
   <div class="fade-in-d3" style="margin-top:14px;max-width:1100px">
     <div class="bar-row">
@@ -386,7 +388,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 07 ENTREGAR /= PRODUTIVIDADE -->
 <div class="slide" data-block="DIAGNÓSTICO - SÍNTESE" data-notes="Pausa de 3 segundos antes de falar. Entregar MAIS não é o mesmo que ser PRODUTIVO. Entregar mais cria volume. Produtividade gera valor. O problema não é entregar código. O problema está no processo embaixo. PAUSA. E aí que entram nossas 3 perguntas operacionais.">
-  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:18px">A SÍNTESE</p>
+  <p class="fade-in mono dim" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:18px">A SÍNTESE</p>
   <h1 class="fade-in-d1" style="font-size:clamp(60px,6vw,124px);line-height:0.92;max-width:1300px">
     Entregar mais<br>
     <span class="red">&ne;</span><br>
@@ -400,12 +402,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 </div>
 
 <!-- 08 P1 ABERTURA - DEMO DO JEITO TRADICIONAL + 3 PROBLEMAS -->
-<div class="slide" data-block="P1 - COMO DEFINIMOS UM PROCESSO" data-steps="2" data-notes="STEP 0: Primeira pergunta. Por que é importante ter um processo? O jeito tradicional de usar IA é abrir o Claude e pedir implementa a feature X. Pode funcionar - mas olha o que acontece na prática. Deixa a demo rodar uns 50 segundos enquanto narra: aqui você pede a feature, ele entrega errado, você corrige. Tenta de novo, quebra outra coisa. Você manda esquecer. Ele tenta com outro approach. Você ainda corrige refresh tokens. Você ainda corrige Redis. Você ainda corrige TypeScript. Finalmente fica bom. Olha o contexto lá em cima já no vermelho. Você tem o que pediu, mas pagou o preço. SETA DIREITA - STEP 1: Esses sintomas você já viu acontecer. SETA DIREITA - STEP 2: Três problemas estruturais. Não replicável, babysitting, context rot." style="justify-content:flex-start;padding-top:5vh">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">RESPOSTA PERGUNTA 1</p>
+<div class="slide" data-block="P1 - COMO DEFINIMOS UM PROCESSO" data-steps="17" data-notes="STEPS 1-15: Cada seta direita revela uma mensagem do chat. Narrativa: pede a feature, AI entrega errado, você corrige (bcrypt→argon2), quebra middleware, manda esquecer, ainda falta refresh tokens, Redis, TypeScript. Finalmente fica bom. Olha o contexto lá em cima já no vermelho. Você tem o que pediu, mas pagou o preço. STEP 16: Esses sintomas você já viu acontecer. STEP 17: Três problemas estruturais. Não replicável, babysitting, context rot." style="justify-content:flex-start;padding-top:clamp(80px,8vh,130px)">
   <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,48px)">Por que é importante <span class="green">ter um processo</span>?</h2>
-  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1050px;margin-top:4px;margin-bottom:14px">O jeito tradicional: abre o Claude, "implementa a feature X". Pode funcionar — mas olha o que costuma acontecer.</p>
+  <p class="fade-in-d2 dim" style="font-size:clamp(15px,1.2vw,23px);max-width:1050px;margin-top:4px;margin-bottom:14px">O jeito tradicional: abre o Claude, "implementa a feature X". Pode funcionar — mas olha o que costuma acontecer.</p>
 
-  <div class="chat-demo playing" id="chatDemo">
+  <div class="chat-demo" id="chatDemo">
     <div class="chat-header">
       <div class="dots"><span></span><span></span><span></span></div>
       <div class="chat-title">claude · auth-service · main</div>
@@ -415,11 +416,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
       </div>
     </div>
     <div class="chat-body" id="chatBody">
-      <div class="chat-msg user m1">
+      <div class="chat-msg user m1" data-step="1">
         <div class="avatar">EU</div>
         <div class="bubble">implementa um sistema de auth com <code>JWT</code> pro nosso backend</div>
       </div>
-      <div class="chat-msg ai m2">
+      <div class="chat-msg ai m2" data-step="2">
         <div class="avatar">AI</div>
         <div class="bubble">
           Claro! Vou criar o módulo de autenticação completo.
@@ -431,11 +432,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
           </div>
         </div>
       </div>
-      <div class="chat-msg user m3">
+      <div class="chat-msg user m3" data-step="3">
         <div class="avatar">EU</div>
         <div class="bubble">espera, a gente usa <code>argon2</code> não bcrypt. refaz.</div>
       </div>
-      <div class="chat-msg ai m4">
+      <div class="chat-msg ai m4" data-step="4">
         <div class="avatar">AI</div>
         <div class="bubble">
           Você tem razão, desculpe! Vou refazer com argon2.
@@ -445,11 +446,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
           </div>
         </div>
       </div>
-      <div class="chat-msg user m5">
+      <div class="chat-msg user m5" data-step="5">
         <div class="avatar">EU</div>
         <div class="bubble">agora tá quebrando o middleware de tenant existente</div>
       </div>
-      <div class="chat-msg ai m6">
+      <div class="chat-msg ai m6" data-step="6">
         <div class="avatar">AI</div>
         <div class="bubble">
           Peço desculpas pela confusão! Vou ajustar para preservar o middleware atual.
@@ -458,11 +459,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
           </div>
         </div>
       </div>
-      <div class="chat-msg user m7">
+      <div class="chat-msg user m7" data-step="7">
         <div class="avatar">EU</div>
         <div class="bubble">esquece tudo. recomeça do zero olhando os arquivos primeiro.</div>
       </div>
-      <div class="chat-msg ai m8">
+      <div class="chat-msg ai m8" data-step="8">
         <div class="avatar">AI</div>
         <div class="bubble">
           Entendido. Vou ler os arquivos antes de propor mudanças.
@@ -473,11 +474,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
           </div>
         </div>
       </div>
-      <div class="chat-msg user m9">
+      <div class="chat-msg user m9" data-step="9">
         <div class="avatar">EU</div>
         <div class="bubble">cadê os refresh tokens? sem isso não vai pra produção</div>
       </div>
-      <div class="chat-msg ai m10">
+      <div class="chat-msg ai m10" data-step="10">
         <div class="avatar">AI</div>
         <div class="bubble">
           Você está certo, faltou. Adicionando o fluxo de refresh.
@@ -487,11 +488,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
           </div>
         </div>
       </div>
-      <div class="chat-msg user m11">
+      <div class="chat-msg user m11" data-step="11">
         <div class="avatar">EU</div>
         <div class="bubble">você tá salvando refresh em memória? tem que ser no <code>Redis</code> que já está no projeto</div>
       </div>
-      <div class="chat-msg ai m12">
+      <div class="chat-msg ai m12" data-step="12">
         <div class="avatar">AI</div>
         <div class="bubble">
           Ah sim, claro. Ajustando para usar o Redis existente.
@@ -501,11 +502,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
           </div>
         </div>
       </div>
-      <div class="chat-msg user m13">
+      <div class="chat-msg user m13" data-step="13">
         <div class="avatar">EU</div>
         <div class="bubble">tá dando erro de type no controller. e os testes nem rodam</div>
       </div>
-      <div class="chat-msg ai m14">
+      <div class="chat-msg ai m14" data-step="14">
         <div class="avatar">AI</div>
         <div class="bubble">
           Identifiquei o problema nos types e nos imports dos testes. Corrigindo.
@@ -517,33 +518,30 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
           </div>
         </div>
       </div>
-      <div class="chat-msg user m15">
+      <div class="chat-msg user m15" data-step="15">
         <div class="avatar">EU</div>
         <div class="bubble" style="color:var(--green)"><strong>agora sim. tá bom.</strong></div>
       </div>
     </div>
   </div>
 
-  <div class="step-card-reveal" data-step="1" style="margin-top:0">
-    <p class="tip" style="margin-top:8px;font-size:14px"><span class="green">→</span> Você chegou onde queria — mas pagou o preço. <strong>Quanto tempo nessa thread?</strong></p>
+  <div class="step-card-reveal" data-step="16" style="margin-top:0">
+    <p class="tip" style="margin-top:8px;font-size:clamp(14px,1.15vw,22px)"><span class="green">→</span> Você chegou onde queria — mas pagou o preço. <strong>3 problemas principais</strong></p>
   </div>
 
-  <div class="step-card-reveal" data-step="2">
+  <div class="step-card-reveal" data-step="17">
     <div class="problem-summary">
       <div class="card">
         <div class="mono">PROBLEMA 1</div>
         <div class="card-title">Não é replicável</div>
-        <p>Sua ótima capacidade de escrever prompts <strong>não escala</strong> pro time todo.</p>
       </div>
       <div class="card">
         <div class="mono">PROBLEMA 2</div>
         <div class="card-title">Babysitting</div>
-        <p>Você virou <strong>babá da IA</strong>: pede, espera, valida, solicita mudança, espera, valida...</p>
       </div>
       <div class="card">
         <div class="mono">PROBLEMA 3</div>
         <div class="card-title">Context Rot</div>
-        <p>A performance do LLM <strong>degrada</strong> conforme a memória cresce. O famoso <em>Lost in the Middle</em>.</p>
       </div>
     </div>
   </div>
@@ -551,7 +549,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 09 INIMIGO 1 - NÃO REPLICAVEL -->
 <div class="slide" data-block="P1 - PROBLEMA 1 - NÃO REPLICAVEL" data-notes="Problema 1: não é replicável. Você pode ser muito bom em escrever prompts. Você conhece os truques, sabe dar contexto, sabe pedir formato de resposta. Mas como você ensina isso pra um time de 15 pessoas? Como você garante que o jeito que VOCÊ consegue resultado seja o mesmo jeito que TODO MUNDO consegue resultado? Sem processo, você vira gargalo do seu próprio time. Você precisa estar em toda interação pra dar dica de prompt. Isso não escala.">
-  <p class="fade-in mono red" style="font-size:12px;letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 1 - JEITO TRADICIONAL</p>
+  <p class="fade-in mono red" style="font-size:clamp(12px,1vw,18px);letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 1 - JEITO TRADICIONAL</p>
   <h2 class="fade-in-d1">Não é <span class="red">replicável</span>.</h2>
 
   <p class="fade-in-d2" style="font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.35;margin-top:14px;max-width:1100px">
@@ -561,7 +559,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
   <div class="two-col fade-in-d3" style="margin-top:24px">
     <div class="card" style="border-left:3px solid var(--red);padding:18px">
       <div class="card-title red">O que acontece</div>
-      <p>Você conhece os truques, sabe dar contexto, formatar a resposta. Mas <strong>como ensinar isso pra 15 pessoas</strong>? Como garantir que o jeito que VOCÊ consegue resultado seja o mesmo do time todo?</p>
+      <p>Você conhece os truques, sabe dar contexto, formatar a resposta. Mas <strong>como ensinar isso pra sua equipe</strong>? Como garantir que o jeito que VOCÊ consegue resultado seja o mesmo do time todo?</p>
     </div>
     <div class="card" style="border-left:3px solid var(--red);padding:18px">
       <div class="card-title red">A consequência</div>
@@ -574,7 +572,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 10 INIMIGO 2 - BABYSITTING -->
 <div class="slide" data-block="P1 - PROBLEMA 2 - BABYSITTING" data-notes="Problema 2: Babysitting. Você manda a IA fazer, fica olhando as letrinhas se mexerem na tela. Ela pede permissão, você diz sim. Ela faz uma parte, você valida, solicita mudança, espera de novo. Reprovou, espera, valida... Você virou BABÁ. No tempo que ela trabalha, você devia estar produzindo valor em outra coisa. Alt+Tab. 3, 5 agentes em paralelo. Quem fica olhando IA trabalhar não é produtivo. Tem que mudar o modelo mental de USO da IA pra TRABALHAR COM agentes.">
-  <p class="fade-in mono red" style="font-size:12px;letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 2 - JEITO TRADICIONAL</p>
+  <p class="fade-in mono red" style="font-size:clamp(12px,1vw,18px);letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 2 - JEITO TRADICIONAL</p>
   <h2 class="fade-in-d1"><span class="red">Babysitting</span> da IA.</h2>
 
   <p class="fade-in-d2" style="font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.3;max-width:1100px;margin-top:14px">
@@ -599,10 +597,10 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 11 INIMIGO 3 - CONTEXT ROT -->
 <div class="slide" data-block="P1 - PROBLEMA 3 - CONTEXT ROT" data-notes="Problema 3: Context Rot. Conforme você usa a mesma janela do Claude, o contexto vai inchando. E a performance DEGRADA. Pesquisa da Chroma de julho de 2025: testaram 18 modelos SOTA. De 10 mil pra 100 mil tokens, queda de 20 a 50% de acurácia. O padrão tem nome: Lost in the Middle, curva em U. Atenção alta no começo da conversa, alta no final, PERDIDA NO MEIO. Vale até para os modelos mais novos. Conversa longa com IA igual a lixo.">
-  <p class="fade-in mono red" style="font-size:12px;letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 3 - JEITO TRADICIONAL</p>
+  <p class="fade-in mono red" style="font-size:clamp(12px,1vw,18px);letter-spacing:2.5px;margin-bottom:14px">PROBLEMA 3 - JEITO TRADICIONAL</p>
   <h2 class="fade-in-d1"><span class="red">Context Rot</span>.<br><span style="font-size:0.5em;color:var(--text-dim);font-weight:500;font-style:italic">Lost in the Middle.</span></h2>
 
-  <p class="fade-in-d2 dim" style="font-size:17px;max-width:1050px;margin-top:8px">Janela enche. Performance degrada. <strong>O contexto apodrece.</strong></p>
+  <p class="fade-in-d2 dim" style="font-size:clamp(17px,1.4vw,26px);max-width:1050px;margin-top:8px">Janela enche. Performance degrada. <strong>O contexto apodrece.</strong></p>
 
   <div class="two-col fade-in-d3" style="margin-top:18px">
     <div>
@@ -618,14 +616,14 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
         <circle cx="30" cy="30" r="6" fill="#00d9ff"/>
         <circle cx="350" cy="170" r="6" fill="#ff5577"/>
         <circle cx="670" cy="30" r="6" fill="#00d9ff"/>
-        <text x="30" y="20" font-family="JetBrains Mono" font-size="11" fill="#7c7e92" text-anchor="start">início - alta atenção</text>
+        <text x="30" y="20" font-family="JetBrains Mono" font-size="11" fill="#eef0f7" text-anchor="start">início - alta atenção</text>
         <text x="350" y="190" font-family="JetBrains Mono" font-size="11" fill="#ff5577" text-anchor="middle">meio - perdido</text>
-        <text x="670" y="20" font-family="JetBrains Mono" font-size="11" fill="#7c7e92" text-anchor="end">fim - alta atenção</text>
+        <text x="670" y="20" font-family="JetBrains Mono" font-size="11" fill="#eef0f7" text-anchor="end">fim - alta atenção</text>
       </svg>
       <p class="source">Curva em U da atenção LLM - Liu et al., TACL 2024 - arXiv:2307.03172</p>
     </div>
     <div>
-      <p class="mono red" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">O QUE A PESQUISA MOSTRA</p>
+      <p class="mono red" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:10px">O QUE A PESQUISA MOSTRA</p>
       <ul class="checklist">
         <li class="x">Chroma Research - 18 modelos SOTA testados</li>
         <li class="x"><strong>Queda 20-50%</strong> de acurácia de 10k para 100k tokens</li>
@@ -639,9 +637,9 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 12 RALPH LOOP -->
 <div class="slide" data-block="P1 - COMO RESOLVEMOS - RALPH LOOP" data-notes="Como definimos um processo na StartSe? Começamos por um padrão da comunidade. Ralph Loop. Não se prendam ao Ralph Loop especificamente, testem em casa. Mas existem outros: GSD, SDD, BMAD, Compozy. Pega um e roda. O importante não é qual framework você escolhe, é ter um processo padronizado pra plugar com seu time. Ralph Loop é um processo derivado de desenvolvimento orientado a especificação. Eu defino o que quero, e a IA itera em cima da especificação, não em cima de prompts soltos no chat.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">COMO RESOLVEMOS</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">COMO RESOLVEMOS</p>
   <h2 class="fade-in-d1">Ralph Loop.</h2>
-  <p class="fade-in-d2 dim" style="font-size:17px;max-width:1050px;margin-top:6px">Começamos por um padrão da comunidade. <strong>Ralph Loop é o que adotamos como default</strong> porque é simples e fácil de plugar.</p>
+  <p class="fade-in-d2 dim" style="font-size:clamp(17px,1.4vw,26px);max-width:1050px;margin-top:6px">Começamos por um padrão da comunidade. <strong>Ralph Loop é o que adotamos como default</strong> porque é simples e fácil de plugar.</p>
 
   <div class="quote fade-in-d3" style="margin-top:18px;border-color:var(--green);background:rgba(0,217,255,0.04)">
     Ralph Loop é um processo derivado de <strong>desenvolvimento orientado a especificação</strong> (spec-driven - SDD). Eu defino o que quero, e a IA <strong>itera em cima da especificação</strong> — não em cima de prompts soltos no chat.
@@ -649,16 +647,16 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
   <div class="two-col fade-in-d4" style="margin-top:20px">
     <div>
-      <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">REPOSITÓRIO PÚBLICO DE REFERÊNCIA</p>
-      <p class="mono" style="font-size:13px;color:var(--text);background:var(--bg-code);padding:10px 14px;border-radius:6px;border-left:3px solid var(--green)">github.com/<span class="green">snarktank/ralph</span></p>
+      <p class="mono green" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:10px">REPOSITÓRIO PÚBLICO DE REFERÊNCIA</p>
+      <p class="mono" style="font-size:clamp(13px,1.05vw,20px);color:var(--text);background:var(--bg-code);padding:10px 14px;border-radius:6px;border-left:3px solid var(--green)">github.com/<span class="green">snarktank/ralph</span></p>
     </div>
     <div>
-      <p class="mono amber" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">OUTROS FRAMEWORKS DO MERCADO</p>
+      <p class="mono amber" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:10px">OUTROS FRAMEWORKS DO MERCADO</p>
       <div class="fw-grid" style="margin-top:0;grid-template-columns:repeat(2,1fr);gap:8px">
-        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">GSD</div><div class="fw-tag">get shit done</div></div>
-        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">SDD</div><div class="fw-tag">spec-driven</div></div>
-        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">BMAD</div><div class="fw-tag">comunidade</div></div>
-        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:16px">Compozy</div><div class="fw-tag">workflows</div></div>
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:clamp(16px,1.3vw,25px)">GSD</div><div class="fw-tag">get shit done</div></div>
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:clamp(16px,1.3vw,25px)">SDD</div><div class="fw-tag">spec-driven</div></div>
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:clamp(16px,1.3vw,25px)">BMAD</div><div class="fw-tag">comunidade</div></div>
+        <div class="fw-card" style="padding:10px"><div class="fw-name" style="font-size:clamp(16px,1.3vw,25px)">Compozy</div><div class="fw-tag">workflows</div></div>
       </div>
     </div>
   </div>
@@ -668,9 +666,9 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 13 RALPH LOOP - COMO FUNCIONA - 4 CARDS -->
 <div class="slide" data-block="P1 - COMO FUNCIONA O RALPH LOOP" data-notes="Como funciona na prática. Ao invés de eu abrir a janela e pedir 'implementa X', eu vou seguir um processo de 4 etapas. Etapa 1: Planejar. Eu descrevo a feature, a IA me faz perguntas pra fechar gaps, gera planejamento inicial. Etapa 2: Validar o planejamento. Abro outra janela em paralelo: 'analise esse planejamento de forma crítica', re-revisão por perspectiva. Etapa 3: Solicitar implementação. Com plano validado, agente faz em background. Etapa 4: Validar a implementação. Eu não acompanho letrinhas se mexendo. Eu valido o resultado final.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">COMO FUNCIONA O RALPH LOOP</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">COMO FUNCIONA O RALPH LOOP</p>
   <h2 class="fade-in-d1">4 etapas que o time todo segue.</h2>
-  <p class="fade-in-d2 dim" style="font-size:16px;max-width:1050px;margin-top:6px">Ao invés de "abre o Claude e implementa X", a interação com a IA passa por um pipeline padronizado.</p>
+  <p class="fade-in-d2 dim" style="font-size:clamp(16px,1.3vw,25px);max-width:1050px;margin-top:6px">Ao invés de "abre o Claude e implementa X", a interação com a IA passa por um pipeline padronizado.</p>
 
   <div class="step-cards fade-in-d3">
     <div class="step-card">
@@ -699,32 +697,32 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 </div>
 
 <!-- 14 RALPH LOOP NA PRATICA - SKILLS + EXECUCAO -->
-<div class="slide" data-block="P1 - RALPH LOOP NA PRÁTICA" data-notes="Na prática, o Ralph Loop roda com 3 comandos. Primeiro: skill /prd. Eu descrevo a feature em linguagem natural e essa skill gera um Product Requirements Document estruturado. Segundo: skill /ralph. Ela pega o PRD e gera o plano de execução: tasks, ordem, dependências, critérios de aceite. Tudo num arquivo .md versionado no repo. Terceiro: rodo o ralph.sh, passando a ferramenta - aqui Claude - e quantas iterações ele pode fazer, 15 por exemplo. Ponto importante: ele abre o Claude com a flag dangerously skip permissions. Isso é o que permite o agente rodar autonomamente em background sem precisar eu aprovar cada read, cada write, cada bash. Sem essa flag, você volta pro babysitting. Com ela, o agente trabalha sozinho dentro do worktree isolado. PAUSA pra falar do aviso: dangerously não está no nome por acaso. O agente vai executar comandos sem confirmação, incluindo rm, git push, instalar dependências, chamar APIs. Plano ruim, estrago real. Por isso a etapa 2 com a skill ralph e a segunda janela de validação crítica não são opcionais. Validar o plano antes de soltar o agente é o que separa autonomia produtiva de prejuízo no fim do mês." style="justify-content:flex-start;padding-top:6vh">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">P1 - NA PRÁTICA</p>
+<div class="slide" data-block="P1 - RALPH LOOP NA PRÁTICA" data-notes="Na prática, o Ralph Loop roda com 3 comandos. Primeiro: skill /prd. Eu descrevo a feature em linguagem natural e essa skill gera um Product Requirements Document estruturado. Segundo: skill /ralph. Ela pega o PRD e gera o plano de execução: tasks, ordem, dependências, critérios de aceite. Tudo num arquivo .md versionado no repo. Terceiro: rodo o ralph.sh, passando a ferramenta - aqui Claude - e quantas iterações ele pode fazer, 15 por exemplo. Ponto importante: ele abre o Claude com a flag dangerously skip permissions. Isso é o que permite o agente rodar autonomamente em background sem precisar eu aprovar cada read, cada write, cada bash. Sem essa flag, você volta pro babysitting. Com ela, o agente trabalha sozinho dentro do worktree isolado. PAUSA pra falar do aviso: dangerously não está no nome por acaso. O agente vai executar comandos sem confirmação, incluindo rm, git push, instalar dependências, chamar APIs. Plano ruim, estrago real. Por isso a etapa 2 com a skill ralph e a segunda janela de validação crítica não são opcionais. Validar o plano antes de soltar o agente é o que separa autonomia produtiva de prejuízo no fim do mês." style="justify-content:flex-start;padding-top:clamp(80px,8vh,130px)">
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:10px">P1 - NA PRÁTICA</p>
   <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,52px)">Como rodamos <span class="green">no dia a dia</span>.</h2>
-  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1050px;margin-top:4px;margin-bottom:18px">Duas skills versionadas no repo + um shell script. O time todo executa do mesmo jeito.</p>
+  <p class="fade-in-d2 dim" style="font-size:clamp(15px,1.2vw,23px);max-width:1050px;margin-top:4px;margin-bottom:18px">Duas skills versionadas no repo + um shell script. O time todo executa do mesmo jeito.</p>
 
   <div class="fade-in-d3" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;max-width:1100px;margin-bottom:16px">
     <div class="card" style="border-top:3px solid var(--green);padding:16px 18px">
-      <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">ETAPA 01 — SKILL</div>
-      <div style="font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--green);margin-bottom:8px">/prd</div>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Descrevo a feature em linguagem natural. A skill gera um <strong>Product Requirements Document</strong> estruturado, com escopo, critérios de aceite e perguntas em aberto.</p>
+      <div class="mono green" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">ETAPA 01 — SKILL</div>
+      <div style="font-family:var(--font-mono);font-size:clamp(18px,1.45vw,28px);font-weight:700;color:var(--green);margin-bottom:8px">/prd</div>
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text-dim)">Descrevo a feature em linguagem natural. A skill gera um <strong>Product Requirements Document</strong> estruturado, com escopo, critérios de aceite e perguntas em aberto.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--green);padding:16px 18px">
-      <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">ETAPA 02 — SKILL</div>
-      <div style="font-family:var(--font-mono);font-size:18px;font-weight:700;color:var(--green);margin-bottom:8px">/ralph</div>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Pega o PRD e gera o <strong>plano de execução do loop</strong>: tasks ordenadas, dependências, critérios de validação. Tudo num <span class="mono" style="font-size:12px">.md</span> versionado.</p>
+      <div class="mono green" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">ETAPA 02 — SKILL</div>
+      <div style="font-family:var(--font-mono);font-size:clamp(18px,1.45vw,28px);font-weight:700;color:var(--green);margin-bottom:8px">/ralph</div>
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text-dim)">Pega o PRD e gera o <strong>plano de execução do loop</strong>: tasks ordenadas, dependências, critérios de validação. Tudo num <span class="mono" style="font-size:clamp(12px,1vw,18px)">.md</span> versionado.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--amber);padding:16px 18px">
-      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">ETAPA 03 — EXECUÇÃO</div>
-      <div style="font-family:var(--font-mono);font-size:16px;font-weight:700;color:var(--amber);margin-bottom:8px">./ralph.sh</div>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Roda o loop autonomamente. Recebe a <strong>ferramenta</strong> e o <strong>número de iterações</strong> permitidas como argumento.</p>
+      <div class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">ETAPA 03 — EXECUÇÃO</div>
+      <div style="font-family:var(--font-mono);font-size:clamp(16px,1.3vw,25px);font-weight:700;color:var(--amber);margin-bottom:8px">./ralph.sh</div>
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text-dim)">Roda o loop autonomamente. Recebe a <strong>ferramenta</strong> e o <strong>número de iterações</strong> permitidas como argumento.</p>
     </div>
   </div>
 
   <div class="fade-in-d4" style="display:grid;grid-template-columns:1.4fr 1fr;gap:14px;max-width:1100px;align-items:stretch">
-    <div style="background:#06070c;border:1px solid var(--border-bright);border-left:3px solid var(--amber);border-radius:6px;padding:14px 16px;font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--text)">
-      <div style="color:var(--text-muted);font-size:11px;margin-bottom:8px;letter-spacing:1px">~/auth-service · main</div>
+    <div style="background:#06070c;border:1px solid var(--border-bright);border-left:3px solid var(--amber);border-radius:6px;padding:14px 16px;font-family:var(--font-mono);font-size:clamp(13px,1.05vw,20px);line-height:1.6;color:var(--text)">
+      <div style="color:var(--text-muted);font-size:clamp(11px,0.9vw,16px);margin-bottom:8px;letter-spacing:1px">~/auth-service · main</div>
       <div><span style="color:var(--green)">$</span> ./ralph.sh <span class="amber">--tool</span> claude <span class="amber">15</span></div>
       <div style="color:var(--text-muted);margin-top:6px">→ spawn claude <span class="amber">--dangerously-skip-permissions</span></div>
       <div style="color:var(--text-muted)">→ working dir: <span class="green">worktrees/ralph-iter-01</span></div>
@@ -737,32 +735,32 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
     </div>
 
     <div class="card" style="border-left:3px solid var(--amber);padding:14px 16px">
-      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">A FLAG QUE MUDA TUDO</div>
-      <div style="font-family:var(--font-mono);font-size:13px;color:var(--amber);margin-bottom:8px;line-height:1.3">--dangerously<br>-skip-permissions</div>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Sem ela, o agente <strong>pede aprovação</strong> a cada read, write, bash. Você volta pro <strong class="red">babysitting</strong>.</p>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-dim);margin-top:6px">Com ela + <span class="mono" style="font-size:12px">git worktree</span> isolado, o agente <strong class="green">trabalha sozinho em background</strong>.</p>
+      <div class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">A FLAG QUE MUDA TUDO</div>
+      <div style="font-family:var(--font-mono);font-size:clamp(13px,1.05vw,20px);color:var(--amber);margin-bottom:8px;line-height:1.3">--dangerously<br>-skip-permissions</div>
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text-dim)">Sem ela, o agente <strong>pede aprovação</strong> a cada read, write, bash. Você volta pro <strong class="red">babysitting</strong>.</p>
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text-dim);margin-top:6px">Com ela + <span class="mono" style="font-size:clamp(12px,1vw,18px)">git worktree</span> isolado, o agente <strong class="green">trabalha sozinho em background</strong>.</p>
     </div>
   </div>
 
   <div class="fade-in-d5" style="margin-top:12px;max-width:1100px;background:rgba(255,85,119,0.06);border:1px solid var(--red);border-radius:6px;padding:12px 16px;display:flex;gap:14px;align-items:flex-start">
-    <div style="font-size:22px;line-height:1;flex-shrink:0;margin-top:1px">⚠️</div>
+    <div style="font-size:clamp(22px,1.75vw,34px);line-height:1;flex-shrink:0;margin-top:1px">⚠️</div>
     <div>
-      <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-bottom:4px">O OUTRO LADO DA FLAG</div>
-      <p style="font-size:13px;line-height:1.5;color:var(--text)">
-        <span class="mono" style="font-size:12px;color:var(--red)">dangerously</span> não está no nome por acaso. O agente vai <strong>executar comandos sem confirmação</strong> — incluindo <span class="mono" style="font-size:12px">rm</span>, <span class="mono" style="font-size:12px">git push</span>, instalar dependências, chamar APIs externas. <strong class="red">Plano ruim = estrago real.</strong>
+      <div class="mono red" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:4px">O OUTRO LADO DA FLAG</div>
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text)">
+        <span class="mono" style="font-size:clamp(12px,1vw,18px);color:var(--red)">dangerously</span> não está no nome por acaso. O agente vai <strong>executar comandos sem confirmação</strong> — incluindo <span class="mono" style="font-size:clamp(12px,1vw,18px)">rm</span>, <span class="mono" style="font-size:clamp(12px,1vw,18px)">git push</span>, instalar dependências, chamar APIs externas. <strong class="red">Plano ruim = estrago real.</strong>
       </p>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-dim);margin-top:6px">
-        Por isso a <strong>etapa 02 (skill <span class="mono" style="font-size:12px;color:var(--green)">/ralph</span>)</strong> e a <strong>2ª janela de validação crítica</strong> não são opcionais. <span class="green">Validar o plano antes de soltar o agente</span> é o que separa autonomia produtiva de prejuízo.
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text-dim);margin-top:6px">
+        Por isso a <strong>etapa 02 (skill <span class="mono" style="font-size:clamp(12px,1vw,18px);color:var(--green)">/ralph</span>)</strong> e a <strong>2ª janela de validação crítica</strong> não são opcionais. <span class="green">Validar o plano antes de soltar o agente</span> é o que separa autonomia produtiva de prejuízo.
       </p>
     </div>
   </div>
 
-  <p class="fade-in-d5 tip" style="margin-top:12px;font-size:14px"><span class="green">→</span> Mesmo comando, mesmo fluxo, <strong>qualquer dev do time consegue rodar</strong>.</p>
+  <p class="fade-in-d5 tip" style="margin-top:12px;font-size:clamp(14px,1.15vw,22px)"><span class="green">→</span> Mesmo comando, mesmo fluxo, <strong>qualquer dev do time consegue rodar</strong>.</p>
 </div>
 
 <!-- 15 TRANSICAO P1 -> P2 -->
 <div class="slide" data-block="" data-notes="Transição. Pausa de 2 segundos. Respondemos a primeira pergunta - como definimos um processo. Ralph Loop, skills, validação. Mas agora vem a segunda pergunta, e ela é igualmente crítica: como mensuramos performance de verdade? Sem isso, você não consegue justificar o investimento, não consegue evoluir, não consegue mostrar pro board que está funcionando.">
-  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:24px">FECHAMOS A PERGUNTA 1</p>
+  <p class="fade-in mono dim" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:24px">FECHAMOS A PERGUNTA 1</p>
   <h1 class="fade-in-d1" style="font-size:clamp(56px,5.5vw,108px);line-height:0.92;max-width:1200px">
     Agora,<br>
     <span class="green">como medimos</span><br>
@@ -772,31 +770,31 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
     Bora pra <strong>pergunta 2</strong>: como mensuramos performance de verdade — sem cair em métricas de vaidade?
   </p>
   <div class="fade-in-d3" style="margin-top:28px;display:flex;gap:14px;align-items:center">
-    <span class="mono green" style="font-size:11px;letter-spacing:2px">PERGUNTA 1</span>
-    <span class="green" style="font-size:22px;font-weight:800">✓</span>
+    <span class="mono green" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px">PERGUNTA 1</span>
+    <span class="green" style="font-size:clamp(22px,1.75vw,34px);font-weight:800">✓</span>
     <span class="muted" style="margin:0 12px">·</span>
-    <span class="mono amber" style="font-size:11px;letter-spacing:2px">PERGUNTA 2</span>
-    <span class="amber" style="font-size:22px;font-weight:800">⟶</span>
+    <span class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px">PERGUNTA 2</span>
+    <span class="amber" style="font-size:clamp(22px,1.75vw,34px);font-weight:800">⟶</span>
     <span class="muted" style="margin:0 12px">·</span>
-    <span class="mono muted" style="font-size:11px;letter-spacing:2px">PERGUNTA 3</span>
+    <span class="mono muted" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px">PERGUNTA 3</span>
   </div>
 </div>
 
 <!-- 16 P2 ABERTURA - PAINEL DO VENDOR + CONSUMO REAL -->
-<div class="slide" data-block="P2 - COMO MENSURAMOS PERFORMANCE" data-notes="Segunda pergunta. Como mensuramos performance? O painel do vendor te mostra o que? Tokens consumidos. Linhas de código geradas. PRs abertos. Janela de contexto. Olha bonito. Inclusive, olha aqui esse gráfico. Esse verdão gigante sou eu, nos últimos 30 dias. 2.5 BILHÕES de tokens consumidos em UM mês. Aqueles risquinhos rasteiros embaixo são meu time todo - várias pessoas. Eu sozinho queimei mais que o time inteiro junto. E aí eu te pergunto: faz sentido eu chegar no board e dizer fomos super produtivos porque consumi 2.5 bilhões de tokens? Claro que não. Token não paga conta. Linhas não geram ROI. PR aberto é PR aberto. Precisamos de outras métricas." style="justify-content:flex-start;padding-top:5vh">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">RESPOSTA PERGUNTA 2</p>
+<div class="slide" data-block="P2 - COMO MENSURAMOS PERFORMANCE" data-notes="Segunda pergunta. Como mensuramos performance? O painel do vendor te mostra o que? Tokens consumidos. Linhas de código geradas. PRs abertos. Janela de contexto. Olha bonito. Inclusive, olha aqui esse gráfico. Esse verdão gigante sou eu, nos últimos 30 dias. 2.5 BILHÕES de tokens consumidos em UM mês. Aqueles risquinhos rasteiros embaixo são meu time todo - várias pessoas. Eu sozinho queimei mais que o time inteiro junto. E aí eu te pergunto: faz sentido eu chegar no board e dizer fomos super produtivos porque consumi 2.5 bilhões de tokens? Claro que não. Token não paga conta. Linhas não geram ROI. PR aberto é PR aberto. Precisamos de outras métricas." style="justify-content:flex-start;padding-top:clamp(80px,8vh,130px)">
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:10px">RESPOSTA PERGUNTA 2</p>
   <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,52px)">O painel do vendor te mostra <span class="amber">vaidade</span>.</h2>
-  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1050px;margin-top:4px;margin-bottom:14px">O painel do <strong>Claude</strong>, do <strong>Cursor</strong>, da maioria das ferramentas — só te mostra <strong>PRs abertos</strong>, <strong>linhas de código geradas</strong> e <strong>quantidade de tokens consumidos</strong>. Olha o meu próprio dashboard dos últimos 30 dias:</p>
+  <p class="fade-in-d2 dim" style="font-size:clamp(15px,1.2vw,23px);max-width:1050px;margin-top:4px;margin-bottom:14px">O painel do <strong>Claude</strong>, do <strong>Cursor</strong>, da maioria das ferramentas — só te mostra <strong>PRs abertos</strong>, <strong>linhas de código geradas</strong> e <strong>quantidade de tokens consumidos</strong>. Olha o meu próprio dashboard dos últimos 30 dias:</p>
 
   <div class="fade-in-d3" style="background:#06070c;border:1px solid var(--border-bright);border-radius:8px;padding:16px 18px;max-width:1100px">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
       <div>
-        <div class="mono dim" style="font-size:11px;letter-spacing:2px;margin-bottom:2px">CONSUMO DE TOKENS · ÚLTIMOS 30 DIAS</div>
-        <div style="font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text)">Eu vs. meu time inteiro</div>
+        <div class="mono dim" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:2px">CONSUMO DE TOKENS · ÚLTIMOS 30 DIAS</div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:clamp(18px,1.45vw,28px);color:var(--text)">Eu vs. meu time inteiro</div>
       </div>
       <div style="text-align:right">
         <div class="bignum green" style="font-size:clamp(36px,3.6vw,56px);line-height:1;text-shadow:0 0 24px rgba(0,217,255,0.3)">2,5B</div>
-        <div class="mono dim" style="font-size:10px;letter-spacing:1.5px;margin-top:2px">SÓ EU</div>
+        <div class="mono dim" style="font-size:clamp(10px,0.85vw,15px);letter-spacing:1.5px;margin-top:2px">SÓ EU</div>
       </div>
     </div>
 
@@ -808,10 +806,10 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
       <line x1="0" y1="200" x2="1000" y2="200" stroke="#2a2d3d" stroke-width="1"/>
 
       <!-- Labels Y -->
-      <text x="8" y="24" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">2,5B</text>
-      <text x="8" y="84" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">1,5B</text>
-      <text x="8" y="144" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">500M</text>
-      <text x="8" y="214" font-family="JetBrains Mono" font-size="11" fill="#7c7e92">0</text>
+      <text x="8" y="24" font-family="JetBrains Mono" font-size="11" fill="#eef0f7">2,5B</text>
+      <text x="8" y="84" font-family="JetBrains Mono" font-size="11" fill="#eef0f7">1,5B</text>
+      <text x="8" y="144" font-family="JetBrains Mono" font-size="11" fill="#eef0f7">500M</text>
+      <text x="8" y="214" font-family="JetBrains Mono" font-size="11" fill="#eef0f7">0</text>
 
       <!-- Linhas do time (rasteiras) - 5 devs em valores próximos: 412M, 320M, 290M, 240M, 150M -->
       <!-- Dev A - 1B - azul -->
@@ -845,20 +843,20 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
       <line x1="990" y1="6" x2="930" y2="-2" stroke="#00d9ff" stroke-width="1" stroke-dasharray="3,2"/>
 
       <!-- Labels X -->
-      <text x="60" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 1</text>
-      <text x="280" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 7</text>
-      <text x="500" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 15</text>
-      <text x="720" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">dia 22</text>
-      <text x="930" y="216" font-family="JetBrains Mono" font-size="10" fill="#7c7e92">hoje</text>
+      <text x="60" y="216" font-family="JetBrains Mono" font-size="10" fill="#eef0f7">dia 1</text>
+      <text x="280" y="216" font-family="JetBrains Mono" font-size="10" fill="#eef0f7">dia 7</text>
+      <text x="500" y="216" font-family="JetBrains Mono" font-size="10" fill="#eef0f7">dia 15</text>
+      <text x="720" y="216" font-family="JetBrains Mono" font-size="10" fill="#eef0f7">dia 22</text>
+      <text x="930" y="216" font-family="JetBrains Mono" font-size="10" fill="#eef0f7">hoje</text>
     </svg>
 
     <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:3px;background:#00d9ff"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text)"><strong>Renato</strong> · 2,5B</span></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#7aa2ff"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev A · 1B</span></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#c084fc"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev B · 320M</span></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ffc233"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev C · 290M</span></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ff77aa"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev D · 240M</span></div>
-      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ff5577"></span><span style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">Dev E · 150M</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:3px;background:#00d9ff"></span><span style="font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text)"><strong>Renato</strong> · 2,5B</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#7aa2ff"></span><span style="font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim)">Dev A · 1B</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#c084fc"></span><span style="font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim)">Dev B · 320M</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ffc233"></span><span style="font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim)">Dev C · 290M</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ff77aa"></span><span style="font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim)">Dev D · 240M</span></div>
+      <div style="display:flex;align-items:center;gap:6px"><span style="display:inline-block;width:14px;height:2px;background:#ff5577"></span><span style="font-family:var(--font-mono);font-size:clamp(11px,0.9vw,16px);color:var(--text-dim)">Dev E · 150M</span></div>
     </div>
   </div>
 
@@ -869,33 +867,33 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 </div>
 
 <!-- 17 P2 - CASO META - TOKENMAXXING / CLAUDEONOMICS -->
-<div class="slide" data-block="P2 - QUANDO A MÉTRICA VIRA META" data-notes="E se você acha que isso é só comigo, é só uma piada do Renato em palestra, deixa eu te contar o que aconteceu na Meta. Abril de 2026. Um funcionário criou um leaderboard interno chamado Claudeonomics. Olha o nome - já é uma piada. Painel que rankeia os 85 mil funcionários da Meta pelo consumo de tokens. Quem consome mais ganha títulos tipo Token Legend, Cache Wizard, Model Connoisseur. Importante: esses números são ESTIMATIVAS apuradas por jornalistas - The Information e Pragmatic Engineer - a partir de relatos internos. A Meta nunca confirmou oficialmente. Mas mesmo com a margem de erro, a ordem de grandeza é absurda. Em 30 dias o time inteiro queimou estimados 60 TRILHÕES de tokens. O top user, sozinho, queimou estimados 281 bilhões num mês. Custo estimado em preço de API da Anthropic: cerca de 900 milhões de dólares em UM MÊS - a Meta provavelmente paga bem menos por contratos enterprise, mas mesmo descontando isso, é absurdo. Aí vem o problema. Engenheiros começaram a deixar agentes rodando sozinhos só pra inflar número. Outros começaram a perguntar pra IA coisas que estavam na documentação interna - só pra subir no ranking. Outros prototipavam features que nunca iam shipar. Vários SEVs - incidentes em produção - foram causados por código IA gerado sem cuidado, porque o cara estava mais preocupado em queimar token que em entregar qualidade. Esse padrão tem nome: tokenmaxxing. Quando você mede a coisa errada, as pessoas otimizam pra coisa errada. A Meta tirou o leaderboard do ar 2 dias depois da história vazar. Lição: token consumido é métrica de input, não de output. É proxy de proxy. Não te diz se algo de valor foi entregue." style="justify-content:flex-start;padding-top:5vh">
-  <p class="fade-in mono amber" style="font-size:13px;letter-spacing:3px;margin-bottom:10px">QUANDO A MÉTRICA VIRA META</p>
+<div class="slide" data-block="P2 - QUANDO A MÉTRICA VIRA META" data-notes="E se você acha que isso é só comigo, é só uma piada do Renato em palestra, deixa eu te contar o que aconteceu na Meta. Abril de 2026. Um funcionário criou um leaderboard interno chamado Claudeonomics. Olha o nome - já é uma piada. Painel que rankeia os 85 mil funcionários da Meta pelo consumo de tokens. Quem consome mais ganha títulos tipo Token Legend, Cache Wizard, Model Connoisseur. Importante: esses números são ESTIMATIVAS apuradas por jornalistas - The Information e Pragmatic Engineer - a partir de relatos internos. A Meta nunca confirmou oficialmente. Mas mesmo com a margem de erro, a ordem de grandeza é absurda. Em 30 dias o time inteiro queimou estimados 60 TRILHÕES de tokens. O top user, sozinho, queimou estimados 281 bilhões num mês. Custo estimado em preço de API da Anthropic: cerca de 900 milhões de dólares em UM MÊS - a Meta provavelmente paga bem menos por contratos enterprise, mas mesmo descontando isso, é absurdo. Aí vem o problema. Engenheiros começaram a deixar agentes rodando sozinhos só pra inflar número. Outros começaram a perguntar pra IA coisas que estavam na documentação interna - só pra subir no ranking. Outros prototipavam features que nunca iam shipar. Vários SEVs - incidentes em produção - foram causados por código IA gerado sem cuidado, porque o cara estava mais preocupado em queimar token que em entregar qualidade. Esse padrão tem nome: tokenmaxxing. Quando você mede a coisa errada, as pessoas otimizam pra coisa errada. A Meta tirou o leaderboard do ar 2 dias depois da história vazar. Lição: token consumido é métrica de input, não de output. É proxy de proxy. Não te diz se algo de valor foi entregue." style="justify-content:flex-start;padding-top:clamp(80px,8vh,130px)">
+  <p class="fade-in mono amber" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:10px">QUANDO A MÉTRICA VIRA META</p>
   <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,52px)">O caso <span class="amber">"Claudeonomics"</span> da Meta.</h2>
-  <p class="fade-in-d2 dim" style="font-size:15px;max-width:1100px;margin-top:4px;margin-bottom:8px">Em abril/2026, um funcionário criou um <strong>leaderboard interno</strong> rankeando os 85 mil engenheiros da Meta por consumo de tokens. Quem consumia mais ganhava títulos: <span class="mono" style="font-size:12px">Token Legend</span>, <span class="mono" style="font-size:12px">Cache Wizard</span>, <span class="mono" style="font-size:12px">Model Connoisseur</span>.</p>
-  <p class="fade-in-d2 mono amber" style="font-size:10px;letter-spacing:1.5px;margin-bottom:10px;opacity:0.85">⚠ NÚMEROS ESTIMADOS — APURADOS POR THE INFORMATION + PRAGMATIC ENGINEER</p>
+  <p class="fade-in-d2 dim" style="font-size:clamp(15px,1.2vw,23px);max-width:1100px;margin-top:4px;margin-bottom:8px">Em abril/2026, um funcionário criou um <strong>leaderboard interno</strong> rankeando os 85 mil engenheiros da Meta por consumo de tokens. Quem consumia mais ganhava títulos: <span class="mono" style="font-size:clamp(12px,1vw,18px)">Token Legend</span>, <span class="mono" style="font-size:clamp(12px,1vw,18px)">Cache Wizard</span>, <span class="mono" style="font-size:clamp(12px,1vw,18px)">Model Connoisseur</span>.</p>
+  <p class="fade-in-d2 mono amber" style="font-size:clamp(10px,0.85vw,15px);letter-spacing:1.5px;margin-bottom:10px;opacity:0.85">⚠ NÚMEROS ESTIMADOS — APURADOS POR THE INFORMATION + PRAGMATIC ENGINEER</p>
 
   <div class="fade-in-d3" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:1100px;margin-bottom:16px">
     <div class="card" style="border-top:3px solid var(--amber);padding:16px 18px;text-align:center">
       <div class="bignum amber" style="font-size:clamp(40px,4vw,64px);line-height:1">~60T</div>
-      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-top:4px">TOKENS EM 30 DIAS · EST.</div>
-      <p style="font-size:12px;line-height:1.4;color:var(--text-dim);margin-top:6px">Total estimado, queimado por 85 mil funcionários no leaderboard interno.</p>
+      <div class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-top:4px">TOKENS EM 30 DIAS · EST.</div>
+      <p style="font-size:clamp(12px,1vw,18px);line-height:1.4;color:var(--text-dim);margin-top:6px">Total estimado, queimado por 85 mil funcionários no leaderboard interno.</p>
     </div>
     <div class="card" style="border-top:3px solid var(--amber);padding:16px 18px;text-align:center">
       <div class="bignum amber" style="font-size:clamp(40px,4vw,64px);line-height:1">~281B</div>
-      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-top:4px">SÓ DO TOP USER · EST.</div>
-      <p style="font-size:12px;line-height:1.4;color:var(--text-dim);margin-top:6px">Uma única pessoa, num só mês. <strong>~112× o meu consumo.</strong></p>
+      <div class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-top:4px">SÓ DO TOP USER · EST.</div>
+      <p style="font-size:clamp(12px,1vw,18px);line-height:1.4;color:var(--text-dim);margin-top:6px">Uma única pessoa, num só mês. <strong>~112× o meu consumo.</strong></p>
     </div>
     <div class="card" style="border-top:3px solid var(--red);padding:16px 18px;text-align:center">
       <div class="bignum red" style="font-size:clamp(40px,4vw,64px);line-height:1">~US$ 900M</div>
-      <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-top:4px">CUSTO ESTIMADO</div>
-      <p style="font-size:12px;line-height:1.4;color:var(--text-dim);margin-top:6px">A preço de API da Anthropic, em <strong>um único mês</strong>. Meta provavelmente paga menos.</p>
+      <div class="mono red" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-top:4px">CUSTO ESTIMADO</div>
+      <p style="font-size:clamp(12px,1vw,18px);line-height:1.4;color:var(--text-dim);margin-top:6px">A preço de API da Anthropic, em <strong>um único mês</strong>. Meta provavelmente paga menos.</p>
     </div>
   </div>
 
   <div class="fade-in-d4" style="display:grid;grid-template-columns:1.3fr 1fr;gap:14px;max-width:1100px;align-items:stretch">
     <div class="card" style="border-left:3px solid var(--red);padding:16px 18px">
-      <div class="mono red" style="font-size:11px;letter-spacing:2px;margin-bottom:8px">O QUE COMEÇOU A ACONTECER</div>
+      <div class="mono red" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:8px">O QUE COMEÇOU A ACONTECER</div>
       <ul class="checklist" style="margin-top:0">
         <li class="x">Devs <strong>deixavam agentes rodando ociosos</strong> só pra inflar número</li>
         <li class="x">Perguntavam à IA o que estava na <strong>documentação interna</strong> — pra subir no ranking</li>
@@ -904,9 +902,9 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
       </ul>
     </div>
     <div style="background:rgba(255,194,51,0.06);border:1px solid var(--amber);border-radius:6px;padding:14px 18px;display:flex;flex-direction:column;justify-content:center">
-      <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">O FENÔMENO TEM NOME</div>
+      <div class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">O FENÔMENO TEM NOME</div>
       <div style="font-family:var(--font-display);font-weight:800;font-size:clamp(28px,2.8vw,44px);line-height:1;color:var(--amber);text-shadow:0 0 24px rgba(255,194,51,0.25);margin-bottom:8px">Tokenmaxxing</div>
-      <p style="font-size:13px;line-height:1.5;color:var(--text-dim)">Quando consumo de token vira <strong>proxy de produtividade</strong> — engenheiros otimizam o número, não o resultado.</p>
+      <p style="font-size:clamp(13px,1.05vw,20px);line-height:1.5;color:var(--text-dim)">Quando consumo de token vira <strong>proxy de produtividade</strong> — engenheiros otimizam o número, não o resultado.</p>
     </div>
   </div>
 
@@ -918,9 +916,9 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 18 DORA METRICS -->
 <div class="slide" data-block="P2 - DORA METRICS" data-notes="Pra medir performance de engenharia de verdade, começamos pelo DORA. DevOps Research and Assessment, do Google Cloud. Validado em centenas de organizações ao longo de mais de 10 anos. 4 métricas core. Lead Time: tempo da alteração até chegar em produção. Deployment Frequency: com que frequência você entrega. Change Failure Rate: percentual de deploys que falham. Recovery Time: tempo pra restaurar quando algo quebra. Essas métricas dizem se você está entregando rápido E com qualidade. Token não diz isso, lead time diz.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P2 - O PRIMEIRO PILAR</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">P2 - O PRIMEIRO PILAR</p>
   <h2 class="fade-in-d1">DORA Metrics.</h2>
-  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">Como o Google mede performance de times de tecnologia há mais de 10 anos. 4 métricas core, validadas em centenas de orgs.</p>
+  <p class="fade-in-d1 dim" style="font-size:clamp(17px,1.4vw,26px);max-width:1050px;margin-top:6px">Como o Google mede performance de times de tecnologia há mais de 10 anos. 4 métricas core, validadas em centenas de orgs.</p>
 
   <div class="metric-grid fade-in-d2">
     <div class="metric-card">
@@ -947,9 +945,9 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 16 DEV FLUENCY -->
 <div class="slide" data-block="P2 - DEV FLUENCY" data-notes="DORA é do mundo pré-IA. Pra times trabalhando com agentes, precisamos de um pilar a mais: Dev Fluency. Esse termo veio das nossas conversas internas e captura algo que o DORA não captura: a fluência do time em CRIAR, OPERAR e EVOLUIR agentes de IA dentro do processo. Como o time está criando skills? Como está evoluindo as específicações? Quanto do trabalho já roda em background sem babysitting? Quanto da operação já está automatizada? Esses são indicadores que dizem se o time está amadurecendo na IA — ou apenas usando ela.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P2 - O SEGUNDO PILAR</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">P2 - O SEGUNDO PILAR</p>
   <h2 class="fade-in-d1">Dev Fluency.</h2>
-  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">DORA é do mundo pré-IA. Pra times com agentes, precisamos de <strong>um pilar a mais</strong>: a fluência do time em criar, operar e evoluir agentes dentro do processo.</p>
+  <p class="fade-in-d1 dim" style="font-size:clamp(17px,1.4vw,26px);max-width:1050px;margin-top:6px">DORA é do mundo pré-IA. Pra times com agentes, precisamos de <strong>um pilar a mais</strong>: a fluência do time em criar, operar e evoluir agentes dentro do processo.</p>
 
   <div class="quote fade-in-d2" style="margin-top:18px;border-color:var(--green);background:rgba(0,217,255,0.04)">
     Dev Fluency mede <strong>maturidade na prática com IA</strong>, não apenas adoção. A diferença entre um time que <em>usa</em> IA é um time que <em>opera</em> com agentes está nessas métricas.
@@ -979,9 +977,9 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 17 RALPH CONSOLE -->
 <div class="slide" data-block="P2 - RALPH CONSOLE" data-notes="Quando você junta DORA com Dev Fluency, você tem o Ralph Console. E a ferramenta que construímos pra olhar essas duas dimensões ao mesmo tempo: o quanto você está entregando rápido E com qualidade, e o quanto seu time está amadurecendo na prática com IA. O painel do vendor te dá vaidade. O Ralph Console te dá DECISÃO. Onde alocar esforço, onde ta o gargalo, qual time precisa de mais investimento em método, qual já consegue rodar 5 agentes em paralelo. Ainda está no início, vocês podem entrar na waitlist no QR do final.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P2 - A FERRAMENTA</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">P2 - A FERRAMENTA</p>
   <h2 class="fade-in-d1">Ralph <span class="green">Console</span>.</h2>
-  <p class="fade-in-d1 dim" style="font-size:17px;max-width:1050px;margin-top:6px">DORA + Dev Fluency num só painel. <strong>Vaidade vira decisão.</strong></p>
+  <p class="fade-in-d1 dim" style="font-size:clamp(17px,1.4vw,26px);max-width:1050px;margin-top:6px">DORA + Dev Fluency num só painel. <strong>Vaidade vira decisão.</strong></p>
 
   <table class="cmp fade-in-d2" style="margin-top:18px">
     <thead><tr><th>Dimensão</th><th class="col-bad">PAINEL DO VENDOR (vaidade)</th><th class="col-good">RALPH CONSOLE (decisão)</th></tr></thead>
@@ -998,15 +996,190 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
   <p class="source fade-in-d3">Ralph Console - waitlist via QR code no final da apresentação</p>
 </div>
 
+<!-- 17b RALPH CONSOLE - TIMELINE DE PRDs -->
+<div class="slide" data-block="P2 - RALPH CONSOLE NA PRÁTICA" data-notes="Aqui é como o console exibe cada PRD do squad. Cada barra é a vida de um PRD do planning ao stabilization. Cada cor é uma fase. Bate o olho: você vê o gargalo na hora. Se a barra está dominada pelo cinza (gap entre dev e review) é fila de review. Se está dominada pelo vermelho (stabilization) é qualidade caindo após o deploy. Se tem o pedaço de planning grande, é overengineering. O DIRECT amber significa que foi merge direto em produção, sem QA - bandeira pra entender contexto: tá certo? tá compensando? Apresenta cada cor da legenda do lado direito enquanto o público bate o olho nos exemplos.">
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:10px">P2 - O CONSOLE NA PRÁTICA</p>
+  <h2 class="fade-in-d1" style="font-size:clamp(32px,2.8vw,48px)">Cada PRD, <span class="green">do planning ao deploy</span>.</h2>
+  <p class="fade-in-d2 dim" style="font-size:clamp(15px,1.2vw,23px);max-width:1100px;margin-top:4px;margin-bottom:8px">Uma barra por PRD. Cada cor é uma fase. O gargalo aparece sozinho.</p>
+
+  <div class="rc-grid fade-in-d3">
+    <div class="rc-list">
+      <div class="rc-list-header">
+        <span class="rc-list-title">squad-pagamentos</span>
+        <span class="rc-list-count">7 PRDs</span>
+      </div>
+
+      <div class="rc-row">
+        <div class="rc-name">ralph/checkout-3ds</div>
+        <div class="rc-tag invisible">DIRECT</div>
+        <div class="rc-bar">
+          <span style="width:9%;background:var(--rc-planning)"></span>
+          <span style="width:5%;background:var(--rc-planning-wait)"></span>
+          <span style="width:14%;background:var(--rc-dev)"></span>
+          <span style="width:6%;background:var(--rc-gap)"></span>
+          <span style="width:42%;background:var(--rc-review)"></span>
+          <span style="width:8%;background:var(--rc-qa)"></span>
+          <span style="width:6%;background:var(--rc-prod)"></span>
+          <span style="width:10%;background:var(--rc-stab)"></span>
+        </div>
+      </div>
+
+      <div class="rc-row">
+        <div class="rc-name">ralph/pix-refund-flow</div>
+        <div class="rc-tag">DIRECT</div>
+        <div class="rc-bar">
+          <span style="width:4%;background:var(--rc-planning)"></span>
+          <span style="width:18%;background:var(--rc-dev)"></span>
+          <span style="width:64%;background:var(--rc-review)"></span>
+          <span style="width:6%;background:var(--rc-prod)"></span>
+          <span style="width:8%;background:var(--rc-stab)"></span>
+        </div>
+      </div>
+
+      <div class="rc-row">
+        <div class="rc-name">ralph/webhook-retry...</div>
+        <div class="rc-tag invisible">DIRECT</div>
+        <div class="rc-bar">
+          <span style="width:6%;background:var(--rc-planning)"></span>
+          <span style="width:3%;background:var(--rc-planning-wait)"></span>
+          <span style="width:32%;background:var(--rc-dev)"></span>
+          <span style="width:24%;background:var(--rc-gap)"></span>
+          <span style="width:25%;background:var(--rc-review)"></span>
+          <span style="width:5%;background:var(--rc-qa)"></span>
+          <span style="width:5%;background:var(--rc-prod)"></span>
+        </div>
+      </div>
+
+      <div class="rc-row">
+        <div class="rc-name">ralph/anti-fraud-rules</div>
+        <div class="rc-tag invisible">DIRECT</div>
+        <div class="rc-bar">
+          <span style="width:14%;background:var(--rc-planning)"></span>
+          <span style="width:8%;background:var(--rc-planning-wait)"></span>
+          <span style="width:22%;background:var(--rc-dev)"></span>
+          <span style="width:4%;background:var(--rc-gap)"></span>
+          <span style="width:30%;background:var(--rc-review)"></span>
+          <span style="width:10%;background:var(--rc-qa)"></span>
+          <span style="width:6%;background:var(--rc-prod)"></span>
+          <span style="width:6%;background:var(--rc-stab)"></span>
+        </div>
+      </div>
+
+      <div class="rc-row">
+        <div class="rc-name">ralph/idempotency-key</div>
+        <div class="rc-tag">DIRECT</div>
+        <div class="rc-bar">
+          <span style="width:2%;background:var(--rc-planning)"></span>
+          <span style="width:8%;background:var(--rc-dev)"></span>
+          <span style="width:78%;background:var(--rc-review)"></span>
+          <span style="width:5%;background:var(--rc-prod)"></span>
+          <span style="width:7%;background:var(--rc-stab)"></span>
+        </div>
+      </div>
+
+      <div class="rc-row">
+        <div class="rc-name">ralph/billing-export</div>
+        <div class="rc-tag invisible">DIRECT</div>
+        <div class="rc-bar">
+          <span style="width:11%;background:var(--rc-planning)"></span>
+          <span style="width:4%;background:var(--rc-planning-wait)"></span>
+          <span style="width:38%;background:var(--rc-dev)"></span>
+          <span style="width:18%;background:var(--rc-gap)"></span>
+          <span style="width:18%;background:var(--rc-review)"></span>
+          <span style="width:5%;background:var(--rc-qa)"></span>
+          <span style="width:6%;background:var(--rc-prod)"></span>
+        </div>
+      </div>
+
+      <div class="rc-row">
+        <div class="rc-name">ralph/dunning-engine</div>
+        <div class="rc-tag invisible">DIRECT</div>
+        <div class="rc-bar">
+          <span style="width:8%;background:var(--rc-planning)"></span>
+          <span style="width:4%;background:var(--rc-planning-wait)"></span>
+          <span style="width:20%;background:var(--rc-dev)"></span>
+          <span style="width:6%;background:var(--rc-gap)"></span>
+          <span style="width:32%;background:var(--rc-review)"></span>
+          <span style="width:8%;background:var(--rc-qa)"></span>
+          <span style="width:5%;background:var(--rc-prod)"></span>
+          <span style="width:17%;background:var(--rc-stab)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rc-legend">
+      <div class="rc-legend-title">Fases do PRD</div>
+
+      <div class="rc-legend-item">
+        <span class="rc-legend-dot" style="background:var(--rc-planning)"></span>
+        <div>
+          <span class="rc-legend-name">Planning</span>
+          <span class="rc-legend-desc">sessão + wait até dev iniciar</span>
+        </div>
+      </div>
+
+      <div class="rc-legend-item">
+        <span class="rc-legend-dot" style="background:var(--rc-dev)"></span>
+        <div>
+          <span class="rc-legend-name">Dev</span>
+          <span class="rc-legend-desc">implementação ativa (loop do agente)</span>
+        </div>
+      </div>
+
+      <div class="rc-legend-item">
+        <span class="rc-legend-dot" style="background:var(--rc-gap)"></span>
+        <div>
+          <span class="rc-legend-name">Dev → Review gap</span>
+          <span class="rc-legend-desc">fila de espera até abrir review</span>
+        </div>
+      </div>
+
+      <div class="rc-legend-item">
+        <span class="rc-legend-dot" style="background:var(--rc-review)"></span>
+        <div>
+          <span class="rc-legend-name">Review</span>
+          <span class="rc-legend-desc">PR em revisão de pares</span>
+        </div>
+      </div>
+
+      <div class="rc-legend-item">
+        <span class="rc-legend-dot" style="background:var(--rc-qa)"></span>
+        <div>
+          <span class="rc-legend-name">QA</span>
+          <span class="rc-legend-desc">staging / validação manual</span>
+        </div>
+      </div>
+
+      <div class="rc-legend-item">
+        <span class="rc-legend-dot" style="background:var(--rc-prod)"></span>
+        <div>
+          <span class="rc-legend-name">Prod</span>
+          <span class="rc-legend-desc">deploy em produção</span>
+        </div>
+      </div>
+
+      <div class="rc-legend-item">
+        <span class="rc-legend-dot" style="background:var(--rc-stab)"></span>
+        <div>
+          <span class="rc-legend-name">Stabilization</span>
+          <span class="rc-legend-desc">janela pós-deploy (incidentes / hotfix)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="fade-in-d3 tip" style="margin-top:14px;font-size:clamp(13px,1.05vw,20px)"><span class="green">→</span> Tag <strong style="color:var(--rc-qa)">DIRECT</strong> = merge direto em produção, sem QA. Bandeira de contexto, não de erro.</p>
+</div>
+
 <!-- 18 RECAPITULANDO -->
 <div class="slide" data-block="RECAPITULANDO" data-notes="Antes de seguir, deixa eu fazer uma pausa pra recapitular. O que vimos até aqui? Como definimos um processo com IA? Adotamos o Ralph Loop, junto com outros frameworks possíveis do mercado. Como mensuramos produtividade? Criamos o Ralph Console juntando DORA com Dev Fluency. E agora a terceira pergunta, que é a mais crítica em escala: como eu acompanho a evolução do time todo sem virar microgerente? E aí que entra a última parte da nossa conversa.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:18px">O QUE VIMOS ATÉ AGORA</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:18px">O QUE VIMOS ATÉ AGORA</p>
   <h2 class="fade-in-d1" style="font-size:clamp(36px,3.2vw,52px)">Recapitulando.</h2>
 
   <div class="fade-in-d2" style="margin-top:24px;max-width:1100px">
     <div class="recap-row">
       <div>
-        <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERGUNTA 1</div>
+        <div class="mono green" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">PERGUNTA 1</div>
         <div class="recap-q">Como definimos um processo com IA?</div>
       </div>
       <div class="recap-a"><strong class="green">Ralph Loop</strong> - spec-driven, 4 etapas, padronizado pelo time</div>
@@ -1014,7 +1187,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
     </div>
     <div class="recap-row">
       <div>
-        <div class="mono green" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERGUNTA 2</div>
+        <div class="mono green" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">PERGUNTA 2</div>
         <div class="recap-q">Como mensuramos produtividade?</div>
       </div>
       <div class="recap-a"><strong class="green">Ralph Console</strong> - DORA + Dev Fluency, vaidade vira decisão</div>
@@ -1022,7 +1195,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
     </div>
     <div class="recap-row">
       <div>
-        <div class="mono amber" style="font-size:11px;letter-spacing:2px;margin-bottom:6px">PERGUNTA 3</div>
+        <div class="mono amber" style="font-size:clamp(11px,0.9vw,16px);letter-spacing:2px;margin-bottom:6px">PERGUNTA 3</div>
         <div class="recap-q">Como acompanho alinhamento estratégico em escala?</div>
       </div>
       <div class="recap-a amber">A pergunta mais crítica - <strong>ainda em aberto</strong></div>
@@ -1035,7 +1208,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 19 P3 ABERTURA - SKILL TECH MANAGER -->
 <div class="slide" data-block="P3 - COMO ALINHAMOS COM A ESTRATEGIA" data-notes="Terceira pergunta. Como acompanhamos alinhamento estratégico em escala? Como Head de Engenharia, eu gastava grande parte do dia entrando em dailies ao vivo de todos os squads pra entender o que estava sendo priorizado. A pergunta que me fiz: eu precisava ESTAR nas dailies de forma síncrona? Não. Eu precisava da TRANSCRIÇÃO delas. A daily não precisava ser uma reunião, ela precisava ser um INPUT. E aí criei uma skill personalizada que processa esse input automaticamente todo dia: a tech-manager. Vou mostrar como funciona em 2 partes: a anatomia, e o operacional.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">RESPOSTA PERGUNTA 3</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">RESPOSTA PERGUNTA 3</p>
   <h2 class="fade-in-d1">Skill personalizada<br><span class="mono green" style="font-size:0.85em">/tech-manager</span></h2>
 
   <p class="fade-in-d2" style="font-size:clamp(22px,2vw,30px);font-weight:600;line-height:1.35;margin-top:14px;max-width:1100px">
@@ -1043,7 +1216,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
     Eu precisava da <span class="green">transcrição</span> delas.
   </p>
 
-  <p class="fade-in-d3 dim" style="font-size:16px;max-width:1050px;margin-top:18px">
+  <p class="fade-in-d3 dim" style="font-size:clamp(16px,1.3vw,25px);max-width:1050px;margin-top:18px">
     Daily não precisa ser <em>reunião</em>. Daily precisa ser <strong>input estruturado</strong>. A skill <span class="mono">/tech-manager</span> processa esse input automaticamente todo dia.
   </p>
 
@@ -1061,13 +1234,13 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 20 ANATOMIA DA SKILL -->
 <div class="slide" data-block="P3 - ANATOMIA DA SKILL" data-notes="Vamos olhar como a skill funciona por dentro. O corpo da skill define o que ela faz: le todas as transcrições das dailies do Slack, cruza com o board, identifica drift entre o que está sendo discutido é o que está priorizado. Os passos são um pipeline diário: 1 le transcrições, 2 cruza com o board, 3 detecta lacunas, 4 cria card automaticamente ou cobra prazo via Slack, 5 gera resumo do estado da semana. Tudo isso roda de manhã sem eu pedir nada.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P3 - ANATOMIA</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">P3 - ANATOMIA</p>
   <h2 class="fade-in-d1">Como a skill funciona <span class="green">por dentro</span>.</h2>
 
   <div class="two-col fade-in-d2" style="margin-top:20px">
     <div>
-      <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">CORPO DA SKILL</p>
-      <div style="background:var(--bg-code);border:1px solid var(--border-bright);border-left:3px solid var(--green);border-radius:6px;padding:14px 18px;font-family:var(--font-mono);font-size:13px;line-height:1.6;color:var(--text-dim)">
+      <p class="mono green" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:10px">CORPO DA SKILL</p>
+      <div style="background:var(--bg-code);border:1px solid var(--border-bright);border-left:3px solid var(--green);border-radius:6px;padding:14px 18px;font-family:var(--font-mono);font-size:clamp(13px,1.05vw,20px);line-height:1.6;color:var(--text-dim)">
         <span class="green">name:</span> tech-manager<br>
         <span class="green">trigger:</span> cron diário 09:00<br>
         <span class="green">inputs:</span><br>
@@ -1081,7 +1254,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
       </div>
     </div>
     <div>
-      <p class="mono amber" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">PASSOS DIARIOS DA SKILL</p>
+      <p class="mono amber" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:10px">PASSOS DIARIOS DA SKILL</p>
       <ul class="checklist" style="margin-top:8px">
         <li><strong>01.</strong> Le todas as transcrições das dailies do dia anterior</li>
         <li><strong>02.</strong> Cruza com o board (GitHub Projects V2)</li>
@@ -1098,13 +1271,13 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 21 OPERACIONAL - BOARD + RELATORIOS -->
 <div class="slide" data-block="P3 - OPERACIONAL" data-notes="Como isso aparece operacionalmente? Estrutura do board: cada iniciativa tem dono, squad, status, prazo e link pra discussão. O agente atualiza tudo isso sozinho cruzando com as dailies. E o output mais importante pra mim como Head: o relatório semanal. Toda sexta de manhã eu recebo um documento estruturado: o que foi entregue, o que ficou em risco, onde precisa de decisão minha. Eu não preciso entrar em reunião pra saber. Eu só abro o relatório e sei pra onde redirecionar foco.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">P3 - OPERACIONAL</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">P3 - OPERACIONAL</p>
   <h2 class="fade-in-d1">Board atualizado <span class="dim">sozinho.</span><br>Relatório chega <span class="dim">sozinho.</span></h2>
 
   <div class="two-col fade-in-d2" style="margin-top:22px">
     <div>
-      <p class="mono green" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">ESTRUTURA DO BOARD</p>
-      <div style="background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:14px;font-family:var(--font-mono);font-size:12px;color:var(--text-dim);line-height:1.7">
+      <p class="mono green" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:10px">ESTRUTURA DO BOARD</p>
+      <div style="background:var(--bg-card);border:1px solid var(--border-bright);border-radius:6px;padding:14px;font-family:var(--font-mono);font-size:clamp(12px,1vw,18px);color:var(--text-dim);line-height:1.7">
         <strong class="green">Iniciativa</strong> - título + descrição curta<br>
         <strong class="green">Dono</strong> - Tech Lead responsável<br>
         <strong class="green">Squad</strong> - qual time está executando<br>
@@ -1114,11 +1287,11 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
         <strong class="green">Discussão</strong> - link pra thread no Slack<br>
         <strong class="green">Última menção</strong> - data + transcrição referenciada
       </div>
-      <p class="dim" style="font-size:13px;margin-top:10px">Cada campo pode ser atualizado pelo agente cruzando dailies + Git + Slack.</p>
+      <p class="dim" style="font-size:clamp(13px,1.05vw,20px);margin-top:10px">Cada campo pode ser atualizado pelo agente cruzando dailies + Git + Slack.</p>
     </div>
     <div>
-      <p class="mono amber" style="font-size:12px;letter-spacing:2px;margin-bottom:10px">RELATORIO SEMANAL (sexta 09:00)</p>
-      <div style="background:var(--bg-card);border:1px solid var(--border-bright);border-left:3px solid var(--amber);border-radius:6px;padding:14px;font-size:13px;line-height:1.6">
+      <p class="mono amber" style="font-size:clamp(12px,1vw,18px);letter-spacing:2px;margin-bottom:10px">RELATORIO SEMANAL (sexta 09:00)</p>
+      <div style="background:var(--bg-card);border:1px solid var(--border-bright);border-left:3px solid var(--amber);border-radius:6px;padding:14px;font-size:clamp(13px,1.05vw,20px);line-height:1.6">
         <p style="font-weight:600;color:var(--text)">Estado da semana - Squad X</p>
         <p style="margin-top:8px;color:var(--text-dim)"><strong class="green">Entregue:</strong> 4 iniciativas (lista)</p>
         <p style="margin-top:4px;color:var(--text-dim)"><strong class="amber">Em risco:</strong> 2 iniciativas (motivos + sugestão)</p>
@@ -1126,7 +1299,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
         <p style="margin-top:4px;color:var(--text-dim)"><strong class="blue">Proxima semana:</strong> prioridades sugeridas</p>
         <p style="margin-top:4px;color:var(--text-dim)"><strong class="purple">Decisão requerida:</strong> 1 ponto crítico</p>
       </div>
-      <p class="dim" style="font-size:13px;margin-top:10px">Eu só abro o relatório. <strong>Sei pra onde redirecionar foco</strong>.</p>
+      <p class="dim" style="font-size:clamp(13px,1.05vw,20px);margin-top:10px">Eu só abro o relatório. <strong>Sei pra onde redirecionar foco</strong>.</p>
     </div>
   </div>
 
@@ -1158,7 +1331,7 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 23 FECHAMENTO DO CICLO -->
 <div class="slide" data-block="FECHAMENTO" data-notes="E o fechamento. Comecei perguntando se você está sendo produtivo com IA. Agora dá pra responder. Se você tem processo, mede outcomes e mantém alinhamento estratégico em escala, você ESTÁ. Se está olhando token, linha, PR aberto, fazendo babysitting da IA ou usando ela como um chat infinito até ela quebrar, provavelmente ainda não está.">
-  <p class="fade-in mono dim" style="font-size:13px;letter-spacing:3px;margin-bottom:24px">FECHANDO O CICLO</p>
+  <p class="fade-in mono dim" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:24px">FECHANDO O CICLO</p>
   <h1 class="fade-in-d1" style="font-size:clamp(40px,4vw,72px);line-height:1.05;max-width:1200px">
     Comecei perguntando se você<br>
     <span class="dim">está sendo produtivo com IA.</span>
@@ -1172,30 +1345,30 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <!-- 24 CONECTE-SE -->
 <div class="slide" data-block="CONECTE-SE" data-notes="Antes de fechar, três QRs. Quem quiser receber esta apresentação, me chama no LinkedIn no primeiro QR. Quem quiser entrar na waitlist do Ralph Console, segundo QR. E pra quem ainda não fez, o terceiro QR é o da Bússola Executiva de IA, um diagnóstico gratuito de 5 minutos onde um time de agentes analisa seu perfil. Deixa 30 segundos pra galera escanear sem pressa.">
-  <p class="fade-in mono green" style="font-size:13px;letter-spacing:3px;margin-bottom:14px">CONECTE-SE</p>
+  <p class="fade-in mono green" style="font-size:clamp(13px,1.05vw,20px);letter-spacing:3px;margin-bottom:14px">CONECTE-SE</p>
   <h2 class="fade-in-d1">Pra continuar a conversa.</h2>
 
   <div class="qr-row fade-in-d2" style="margin-top:24px">
     <div class="qr-card">
-      <div class="qr-pic"></div>
+      <img class="qr-pic" alt="QR LinkedIn Renato Barbosa" src="assets/qr-linkedin.png">
       <div class="qr-title">LinkedIn - Renato</div>
       <div class="qr-sub">Me chame —<br>te envio <strong>os slides desta talk</strong>.</div>
+      <div class="qr-sub mono" style="margin-top:6px;font-size:clamp(11px,0.9vw,16px);word-break:break-all">linkedin.com/in/rbcandido</div>
     </div>
     <div class="qr-card">
-      <div class="qr-pic"></div>
+      <img class="qr-pic" alt="QR Ralph Console waitlist" src="assets/qr-ralph-console.png">
       <div class="qr-title">Ralph Console</div>
       <div class="qr-sub">Entre na <strong>waitlist</strong>.<br>Você recebe o convite quando liberarmos.</div>
+      <div class="qr-sub mono" style="margin-top:6px;font-size:clamp(11px,0.9vw,16px);word-break:break-all">ralph.ai-solutions.startse.com</div>
     </div>
     <div class="qr-card" style="border-color:var(--amber)">
-      <div class="qr-pic" style="border-color:var(--amber)"></div>
+      <img class="qr-pic" alt="QR Bússola Executiva de IA" src="assets/qr-bussola.png" style="border-color:var(--amber)">
       <div class="qr-title amber">Bússola Executiva de IA</div>
       <div class="qr-sub">Diagnóstico gratuito - 5 min.<br>Time de agentes analisa seu perfil.</div>
+      <div class="qr-sub mono" style="margin-top:6px;font-size:clamp(11px,0.9vw,16px);word-break:break-all;color:var(--amber)">ai-festival.startse.com</div>
     </div>
   </div>
 
-  <p class="fade-in-d3 dim" style="font-size:14px;margin-top:18px;text-align:center;width:100%">
-    Deixar 30 segundos aberto pra galera escanear sem pressa.
-  </p>
 </div>
 
 <!-- 25 OBRIGADO -->
@@ -1212,12 +1385,12 @@ table.cmp .col-bad{color:var(--red)}table.cmp .col-good{color:var(--green)}
 
 <div class="footer-logos" id="footerLogos">
   <div class="logo-wrap" title="StartSe Tech Academy">
-    <span style="font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:1.5px;color:#bfc1d4">STARTSE TECH</span>
+    <span style="font-family:var(--font-display);font-weight:800;font-size:clamp(13px,1.05vw,20px);letter-spacing:1.5px;color:#eef0f7">STARTSE TECH</span>
   </div>
   <div class="footer-event-date">13-14 maio - Pro Magno - SP</div>
   <div class="logo-wrap" title="AI Festival 2026">
     <img src="https://pages.startse.com/hs-fs/hubfs/AIFESTIVAL26.png?width=200&name=AIFESTIVAL26.png" alt="AI Festival 2026" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
-    <span style="display:none;font-family:var(--font-display);font-weight:800;font-size:14px;letter-spacing:2px;color:var(--green)">AI FESTIVAL 26</span>
+    <span style="display:none;font-family:var(--font-display);font-weight:800;font-size:clamp(14px,1.15vw,22px);letter-spacing:2px;color:var(--green)">AI FESTIVAL 26</span>
   </div>
 </div>
 
@@ -1269,6 +1442,36 @@ function applySteps(){
       el.classList.remove('revealed');
     }
   });
+  // Chat messages: revelar manualmente conforme o step
+  const chatBody = slide.querySelector('.chat-body');
+  let lastShownMsg = null;
+  slide.querySelectorAll('.chat-msg[data-step]').forEach(msg => {
+    const step = parseInt(msg.dataset.step, 10);
+    const wasShown = msg.classList.contains('shown');
+    const shouldShow = step <= currentStep;
+    if(shouldShow && !wasShown){
+      msg.classList.add('shown');
+      lastShownMsg = msg;
+    } else if(!shouldShow && wasShown){
+      msg.classList.remove('shown');
+    }
+  });
+  // Auto-scroll dentro do chat-body para a última msg revelada
+  if(lastShownMsg && chatBody){
+    setTimeout(()=>{
+      const msgBottom = lastShownMsg.offsetTop + lastShownMsg.offsetHeight;
+      const visibleBottom = chatBody.scrollTop + chatBody.clientHeight;
+      if(msgBottom > visibleBottom - 20){
+        chatBody.scrollTo({top: msgBottom - chatBody.clientHeight + 20, behavior:'smooth'});
+      }
+    }, 80);
+  }
+  // Atualiza a barra de contexto do chat proporcional às msgs reveladas (max 15)
+  const ctxFill = slide.querySelector('.ctx-fill');
+  if(ctxFill){
+    const chatProgress = Math.min(15, currentStep) / 15;
+    ctxFill.style.width = (chatProgress * 100) + '%';
+  }
   renderStepIndicator();
   // Auto-scroll suave pro último elemento revelado (caso o slide tenha overflow)
   if(lastRevealed && slide.scrollHeight > slide.clientHeight){
@@ -1292,50 +1495,16 @@ function show(idx){
   slides[current].querySelectorAll('.step-card-reveal').forEach(el => el.classList.remove('revealed'));
   // Reset scroll do slide (caso seja scrollável)
   slides[current].scrollTop = 0;
-  // Reset/restart demos de chat (re-trigger animações CSS + auto-scroll do body)
-  document.querySelectorAll('.chat-demo').forEach(demo => demo.classList.remove('playing'));
+  // Reset do chat: esconde todas as msgs, zera a barra de contexto e o scroll do body
   const slideDemo = slides[current].querySelector('.chat-demo');
   if(slideDemo){
-    // Force reflow para reiniciar todas as animações CSS
-    slideDemo.querySelectorAll('.chat-msg, .ctx-fill').forEach(el => {
-      el.style.animation = 'none';
-      void el.offsetWidth;
-      el.style.animation = '';
-    });
-    // Reset scroll do body do chat
+    slideDemo.querySelectorAll('.chat-msg').forEach(el => el.classList.remove('shown'));
+    const ctxFill = slideDemo.querySelector('.ctx-fill');
+    if(ctxFill) ctxFill.style.width = '0%';
     const body = slideDemo.querySelector('.chat-body');
     if(body) body.scrollTop = 0;
-    // Pequeno delay pra começar a tocar após o slide aparecer
-    setTimeout(()=> {
-      slideDemo.classList.add('playing');
-      setupChatAutoScroll(slideDemo);
-    }, 300);
   }
   applySteps();
-}
-
-function setupChatAutoScroll(demo){
-  const body = demo.querySelector('.chat-body');
-  if(!body) return;
-  // Cada msg dispara 'animationstart' quando começa a aparecer.
-  // Nesse momento fazemos scroll suave até ela.
-  body.querySelectorAll('.chat-msg').forEach(msg => {
-    msg.addEventListener('animationstart', (e) => {
-      if(e.animationName !== 'msgIn') return;
-      // Pequeno timeout pra garantir que a mensagem renderizou completamente
-      setTimeout(() => {
-        // Scroll suave dentro do chat-body (não scrollIntoView pra não mexer no slide)
-        const msgBottom = msg.offsetTop + msg.offsetHeight;
-        const visibleBottom = body.scrollTop + body.clientHeight;
-        if(msgBottom > visibleBottom - 20){
-          body.scrollTo({
-            top: msgBottom - body.clientHeight + 20,
-            behavior: 'smooth'
-          });
-        }
-      }, 80);
-    }, {once: true});
-  });
 }
 
 function nextSlide(){
